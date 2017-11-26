@@ -1,12 +1,11 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="datatables" uri="http://github.com/dandelion/datatables" %>
 <%@ taglib prefix="dandelion" uri="http://github.com/dandelion" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<fmt:setLocale value="ru"/>
-<fmt:setBundle basename="messages.app"/>
+
 <html>
 <dandelion:bundle includes="topjavaDatatable"/>
 <jsp:include page="fragments/headTag.jsp"/>
@@ -23,27 +22,27 @@
                            accept-charset="UTF-8" id="filter">
                     <div class="form-group">
                         <spring:bind path="startDate">
-                            <label class="col-sm-2">Дата с</label>
+                            <label class="col-sm-2">From Date</label>
                             <div class="col-sm-2"><form:input path="startDate" class="form-control date-picker" placeholder="Start Date"/></div>
                         </spring:bind>
-                        <spring:bind path="startTime">
-                            <label class="col-sm-2">Время с</label>
-                            <div class="col-sm-2"><form:input path="startTime" class="form-control time-picker" placeholder="Start Time"/></div>
+                        <spring:bind path="endDate">
+                            <label class="col-sm-2">To Date</label>
+                            <div class="col-sm-2"><form:input path="endDate" class="form-control date-picker" placeholder="End Date"/></div>
                         </spring:bind>
                     </div>
                     <div class="form-group">
-                        <spring:bind path="endDate">
-                            <label class="col-sm-2">Дата по</label>
-                            <div class="col-sm-2"><form:input path="endDate" class="form-control date-picker" placeholder="End Date"/></div>
+                        <spring:bind path="startTime">
+                            <label class="col-sm-2">From Time</label>
+                            <div class="col-sm-2"><form:input path="startTime" class="form-control time-picker" placeholder="Start Time"/></div>
                         </spring:bind>
                         <spring:bind path="endTime">
-                            <label class="col-sm-2">Время по</label>
+                            <label class="col-sm-2">To Time</label>
                             <div class="col-sm-2"><form:input path="endTime" class="form-control time-picker" placeholder="End Time"/></div>
                         </spring:bind>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-8">
-                            <button type="submit" class="btn btn-primary pull-right">Поиск</button>
+                            <button type="submit" class="btn btn-primary pull-right">Filter</button>
                         </div>
                     </div>
                 </form:form>
@@ -72,7 +71,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h2 class="modal-title">Сведения о еде:</h2>
+                <h2 class="modal-title">Meal details:</h2>
             </div>
             <div class="modal-body">
                 <form:form class="form-horizontal" method="post" id="detailsForm">
@@ -86,7 +85,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="description" class="control-label col-xs-3">Описание</label>
+                        <label for="description" class="control-label col-xs-3">Description</label>
 
                         <div class="col-xs-9">
                             <input type="text" class="form-control" id="description" name="description" placeholder="Description">
@@ -102,7 +101,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
-                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </div>
                 </form:form>

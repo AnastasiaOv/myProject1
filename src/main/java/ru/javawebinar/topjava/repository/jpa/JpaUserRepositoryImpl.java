@@ -7,8 +7,6 @@ import ru.javawebinar.topjava.repository.UserRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -63,10 +61,6 @@ public class JpaUserRepositoryImpl implements UserRepository {
 
     @Override
     public User getByEmail(String email) {
-        return em.createNamedQuery(User.BY_EMAIL, User.class).setParameter(1, email).getSingleResult();
-    }
-
-    public User getUserRates(String email) {
         return em.createNamedQuery(User.BY_EMAIL, User.class).setParameter(1, email).getSingleResult();
     }
 

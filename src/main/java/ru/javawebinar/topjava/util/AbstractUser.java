@@ -2,13 +2,10 @@ package ru.javawebinar.topjava.util;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-import ru.javawebinar.topjava.model.Position;
-import ru.javawebinar.topjava.model.Rate;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 /**
  * GKislin
@@ -23,17 +20,7 @@ public interface AbstractUser {
     @NotEmpty
     String getName();
 
-    String getSurname();
-
-    String getFirstName();
-
-    String getSecondName();
-
-    Boolean getIsAdmin();
-
     void setName(String password);
-
-    List<Position> getPositions();
 
     @Email
     @NotEmpty
@@ -51,5 +38,4 @@ public interface AbstractUser {
     int getCaloriesPerDay();
 
     void setCaloriesPerDay(int caloriesPerDay);
-
 }

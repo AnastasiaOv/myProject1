@@ -11,16 +11,12 @@ import ru.javawebinar.topjava.to.UserTo;
 public class UserUtil {
 
     public static User createFromTo(UserTo newUser) {
-        if (newUser.getIsAdmin())
-            return new User(null, newUser.getName(), newUser.getEmail().toLowerCase(), newUser.getSurname(), newUser.getFirstName(), newUser.getSecondName(),
-                    PasswordUtil.encode(newUser.getPassword()), true, Role.ROLE_ADMIN, newUser.getPositions());
-        else
-            return new User(null, newUser.getName(), newUser.getEmail().toLowerCase(), newUser.getSurname(), newUser.getFirstName(), newUser.getSecondName(),
-                    PasswordUtil.encode(newUser.getPassword()), true, Role.ROLE_USER, newUser.getPositions());
+        return new User(null, newUser.getName(), newUser.getEmail().toLowerCase(),
+                PasswordUtil.encode(newUser.getPassword()), true, Role.ROLE_USER);
     }
 
     public static UserTo asTo(AbstractUser user) {
-        return new UserTo(user.getId(), user.getName(), user.getEmail(), user.getSurname(), user.getFirstName(), user.getSecondName(), user.getCaloriesPerDay(), user.getIsAdmin(), user.getPositions());
+        return new UserTo(user.getId(), user.getName(), user.getEmail(), user.getCaloriesPerDay());
     }
 
     public static User updateFromTo(User oldUser, UserTo updatedUser) {

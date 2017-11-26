@@ -38,7 +38,7 @@ public class AdminAjaxController extends AbstractUserController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void createOrUpdate(@Valid UserTo userTo, BindingResult result, SessionStatus status,@RequestParam Boolean isAdmin) {
+    public void createOrUpdate(@Valid UserTo userTo, BindingResult result, SessionStatus status) {
         if (result.hasErrors()) {
             throw LOG.getValidationException(result);
         } else {

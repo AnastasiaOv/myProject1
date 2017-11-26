@@ -1,6 +1,5 @@
 package ru.javawebinar.topjava.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import ru.javawebinar.topjava.util.AbstractUser;
@@ -11,6 +10,9 @@ import java.util.*;
 
 /**
  * Entity for User
+ *
+ * User: gkislin
+ * Date: 22.08.2014
  */
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "unique_email")})
@@ -28,15 +30,6 @@ public class User extends NamedEntity implements AbstractUser {
 
     @Column(name = "email", nullable = false, unique = true)
     protected String email;
-
-    @Column(name = "surname", nullable = false, unique = false)
-    protected String surname;
-
-    @Column(name = "firstName", nullable = false, unique = false)
-    protected String firstName;
-
-    @Column(name = "secondName", nullable = false, unique = false)
-    protected String secondName;
 
     @Column(name = "password", nullable = false)
     protected String password;
@@ -59,41 +52,14 @@ public class User extends NamedEntity implements AbstractUser {
     @Column(name = "calories_per_day", nullable = false, columnDefinition = "default 2000")
     protected int caloriesPerDay = 2000;
 
-    @Transient
-    private Boolean isAdmin;
-
-    @Transient
-    private String position;
-
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user", fetch = FetchType.EAGER)
-    private List<UserMeal> userMeals = new LinkedList<>();
-
-    public User(Integer id, String name, String email, String surname, String firstName, String secondName, String password, boolean enabled, Set<Role> roles, List<Position> positions) {
-        super(id, name);
-        this.email = email;
-        this.surname = surname;
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.password = password;
-        this.enabled = enabled;
-        this.roles = roles;
-        this.position = getStringFromList(positions);
-        this.positions = positions;
-    }
-
-    @Override
-    public List<Position> getPositions() {
-        return positions;
-    }
-
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id",nullable = false)
-    private List<Position> positions;
+//    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user", fetch = FetchType.LAZY)
+//    private List<UserMeal> userMeals = new LinkedList<>();
 
     public User() {
     }
+
     public User(User u) {
-        this(u.getId(), u.getName(), u.getEmail(), u.getSurname(), u.getFirstName(), u.getSecondName(), u.getPassword(), u.isEnabled(), u.getRoles(), u.getPositions());
+        this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.isEnabled(), u.getRoles());
     }
 
     public User(Integer id, String name, String email, String password, boolean enabled, Role role, Role... roles) {
@@ -108,63 +74,12 @@ public class User extends NamedEntity implements AbstractUser {
         this.roles = roles;
     }
 
-
-    public User(Integer id, String name, String email, String surname, String firstName, String secondName, String password, boolean enabled, Role role, List<Position> positions) {
-        super(id, name);
-        this.email = email;
-        this.surname = surname;
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.password = password;
-        this.enabled = enabled;
-        this.roles = EnumSet.of(role);
-        this.position = getStringFromList(positions);
-        this.positions = positions;
-    }
-
-    private String getStringFromList(List<Position> positions) {
-        StringBuilder sb = new StringBuilder();
-        for (Position position : positions) {
-            sb.append(position.getId()).append("\n");
-        }
-        return sb.toString();
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getSecondName() {
-        return secondName;
-    }
-
-    @Override
-    public Boolean getIsAdmin() {
-        return isAdmin;
-    }
-
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
     }
 
     public void setPassword(String password) {
@@ -215,20 +130,12 @@ public class User extends NamedEntity implements AbstractUser {
 
     @Override
     public String toString() {
-        return "User{" +
-                "email='" + email + '\'' +
-                ", surname='" + surname + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", secondName='" + secondName + '\'' +
-                ", password='" + password + '\'' +
+        return "User (" +
+                "id=" + id +
+                ", email=" + email +
+                ", name=" + name +
                 ", enabled=" + enabled +
-                ", registered=" + registered +
                 ", roles=" + roles +
-                ", caloriesPerDay=" + caloriesPerDay +
-                ", isAdmin=" + isAdmin +
-                ", position='" + position + '\'' +
-                ", userMeals=" + userMeals +
-                ", positions=" + positions +
-                '}';
+                ')';
     }
 }

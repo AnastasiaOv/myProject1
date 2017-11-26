@@ -48,12 +48,6 @@ public class RootController {
         return "mealList";
     }
 
-    @RequestMapping(value = "/processes", method = RequestMethod.GET)
-    public String processList(Model model) {
-        model.addAttribute("filter", new DateTimeFilter());
-        return "processList";
-    }
-
     //    @Secured("ROLE_ADMIN")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/users", method = RequestMethod.GET)
