@@ -7,7 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import ru.javawebinar.topjava.model.Process;
+import ru.javawebinar.topjava.model.UserMeal;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -21,11 +23,24 @@ public interface ProxyProcessRepository extends  JpaRepository<Process, Integer>
 
     @Override
     @Transactional
-    Process save(Process rate);
+    Process save(Process process);
 
     @Override
     Process findOne(Integer id);
 
     @Override
     List<Process> findAll(Sort sort);
+
+
+    @Query("SELECT p FROM Process p left join fetch all properties WHERE p.id=:id AND m.user.id=:userId")
+    UserMeal get(@Param("id") int id, @Param("userId") int userId);
+
+    @Query("SELECT p FROM Process p left join fetch all properties WHERE p.id=:id AND m.user.id=:userId ORDER BY m.start_time DESC")
+    List<Process> getAll(@Param("userId") int userId);
+
+
+
+    @Query("SELECT m from Process m WHERE m.user.id=:userId AND m.dateTime>=:after and m.dateTime<:before ORDER BY m.dateTime DESC")
+    List<Process> getBetween(@Param("after") LocalDateTime startDate, @Param("before") LocalDateTime endDate, @Param("userId") int userId);
+
 }

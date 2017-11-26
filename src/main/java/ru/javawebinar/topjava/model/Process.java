@@ -9,7 +9,19 @@ import java.util.List;
  */
 @Entity
 @Table(name = "process")
+/*
+@NamedNativeQueries({
+        @NamedNativeQuery(name = Process.ALL_PROC, query = "SELECT process_name FROM process JOIN position ON process.id = position.process_id WHERE user_id='100001'"),
+})
+
+@NamedQueries({
+        @NamedQuery(name = Process.ALL_PROC, query = "SELECT p from Process p left join fetch p.position where p.user_id=:id"),
+})
+*/
 public class Process extends NamedEntity {
+
+    static final String ALL_PROC = "Process.allProc";
+
     @Column(name = "process_name")
     private String processName;
 
