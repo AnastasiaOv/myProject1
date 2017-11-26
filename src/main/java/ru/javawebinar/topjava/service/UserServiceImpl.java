@@ -89,4 +89,5 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
         return new LoggedUser(u);
     }
+
 }

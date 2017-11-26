@@ -1,16 +1,15 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page pageEncoding="UTF-8" %>
+<%@page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<%--
 <fmt:setLocale value="ru"/>
 <fmt:setBundle basename="messages.app"/>
---%>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
 
+    <div class="container">
         <c:url value="/meals" var="meals"/>
         <a href="${meals}" class="navbar-brand"><fmt:message key="app.title"/></a>
 

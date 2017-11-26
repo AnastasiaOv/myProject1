@@ -1,12 +1,15 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="datatables" uri="http://github.com/dandelion/datatables" %>
 <%@ taglib prefix="dandelion" uri="http://github.com/dandelion" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="datatable" uri="http://github.com/dandelion/datatables" %>
+
+
 <fmt:setLocale value="ru"/>
 <fmt:setBundle basename="messages.app"/>
+
 <html>
 <dandelion:bundle includes="topjavaDatatable"/>
 <jsp:include page="fragments/headTag.jsp"/>
@@ -17,28 +20,28 @@
         <div class="shadow">
             <h3><fmt:message key="meals.title"/></h3>
 
-            <c:set var="ajaxUrl" value="ajax/profile/meals/"/>
+            <c:set var="ajaxUrl" value="ajax/profile/processes/"/>
             <div class="view-box">
-                <form:form modelAttribute="filter" class="form-horizontal" action="ajax/profile/meals/filter" charset="utf-8"
+                <form:form modelAttribute="filter" class="form-horizontal" action="ajax/profile/processes/filter" charset="utf-8"
                            accept-charset="UTF-8" id="filter">
                     <div class="form-group">
                         <spring:bind path="startDate">
                             <label class="col-sm-2">Дата с</label>
-                            <div class="col-sm-2"><form:input path="startDate" class="form-control date-picker" placeholder="Start Date"/></div>
+                            <div class="col-sm-2"><form:input path="startDate" class="form-control date-picker" placeholder="Дата начала"/></div>
                         </spring:bind>
                         <spring:bind path="startTime">
                             <label class="col-sm-2">Время с</label>
-                            <div class="col-sm-2"><form:input path="startTime" class="form-control time-picker" placeholder="Start Time"/></div>
+                            <div class="col-sm-2"><form:input path="startTime" class="form-control time-picker" placeholder="Время начала"/></div>
                         </spring:bind>
                     </div>
                     <div class="form-group">
                         <spring:bind path="endDate">
                             <label class="col-sm-2">Дата по</label>
-                            <div class="col-sm-2"><form:input path="endDate" class="form-control date-picker" placeholder="End Date"/></div>
+                            <div class="col-sm-2"><form:input path="endDate" class="form-control date-picker" placeholder="Дата конца"/></div>
                         </spring:bind>
                         <spring:bind path="endTime">
                             <label class="col-sm-2">Время по</label>
-                            <div class="col-sm-2"><form:input path="endTime" class="form-control time-picker" placeholder="End Time"/></div>
+                            <div class="col-sm-2"><form:input path="endTime" class="form-control time-picker" placeholder="Время конца"/></div>
                         </spring:bind>
                     </div>
                     <div class="form-group">
@@ -48,14 +51,15 @@
                     </div>
                 </form:form>
 
-                <a class="btn btn-sm btn-info" id="add">Add Meal</a>
+                <a class="btn btn-sm btn-info" id="add">Добавить процесс</a>
 
-                <datatables:table id="datatable" url="${ajaxUrl}" row="user" theme="bootstrap3"
+                <datatables:table id="datatable" url="${ajaxUrl}" row="process" theme="bootstrap3"
                                   cssClass="table table-striped" pageable="false" info="false">
 
-                    <datatables:column title="Date" filterable="false" sortInitDirection="desc" property="dateTime"/>
-                    <datatables:column title="Description" property="description"/>
-                    <datatables:column title="Calories" filterable="false" property="calories"/>
+                    <datatables:column title="время начала" filterable="false" sortInitDirection="desc" property="start_time"/>
+                    <datatables:column title="время окончания" filterable="false" sortInitDirection="desc" property="end_time"/>
+                    <datatables:column title="имя процесса" filterable="false" property="process_name"/>
+                    <datatables:column title="описание процесса" filterable="false" property="description"/>
                     <datatables:column sortable="false" renderFunction="renderUpdateBtn"/>
                     <datatables:column sortable="false" renderFunction="renderDeleteBtn"/>
                     <datatables:column property="exceed" sortable="false" cssCellClass="hidden exceed"/>
@@ -72,32 +76,15 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h2 class="modal-title">Сведения о еде:</h2>
+                <h2 class="modal-title">Сведения о процессе</h2>
             </div>
             <div class="modal-body">
                 <form:form class="form-horizontal" method="post" id="detailsForm">
-                    <input type="text" hidden="hidden" id="id" name="id">
-
-                    <div class="form-group">
-                        <label for="datetime" class="control-label col-xs-3">Date</label>
-
-                        <div class="col-xs-9">
-                            <input type="datetime" class="form-control datetime-picker" id="dateTime" name="dateTime" placeholder="Date">
-                        </div>
-                    </div>
                     <div class="form-group">
                         <label for="description" class="control-label col-xs-3">Описание</label>
 
                         <div class="col-xs-9">
                             <input type="text" class="form-control" id="description" name="description" placeholder="Description">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="calories" class="control-label col-xs-3">Calories</label>
-
-                        <div class="col-xs-9">
-                            <input type="number" class="form-control" id="calories" name="calories"
-                                   placeholder="2000">
                         </div>
                     </div>
                     <div class="form-group">

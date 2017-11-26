@@ -1,28 +1,36 @@
-DROP TABLE IF EXISTS user_roles;
-DROP TABLE IF EXISTS meals;
-DROP TABLE IF EXISTS users;
-DROP SEQUENCE IF EXISTS global_seq;
+/*
+DROP TABLE users CASCADE;
+DROP TABLE user_roles;
+DROP TABLE meals;
+DROP TABLE position_dict CASCADE;
+DROP TABLE process CASCADE;
+DROP TABLE position CASCADE;
+DROP TABLE rate;
+drop SEQUENCE global_seq CASCADE;
 
-CREATE SEQUENCE global_seq START 100000;
+*/
+CREATE SEQUENCE global_seq;
 
 CREATE TABLE users
 (
-  id         INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
-  name       VARCHAR,
-  email      VARCHAR NOT NULL,
-  password   VARCHAR NOT NULL,
-  registered TIMESTAMP NOT NULL DEFAULT now(),
-  enabled    BOOL                DEFAULT TRUE,
-  calories_per_day INTEGER NOT NULL DEFAULT 2000
+  id               INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  name             VARCHAR,
+  email            VARCHAR   NOT NULL,
+  password         VARCHAR   NOT NULL,
+  surname          VARCHAR,
+  firstName        VARCHAR,
+  secondName       VARCHAR,
+  registered       TIMESTAMP NOT NULL  DEFAULT now(),
+  enabled          BOOL                DEFAULT TRUE,
+  calories_per_day INTEGER   NOT NULL  DEFAULT 2000
 );
-CREATE UNIQUE INDEX unique_email ON USERS (email);
 
 CREATE TABLE user_roles
 (
   user_id INTEGER NOT NULL,
   role    VARCHAR,
   CONSTRAINT user_roles_idx UNIQUE (user_id, role),
-  FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+  FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE meals (
@@ -31,5 +39,44 @@ CREATE TABLE meals (
   datetime    TIMESTAMP,
   description TEXT,
   calories    INT,
-  FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+  FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE process (
+  id           INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  process_name VARCHAR,
+  level        INTEGER,
+  start_time   TIMESTAMP,
+  end_time     TIMESTAMP NULL,
+  description  TEXT
+);
+
+CREATE TABLE position_dict (
+  id         INTEGER NOT NULL PRIMARY KEY DEFAULT nextval('global_seq'),
+  name       VARCHAR NOT NULL,
+  department VARCHAR NOT NULL
+);
+
+CREATE TABLE position (
+  id             INTEGER NOT NULL PRIMARY KEY DEFAULT nextval('global_seq'),
+  user_id        INTEGER NOT NULL,
+  process_id     INTEGER NOT NULL,
+  rate_amount     DECIMAL NOT NULL,
+  is_owner       BOOLEAN,
+  is_executor    BOOLEAN,
+  is_responsible BOOLEAN,
+  position_id    INTEGER NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (process_id) REFERENCES process (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (position_id) REFERENCES position_dict (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+CREATE TABLE rate (
+  id          INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  user_id     INTEGER NOT NULL,
+  position_id INTEGER NOT NULL,
+  rate_amount DECIMAL NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+  FOREIGN KEY (position_id) REFERENCES position (id) ON DELETE CASCADE
 );

@@ -4,7 +4,7 @@ function makeEditable(ajaxUrl) {
     form = $('#detailsForm');
 
     $('#add').click(function () {
-        form.find(":input").each(function () {
+        form.find(":select").each(function () {
             $(this).val("");
         });
         $('#id').val(0);
@@ -39,6 +39,14 @@ function makeEditable(ajaxUrl) {
 function updateRow(id) {
     $.get(ajaxUrl + id, function (data) {
         $.each(data, function (key, value) {
+            var elementName = key;
+            if (key === 'positions') {
+                $.each(value, function (index) {
+                    var optValue = value[index].id;
+                    $('#positions').attr('size', value.length).append($("<option></option>")
+                        .text(optValue));
+                });
+            }
             form.find("input[name='" + key + "']").val(value);
         });
         $('#editRow').modal();
@@ -78,10 +86,17 @@ function updateByData(data) {
 }
 
 function save() {
+    var a = $("select").on( "change").val();
+    var isAdmin;
+    if (a === 'Администратор') {
+        isAdmin = '&isAdmin=true';
+    } else {
+        isAdmin = '&isAdmin=false'
+    }
     $.ajax({
         type: "POST",
         url: ajaxUrl,
-        data: form.serialize(),
+        data: form.serialize() + isAdmin,
         success: function (data) {
             $('#editRow').modal('hide');
             updateTable();
@@ -126,6 +141,14 @@ function renderDate(date, type, row) {
         return '<span>' + dateObject.toISOString().substring(0, 10) + '</span>';
     }
     return date;
+}
+
+function renderList(date, type, row) {
+    var newDate = '';
+    $.each(date, function (index) {
+        newDate += date[index].id + '\n';
+    });
+    return newDate;
 }
 
 function renderEmail(data, type, row) {

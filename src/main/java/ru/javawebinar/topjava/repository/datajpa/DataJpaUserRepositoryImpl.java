@@ -4,14 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
-import ru.javawebinar.topjava.Profiles;
 import ru.javawebinar.topjava.model.BaseEntity;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
 import ru.javawebinar.topjava.util.exception.ValidationException;
 
-import javax.annotation.PostConstruct;
-import java.util.Arrays;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
@@ -30,11 +29,6 @@ public class DataJpaUserRepositoryImpl implements UserRepository {
     private Environment env;
 
     private boolean mainUserModificationRestricted;
-
-    @PostConstruct
-    void postConstruct() {
-        mainUserModificationRestricted = Arrays.asList(env.getActiveProfiles()).stream().filter(Profiles.HEROKU::equals).findFirst().isPresent();
-    }
 
     public void checkModificationAllowed(Integer id) {
         if (mainUserModificationRestricted && id != null && id < BaseEntity.START_SEQ + 2) {

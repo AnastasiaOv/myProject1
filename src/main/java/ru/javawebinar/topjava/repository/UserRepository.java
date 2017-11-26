@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Interface for User DAO(Repository)
- *
+ * <p>
  * User: gkislin
  * Date: 22.08.2014
  */
