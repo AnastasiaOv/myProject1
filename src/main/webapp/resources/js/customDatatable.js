@@ -86,7 +86,7 @@ function updateByData(data) {
 }
 
 function save() {
-    var a = $("select").on( "change").val();
+    var a = $("#roles").on( "change").val();
     var isAdmin;
     if (a === 'Администратор') {
         isAdmin = '&isAdmin=true';
