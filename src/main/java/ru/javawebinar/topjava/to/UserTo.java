@@ -1,6 +1,7 @@
 package ru.javawebinar.topjava.to;
 
 import ru.javawebinar.topjava.model.Position;
+import ru.javawebinar.topjava.model.PositionDict;
 import ru.javawebinar.topjava.model.Rate;
 import ru.javawebinar.topjava.util.AbstractUser;
 
@@ -35,6 +36,20 @@ public class UserTo implements AbstractUser, Serializable {
         this.caloriesPerDay = caloriesPerDay;
         this.isAdmin = isAdmin;
         this.position = positions;
+
+    }
+
+    public UserTo(int id, String name, String email, String surname, String firstName, String secondName, int caloriesPerDay, Boolean isAdmin, List<Position> positions,List<PositionDict> positionDicts) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.surname = surname;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.caloriesPerDay = caloriesPerDay;
+        this.isAdmin = isAdmin;
+        this.position = positions;
+        this.positionDicts=positionDicts;
     }
 
     protected String name;
@@ -50,10 +65,16 @@ public class UserTo implements AbstractUser, Serializable {
     private int caloriesPerDay = 2000;
     private Boolean isAdmin;
     private List<Position> position;
+    private List<PositionDict> positionDicts;
 
     @Override
     public List<Position> getPositions() {
         return position;
+    }
+
+    @Override
+    public List<PositionDict> getPositionDicts() {
+        return positionDicts;
     }
 
     public void setPosition(List<Position> position) {

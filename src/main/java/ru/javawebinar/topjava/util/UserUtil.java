@@ -20,7 +20,7 @@ public class UserUtil {
     }
 
     public static UserTo asTo(AbstractUser user) {
-        return new UserTo(user.getId(), user.getName(), user.getEmail(), user.getSurname(), user.getFirstName(), user.getSecondName(), user.getCaloriesPerDay(), user.getIsAdmin(), user.getPositions());
+        return new UserTo(user.getId(), user.getName(), user.getEmail(), user.getSurname(), user.getFirstName(), user.getSecondName(), user.getCaloriesPerDay(), user.getIsAdmin(), user.getPositions(), user.getPositionDicts());
     }
 
     public static User updateFromTo(User oldUser, UserTo updatedUser) {

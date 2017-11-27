@@ -3,6 +3,7 @@ package ru.javawebinar.topjava.util;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import ru.javawebinar.topjava.model.Position;
+import ru.javawebinar.topjava.model.PositionDict;
 import ru.javawebinar.topjava.model.Rate;
 
 import javax.validation.constraints.Digits;
@@ -34,6 +35,7 @@ public interface AbstractUser {
     void setName(String password);
 
     List<Position> getPositions();
+    List<PositionDict> getPositionDicts();
 
     @Email
     @NotEmpty

@@ -2,6 +2,7 @@ package ru.javawebinar.topjava.web.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.javawebinar.topjava.model.User;
+import ru.javawebinar.topjava.service.PositionDictService;
 import ru.javawebinar.topjava.service.UserService;
 import ru.javawebinar.topjava.to.UserTo;
 import ru.javawebinar.topjava.util.UserUtil;
@@ -27,6 +28,7 @@ public abstract class AbstractUserController extends ExceptionInfoHandler {
         LOG.info("get " + id);
         User user = service.get(id);
         user.setPassword(null);
+        user.setPositionDicts(service.getAllPositions());
         return user;
     }
 

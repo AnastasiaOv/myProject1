@@ -8,7 +8,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.javawebinar.topjava.LoggedUser;
+import ru.javawebinar.topjava.model.PositionDict;
 import ru.javawebinar.topjava.model.User;
+import ru.javawebinar.topjava.repository.PositionDictRepository;
 import ru.javawebinar.topjava.repository.UserRepository;
 import ru.javawebinar.topjava.to.UserTo;
 import ru.javawebinar.topjava.util.UserUtil;
@@ -28,6 +30,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private PositionDictRepository positionDictRepository;
 
     @CacheEvict(value = "users", allEntries = true)
     public User save(User user) {
@@ -73,6 +78,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @CacheEvict(value = "users", allEntries = true)
     @Override
     public void evictCache() {
+    }
+
+    @Override
+    public List<PositionDict> getAllPositions() {
+        return positionDictRepository.getAll();
     }
 
     @CacheEvict(value = "users", allEntries = true)

@@ -22,7 +22,7 @@ public class AdminAjaxController extends AbstractUserController {
         return super.getAll();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)//вызывается при апдейте строки
     public User get(@PathVariable("id") int id) {
         return super.get(id);
     }

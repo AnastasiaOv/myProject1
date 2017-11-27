@@ -7,13 +7,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import ru.javawebinar.topjava.model.Position;
+import ru.javawebinar.topjava.model.PositionDict;
 
 import java.util.List;
 
 /**
  * Created by Анастасия on 26.11.2017.
  */
-public interface ProxyPositionReposiory extends JpaRepository<Position, Integer> {
+public interface ProxyDictPositionReposiory extends JpaRepository<PositionDict, Integer> {
 
     @Transactional
     @Modifying
@@ -22,12 +23,15 @@ public interface ProxyPositionReposiory extends JpaRepository<Position, Integer>
 
     @Override
     @Transactional
-    Position save(Position position);
+    PositionDict save(PositionDict position);
 
     @Override
-    Position findOne(Integer id);
+    PositionDict findOne(Integer id);
 
     @Override
-    List<Position> findAll(Sort sort);
+    List<PositionDict> findAll(Sort sort);
+
+    @Query("SELECT p FROM PositionDict p")
+    List<PositionDict> getAll();
 
 }

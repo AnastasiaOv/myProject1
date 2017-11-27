@@ -44,11 +44,6 @@ public class DataJpaProcessRepositoryImpl implements ProcessRepository {
     }
 
     @Override
-    public void deleteAll(int userId) {
-
-    }
-
-    @Override
     public List<Process> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
         return null;
     }

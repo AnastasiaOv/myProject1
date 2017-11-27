@@ -11,17 +11,17 @@ import java.util.List;
  */
 public interface ProcessService {
 
-    public Process save(Process process, int userId);
+    Process save(Process process, int userId);
 
-    public Process update(Process process, int userId);
+    Process update(Process process, int userId);
 
-    public void delete(int id, int userId);
+    void delete(int id, int userId);
 
-    public void deleteAll(int userId);
+    void deleteAll(int userId);
 
-    public Process get(int id, int userId);
+    Process get(int id, int userId);
 
-    public List<Process> getAll(int userId);
+    List<Process> getAll(int userId);
 
-    public List<Process> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId);
+    List<Process> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId);
 }

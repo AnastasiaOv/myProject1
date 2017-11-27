@@ -22,8 +22,6 @@ public interface ProcessRepository {
     // ORDERED DATE, TIME
     List<Process> getAll();
 
-    void deleteAll(int userId);
-
     List<Process> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId);
 
 }

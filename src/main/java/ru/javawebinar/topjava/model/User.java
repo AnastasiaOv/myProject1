@@ -1,8 +1,10 @@
 package ru.javawebinar.topjava.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.beans.factory.annotation.Autowired;
+import ru.javawebinar.topjava.service.PositionDictService;
+import ru.javawebinar.topjava.service.PositionService;
 import ru.javawebinar.topjava.util.AbstractUser;
 
 import javax.persistence.*;
@@ -21,6 +23,14 @@ import java.util.*;
 })
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class User extends NamedEntity implements AbstractUser {
+
+    @Transient
+    @Autowired
+    PositionDictService positionDictService;
+
+    @Transient
+    @Autowired
+    PositionService positionService;
 
     public static final String DELETE = "User.delete";
     public static final String ALL_SORTED = "User.getAllSorted";
@@ -65,6 +75,9 @@ public class User extends NamedEntity implements AbstractUser {
     @Transient
     private String position;
 
+    @Transient
+    private List<PositionDict> positionDicts;
+
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user", fetch = FetchType.EAGER)
     private List<UserMeal> userMeals = new LinkedList<>();
 
@@ -77,7 +90,7 @@ public class User extends NamedEntity implements AbstractUser {
         this.password = password;
         this.enabled = enabled;
         this.roles = roles;
-        this.position = getStringFromList(positions);
+        this.positionDicts = positionDictService.getAll();
         this.positions = positions;
     }
 
@@ -87,11 +100,12 @@ public class User extends NamedEntity implements AbstractUser {
     }
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id",nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private List<Position> positions;
 
     public User() {
     }
+
     public User(User u) {
         this(u.getId(), u.getName(), u.getEmail(), u.getSurname(), u.getFirstName(), u.getSecondName(), u.getPassword(), u.isEnabled(), u.getRoles(), u.getPositions());
     }
@@ -118,14 +132,14 @@ public class User extends NamedEntity implements AbstractUser {
         this.password = password;
         this.enabled = enabled;
         this.roles = EnumSet.of(role);
-        this.position = getStringFromList(positions);
+        //this.position = getStringFromList(positionService.getAll());
         this.positions = positions;
     }
 
-    private String getStringFromList(List<Position> positions) {
+    private String getStringFromList(List<PositionDict> positions) {
         StringBuilder sb = new StringBuilder();
-        for (Position position : positions) {
-            sb.append(position.getId()).append("\n");
+        for (PositionDict position : positions) {
+            sb.append(position.getName()).append("\n");
         }
         return sb.toString();
     }
@@ -211,6 +225,15 @@ public class User extends NamedEntity implements AbstractUser {
 
     public void setRoles(Collection<Role> authorities) {
         this.roles = EnumSet.copyOf(authorities);
+    }
+
+    @Override
+    public List<PositionDict> getPositionDicts() {
+        return positionDicts;
+    }
+
+    public void setPositionDicts(List<PositionDict> positionDicts) {
+        this.positionDicts = positionDicts;
     }
 
     @Override

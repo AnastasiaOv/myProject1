@@ -1,22 +1,27 @@
 package ru.javawebinar.topjava.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by Анастасия on 27.11.2017.
  */
 @Entity
-@Table(name="position_dict")
-public class PositionDict extends BaseEntity{
-    @Column(name="name")
+@Table(name = "position_dict")
+@NamedQueries({
+        @NamedQuery(name = PositionDict.GET_ALL, query = "SELECT p FROM PositionDict p"),})
+
+public class PositionDict extends BaseEntity {
+
+    public static final String GET_ALL = "PositionDict.getAll";
+
+    @Column(name = "name")
     private String name;
 
-    @Column(name="department")
+    @Column(name = "department")
     private String department;
 
-    public PositionDict() {}
+    public PositionDict() {
+    }
 
     public PositionDict(String name, String department) {
         this.name = name;

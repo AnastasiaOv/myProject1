@@ -67,6 +67,15 @@
 
                     <datatables:callback type="init" function="makeEditable"/>
                 </datatables:table>
+
+                <datatables:table id="datatable" url="${ajaxUrl}" row="position_id" theme="bootstrap3"
+                                  cssClass="table table-striped" pageable="false" info="false">
+
+                    <datatables:column title="все должности" filterable="false" sortInitDirection="desc" property="positionName"/>
+
+                </datatables:table>
+
+
             </div>
         </div>
     </div>
