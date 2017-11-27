@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import ru.javawebinar.topjava.model.Process;
+import ru.javawebinar.topjava.model.UserMeal;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public interface ProxyProcessRepository extends  JpaRepository<Process, Integer>
     @Override
     Process findOne(Integer id);
 
-    @Override
-    List<Process> findAll(Sort sort);
+    @Query("SELECT p FROM Process p ORDER BY p.start_time DESC")
+    List<Process> getAll();
+
 }

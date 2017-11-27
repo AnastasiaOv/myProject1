@@ -1,5 +1,7 @@
 package ru.javawebinar.topjava.model;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "process")
-public class Process extends NamedEntity {
+public class Process extends BaseEntity {
     @Column(name = "process_name")
     private String processName;
 
@@ -22,7 +24,7 @@ public class Process extends NamedEntity {
     @Column(name = "end_time")
     protected LocalDateTime end_time;
 
-    @Column(name = "definition")
+    @Column(name = "description")
     private String definition;
 
     @OneToMany(fetch = FetchType.EAGER)
@@ -32,7 +34,8 @@ public class Process extends NamedEntity {
     public Process() {
     }
 
-    public Process(String processName, Integer level, LocalDateTime start_time, LocalDateTime end_time, String definition, List<Position> positionList) {
+    public Process(Integer id, String processName, Integer level, LocalDateTime start_time, LocalDateTime end_time, String definition, List<Position> positionList) {
+        super(id);
         this.processName = processName;
         this.level = level;
         this.start_time = start_time;
@@ -40,6 +43,16 @@ public class Process extends NamedEntity {
         this.definition = definition;
         this.positionList = positionList;
     }
+
+    public Process(Integer id, String processName, Integer level, LocalDateTime start_time, String definition, List<Position> positionList) {
+        super(id);
+        this.processName = processName;
+        this.level = level;
+        this.start_time = start_time;
+        this.definition = definition;
+        this.positionList = positionList;
+    }
+
 
     public String getProcessName() {
         return processName;
@@ -88,6 +101,7 @@ public class Process extends NamedEntity {
     public void setPositionList(List<Position> positionList) {
         this.positionList = positionList;
     }
+
 
     @Override
     public String toString() {

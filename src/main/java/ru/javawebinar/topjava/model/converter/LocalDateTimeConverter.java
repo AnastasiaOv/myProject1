@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 /**
  * GKislin
  * 08.01.2015.
+ *
  * @link https://weblogs.java.net/blog/montanajava/archive/2014/06/17/using-java-8-datetime-classes-jpa
  */
 @Converter(autoApply = true)
@@ -19,6 +20,8 @@ public class LocalDateTimeConverter implements AttributeConverter<LocalDateTime,
 
     @Override
     public LocalDateTime convertToEntityAttribute(Timestamp ts) {
+        if (ts == null)
+            return LocalDateTime.now();
         return ts.toLocalDateTime();
     }
 }

@@ -71,6 +71,6 @@ public class Position extends BaseEntity {
                 "part=" + part +
                 ", isOwner=" + isOwner +
                 ", isExecutor=" + isExecutor +
-                ", isResponsible=" + isResponsible ;
+                ", isResponsible=" + isResponsible;
     }
 }
