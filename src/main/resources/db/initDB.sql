@@ -5,7 +5,7 @@ DROP TABLE meals;
 DROP TABLE position_dict CASCADE;
 DROP TABLE process CASCADE;
 DROP TABLE position CASCADE;
-DROP TABLE rate;
+DROP TABLE rate Cascade;
 drop SEQUENCE global_seq CASCADE;
 
 */
@@ -57,19 +57,6 @@ CREATE TABLE position_dict (
   department VARCHAR NOT NULL
 );
 
-CREATE TABLE position (
-  id             INTEGER NOT NULL PRIMARY KEY DEFAULT nextval('global_seq'),
-  user_id        INTEGER NOT NULL,
-  process_id     INTEGER NOT NULL,
-  rate_amount     DECIMAL NOT NULL,
-  is_owner       BOOLEAN,
-  is_executor    BOOLEAN,
-  is_responsible BOOLEAN,
-  position_id    INTEGER NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (process_id) REFERENCES process (id) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (position_id) REFERENCES position_dict (id) ON DELETE CASCADE ON UPDATE CASCADE
-);
 
 
 CREATE TABLE rate (
@@ -78,5 +65,16 @@ CREATE TABLE rate (
   position_id INTEGER NOT NULL,
   rate_amount DECIMAL NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
-  FOREIGN KEY (position_id) REFERENCES position (id) ON DELETE CASCADE
+  FOREIGN KEY (position_id) REFERENCES position_dict (id) ON DELETE CASCADE
+);
+
+CREATE TABLE position (
+  id             INTEGER NOT NULL PRIMARY KEY DEFAULT nextval('global_seq'),
+  rate_id        INTEGER NOT NULL,
+  process_id     INTEGER NOT NULL,
+  is_owner       BOOLEAN,
+  is_executor    BOOLEAN,
+  is_responsible BOOLEAN,
+  FOREIGN KEY (rate_id) REFERENCES rate (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (process_id) REFERENCES process (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
