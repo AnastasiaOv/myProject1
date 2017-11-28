@@ -22,26 +22,31 @@
 
             <c:set var="ajaxUrl" value="ajax/profile/processes/"/>
             <div class="view-box">
-                <form:form modelAttribute="filter" class="form-horizontal" action="ajax/profile/processes/filter" charset="utf-8"
+                <form:form modelAttribute="filter" class="form-horizontal" action="ajax/profile/processes/filter"
+                           charset="utf-8"
                            accept-charset="UTF-8" id="filter">
                     <div class="form-group">
                         <spring:bind path="startDate">
                             <label class="col-sm-2">Дата с</label>
-                            <div class="col-sm-2"><form:input path="startDate" class="form-control date-picker" placeholder="Дата начала"/></div>
+                            <div class="col-sm-2"><form:input path="startDate" class="form-control date-picker"
+                                                              placeholder="Дата начала"/></div>
                         </spring:bind>
                         <spring:bind path="startTime">
                             <label class="col-sm-2">Время с</label>
-                            <div class="col-sm-2"><form:input path="startTime" class="form-control time-picker" placeholder="Время начала"/></div>
+                            <div class="col-sm-2"><form:input path="startTime" class="form-control time-picker"
+                                                              placeholder="Время начала"/></div>
                         </spring:bind>
                     </div>
                     <div class="form-group">
                         <spring:bind path="endDate">
                             <label class="col-sm-2">Дата по</label>
-                            <div class="col-sm-2"><form:input path="endDate" class="form-control date-picker" placeholder="Дата конца"/></div>
+                            <div class="col-sm-2"><form:input path="endDate" class="form-control date-picker"
+                                                              placeholder="Дата конца"/></div>
                         </spring:bind>
                         <spring:bind path="endTime">
                             <label class="col-sm-2">Время по</label>
-                            <div class="col-sm-2"><form:input path="endTime" class="form-control time-picker" placeholder="Время конца"/></div>
+                            <div class="col-sm-2"><form:input path="endTime" class="form-control time-picker"
+                                                              placeholder="Время конца"/></div>
                         </spring:bind>
                     </div>
                     <div class="form-group">
@@ -56,8 +61,10 @@
                 <datatables:table id="datatable" url="${ajaxUrl}" row="process" theme="bootstrap3"
                                   cssClass="table table-striped" pageable="false" info="false">
 
-                    <datatables:column title="время начала" filterable="false" sortInitDirection="desc" property="start_time"/>
-                    <datatables:column title="время окончания" filterable="false" sortInitDirection="desc" property="end_time"/>
+                    <datatables:column title="время начала" filterable="false" sortInitDirection="desc"
+                                       property="start_time"/>
+                    <datatables:column title="время окончания" filterable="false" sortInitDirection="desc"
+                                       property="end_time"/>
                     <datatables:column title="имя процесса" filterable="false" property="processName"/>
                     <datatables:column title="описание процесса" filterable="false" property="definition"/>
 
@@ -67,7 +74,6 @@
 
                     <datatables:callback type="init" function="makeEditable"/>
                 </datatables:table>
-
 
 
             </div>
@@ -84,11 +90,18 @@
             </div>
             <div class="modal-body">
                 <form:form class="form-horizontal" method="post" id="detailsForm">
+
+                    <input type="text" hidden="hidden" id="id" name="id">
+                    <input type="datetime" hidden="hidden" id="start_time" name="start_time">
+                    <input type="number" hidden="hidden" id="level" name="level">
+                    <input type="text" hidden="hidden" id="processName" name="processName">
+
                     <div class="form-group">
-                        <label for="description" class="control-label col-xs-3">Описание</label>
+                        <label for="definition" class="control-label col-xs-3">Описание</label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="description" name="description" placeholder="Description">
+                            <input type="text" class="form-control" id="definition" name="definition"
+                                   placeholder="Description">
                         </div>
                     </div>
                     <div class="form-group">
@@ -114,16 +127,16 @@
         $('.date-picker').datetimepicker({
             timepicker: false,
             format: 'Y-m-d',
-            lang:'ru'
+            lang: 'ru'
         });
         $('.time-picker').datetimepicker({
             datepicker: false,
             format: 'H:i',
-            lang:'ru'
+            lang: 'ru'
         });
         $('.datetime-picker').datetimepicker({
             format: 'Y-m-d H:i',
-            lang:'ru'
+            lang: 'ru'
         });
         coloredTable();
     }
@@ -134,7 +147,7 @@
             type: "POST",
             url: frm.attr('action'),
             data: frm.serialize(),
-            success: function(data){
+            success: function (data) {
                 updateByData(data);
                 coloredTable();
             }

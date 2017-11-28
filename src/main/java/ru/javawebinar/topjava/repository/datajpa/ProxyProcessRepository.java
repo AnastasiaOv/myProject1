@@ -20,11 +20,13 @@ public interface ProxyProcessRepository extends JpaRepository<Process, Integer> 
     int delete(@Param("id") int id);
 
     @Override
-    @Transactional
     Process save(Process process);
 
     @Override
     Process findOne(Integer id);
+
+    @Query("SELECT p FROM Process p WHERE p.id=:id")
+    Process get(@Param("id") int id);
 
     @Query("SELECT p FROM Process p ORDER BY p.start_time DESC")
     List<Process> getAll();

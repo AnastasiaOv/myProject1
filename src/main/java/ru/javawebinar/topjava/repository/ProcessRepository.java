@@ -11,13 +11,13 @@ import java.util.List;
 
 public interface ProcessRepository {
     // UserMeal.user = null
-    Process save(Process process, int userId);
+    Process save(Process process);
 
     // false if not found
     boolean delete(int id);
 
     // null if not found
-    Process get(int id, int userId);
+    Process get(int id);
 
     // ORDERED DATE, TIME
     List<Process> getAll();

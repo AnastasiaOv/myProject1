@@ -19,7 +19,7 @@ public interface ProcessService {
 
     void deleteAll(int userId);
 
-    Process get(int id, int userId);
+    Process get(int id);
 
     List<Process> getAll(int userId);
 

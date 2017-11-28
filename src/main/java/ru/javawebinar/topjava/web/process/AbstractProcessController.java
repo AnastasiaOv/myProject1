@@ -23,7 +23,7 @@ public class AbstractProcessController extends ExceptionInfoHandler {
     public Process get(int id) {
         int userId = LoggedUser.id();
         LOG.info("get meal {} for User {}", id, userId);
-        return service.get(id, userId);
+        return service.get(id);
     }
 
     public void delete(int id) {

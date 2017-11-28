@@ -108,7 +108,7 @@
                         <label for="positions" class="control-label col-xs-3">Должность</label>
 
                         <div class="col-xs-9">
-                            <select id="positions">
+                            <select id="positions" >
 
                             </select>
                         </div>

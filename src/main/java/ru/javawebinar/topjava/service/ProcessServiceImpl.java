@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import ru.javawebinar.topjava.model.Process;
-import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.repository.ProcessRepository;
-import ru.javawebinar.topjava.repository.UserMealRepository;
+import ru.javawebinar.topjava.util.exception.ExceptionUtil;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,12 +20,17 @@ public class ProcessServiceImpl implements ProcessService {
 
     @Override
     public Process save(Process process, int userId) {
-        return null;
+        return repository.save(process);
+    }
+
+    @Override
+    public Process get(int id) {
+        return repository.get(id);
     }
 
     @Override
     public Process update(Process process, int userId) {
-        return null;
+        return ExceptionUtil.check(repository.save(process), process.getId());
     }
 
     @Override
@@ -37,11 +41,6 @@ public class ProcessServiceImpl implements ProcessService {
     @Override
     public void deleteAll(int userId) {
 
-    }
-
-    @Override
-    public Process get(int id, int userId) {
-        return null;
     }
 
     @Override

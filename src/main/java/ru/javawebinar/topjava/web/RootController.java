@@ -29,7 +29,7 @@ public class RootController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String root() {
-        return "redirect:meals";
+        return "redirect:processes";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

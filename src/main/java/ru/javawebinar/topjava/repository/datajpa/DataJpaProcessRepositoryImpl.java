@@ -2,6 +2,7 @@ package ru.javawebinar.topjava.repository.datajpa;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.javawebinar.topjava.model.Process;
 import ru.javawebinar.topjava.repository.ProcessRepository;
 
@@ -21,8 +22,9 @@ public class DataJpaProcessRepositoryImpl implements ProcessRepository {
 
 
     @Override
-    public Process save(Process process, int userId) {
-        if (!process.isNew() && get(process.getId(), userId) == null) {
+    @Transactional
+    public Process save(Process process) {
+        if (!process.isNew() && process.getId() == null) {
             return null;
         }
         return proxy.save(process);
@@ -34,8 +36,8 @@ public class DataJpaProcessRepositoryImpl implements ProcessRepository {
     }
 
     @Override
-    public Process get(int id, int userId) {
-        return null;
+    public Process get(int id) {
+        return proxy.get(id);
     }
 
     @Override
