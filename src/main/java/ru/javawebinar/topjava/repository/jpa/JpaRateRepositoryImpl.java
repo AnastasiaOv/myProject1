@@ -2,7 +2,6 @@ package ru.javawebinar.topjava.repository.jpa;
 
 import org.springframework.transaction.annotation.Transactional;
 import ru.javawebinar.topjava.model.Rate;
-import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.RateRepository;
 
 import javax.persistence.EntityManager;
@@ -40,8 +39,10 @@ public class JpaRateRepositoryImpl implements RateRepository {
     }
 
     @Override
-    public Rate getByUser(User user) {
-        return null;
+    public List<Rate> getByUser(int userId) {
+        return em.createNamedQuery(Rate.ALL_SORTED, Rate.class)
+                .setParameter("userId", userId)
+                .getResultList();
     }
 
     @Override

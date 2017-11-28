@@ -13,14 +13,14 @@ public class UserUtil {
     public static User createFromTo(UserTo newUser) {
         if (newUser.getIsAdmin())
             return new User(null, newUser.getName(), newUser.getEmail().toLowerCase(), newUser.getSurname(), newUser.getFirstName(), newUser.getSecondName(),
-                    PasswordUtil.encode(newUser.getPassword()), true, Role.ROLE_ADMIN, newUser.getPositions());
+                    PasswordUtil.encode(newUser.getPassword()), true, Role.ROLE_ADMIN, newUser.getRates());
         else
             return new User(null, newUser.getName(), newUser.getEmail().toLowerCase(), newUser.getSurname(), newUser.getFirstName(), newUser.getSecondName(),
-                    PasswordUtil.encode(newUser.getPassword()), true, Role.ROLE_USER, newUser.getPositions());
+                    PasswordUtil.encode(newUser.getPassword()), true, Role.ROLE_USER, newUser.getRates());
     }
 
     public static UserTo asTo(AbstractUser user) {
-        return new UserTo(user.getId(), user.getName(), user.getEmail(), user.getSurname(), user.getFirstName(), user.getSecondName(), user.getCaloriesPerDay(), user.getIsAdmin(), user.getPositions(), user.getPositionDicts());
+        return new UserTo(user.getId(), user.getName(), user.getEmail(), user.getSurname(), user.getFirstName(), user.getSecondName(), user.getCaloriesPerDay(), user.getIsAdmin(),  user.getPositionDicts(),user.getRates());
     }
 
     public static User updateFromTo(User oldUser, UserTo updatedUser) {

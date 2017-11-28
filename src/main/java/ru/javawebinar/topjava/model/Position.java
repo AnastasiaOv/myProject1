@@ -1,5 +1,7 @@
 package ru.javawebinar.topjava.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -11,9 +13,6 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "position")
 public class Position extends BaseEntity {
-    @Column(name = "rate_amount")
-    private BigDecimal part;
-
     @Column(name = "is_owner")
     private Boolean isOwner;
 
@@ -23,8 +22,8 @@ public class Position extends BaseEntity {
     @Column(name = "is_responsible")
     private Boolean isResponsible;
 
-    public Position(BigDecimal part, Boolean isOwner, Boolean isExecutor, Boolean isResponsible) {
-        this.part = part;
+    public Position(Boolean isOwner, Boolean isExecutor, Boolean isResponsible) {
+
         this.isOwner = isOwner;
         this.isExecutor = isExecutor;
         this.isResponsible = isResponsible;
@@ -33,13 +32,6 @@ public class Position extends BaseEntity {
     public Position() {
     }
 
-    public BigDecimal getPart() {
-        return part;
-    }
-
-    public void setPart(BigDecimal part) {
-        this.part = part;
-    }
 
     public Boolean getOwner() {
         return isOwner;
@@ -68,7 +60,6 @@ public class Position extends BaseEntity {
     @Override
     public String toString() {
         return "Position{" +
-                "part=" + part +
                 ", isOwner=" + isOwner +
                 ", isExecutor=" + isExecutor +
                 ", isResponsible=" + isResponsible;

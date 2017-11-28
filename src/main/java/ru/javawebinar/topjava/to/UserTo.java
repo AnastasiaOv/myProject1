@@ -26,7 +26,7 @@ public class UserTo implements AbstractUser, Serializable {
 
     }
 
-    public UserTo(int id, String name, String email, String surname, String firstName, String secondName, int caloriesPerDay, Boolean isAdmin, List<Position> positions) {
+    public UserTo(int id, String name, String email, String surname, String firstName, String secondName, int caloriesPerDay, Boolean isAdmin, List<Rate> rates) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -35,11 +35,11 @@ public class UserTo implements AbstractUser, Serializable {
         this.secondName = secondName;
         this.caloriesPerDay = caloriesPerDay;
         this.isAdmin = isAdmin;
-        this.position = positions;
+        this.rates = rates;
 
     }
 
-    public UserTo(int id, String name, String email, String surname, String firstName, String secondName, int caloriesPerDay, Boolean isAdmin, List<Position> positions,List<PositionDict> positionDicts) {
+    public UserTo(int id, String name, String email, String surname, String firstName, String secondName, int caloriesPerDay, Boolean isAdmin, List<PositionDict> positionDicts, List<Rate> rates) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -48,7 +48,7 @@ public class UserTo implements AbstractUser, Serializable {
         this.secondName = secondName;
         this.caloriesPerDay = caloriesPerDay;
         this.isAdmin = isAdmin;
-        this.position = positions;
+        this.rates = rates;
         this.positionDicts=positionDicts;
     }
 
@@ -64,21 +64,12 @@ public class UserTo implements AbstractUser, Serializable {
 
     private int caloriesPerDay = 2000;
     private Boolean isAdmin;
-    private List<Position> position;
     private List<PositionDict> positionDicts;
-
-    @Override
-    public List<Position> getPositions() {
-        return position;
-    }
+    private List<Rate> rates;
 
     @Override
     public List<PositionDict> getPositionDicts() {
         return positionDicts;
-    }
-
-    public void setPosition(List<Position> position) {
-        this.position = position;
     }
 
     public void setId(int id) {
@@ -95,6 +86,11 @@ public class UserTo implements AbstractUser, Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public List<Rate> getRates() {
+        return this.rates;
     }
 
     public void setSurname(String surname) {
@@ -173,7 +169,8 @@ public class UserTo implements AbstractUser, Serializable {
                 ", secondName='" + secondName + '\'' +
                 ", caloriesPerDay=" + caloriesPerDay +
                 ", isAdmin=" + isAdmin +
-                ", position=" + position +
+                ", positionDicts=" + positionDicts +
+                ", rates=" + rates +
                 '}';
     }
 }

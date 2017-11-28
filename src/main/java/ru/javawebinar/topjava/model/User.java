@@ -81,7 +81,7 @@ public class User extends NamedEntity implements AbstractUser {
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user", fetch = FetchType.EAGER)
     private List<UserMeal> userMeals = new LinkedList<>();
 
-    public User(Integer id, String name, String email, String surname, String firstName, String secondName, String password, boolean enabled, Set<Role> roles, List<Position> positions) {
+    public User(Integer id, String name, String email, String surname, String firstName, String secondName, String password, boolean enabled, Set<Role> roles, List<Rate> rates) {
         super(id, name);
         this.email = email;
         this.surname = surname;
@@ -91,23 +91,23 @@ public class User extends NamedEntity implements AbstractUser {
         this.enabled = enabled;
         this.roles = roles;
         this.positionDicts = positionDictService.getAll();
-        this.positions = positions;
+        this.rates = rates;
     }
 
     @Override
-    public List<Position> getPositions() {
-        return positions;
+    public List<Rate> getRates() {
+        return rates;
     }
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
-    private List<Position> positions;
+    private List<Rate> rates;
 
     public User() {
     }
 
     public User(User u) {
-        this(u.getId(), u.getName(), u.getEmail(), u.getSurname(), u.getFirstName(), u.getSecondName(), u.getPassword(), u.isEnabled(), u.getRoles(), u.getPositions());
+        this(u.getId(), u.getName(), u.getEmail(), u.getSurname(), u.getFirstName(), u.getSecondName(), u.getPassword(), u.isEnabled(), u.getRoles(), u.getRates());
     }
 
     public User(Integer id, String name, String email, String password, boolean enabled, Role role, Role... roles) {
@@ -123,7 +123,7 @@ public class User extends NamedEntity implements AbstractUser {
     }
 
 
-    public User(Integer id, String name, String email, String surname, String firstName, String secondName, String password, boolean enabled, Role role, List<Position> positions) {
+    public User(Integer id, String name, String email, String surname, String firstName, String secondName, String password, boolean enabled, Role role, List<Rate> rates) {
         super(id, name);
         this.email = email;
         this.surname = surname;
@@ -132,8 +132,7 @@ public class User extends NamedEntity implements AbstractUser {
         this.password = password;
         this.enabled = enabled;
         this.roles = EnumSet.of(role);
-        //this.position = getStringFromList(positionService.getAll());
-        this.positions = positions;
+        this.rates = rates;
     }
 
     private String getStringFromList(List<PositionDict> positions) {
@@ -239,7 +238,9 @@ public class User extends NamedEntity implements AbstractUser {
     @Override
     public String toString() {
         return "User{" +
-                "email='" + email + '\'' +
+                "positionDictService=" + positionDictService +
+                ", positionService=" + positionService +
+                ", email='" + email + '\'' +
                 ", surname='" + surname + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
@@ -250,8 +251,9 @@ public class User extends NamedEntity implements AbstractUser {
                 ", caloriesPerDay=" + caloriesPerDay +
                 ", isAdmin=" + isAdmin +
                 ", position='" + position + '\'' +
+                ", positionDicts=" + positionDicts +
                 ", userMeals=" + userMeals +
-                ", positions=" + positions +
+                ", rates=" + rates +
                 '}';
     }
 }

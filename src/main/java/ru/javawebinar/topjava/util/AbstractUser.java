@@ -34,7 +34,7 @@ public interface AbstractUser {
 
     void setName(String password);
 
-    List<Position> getPositions();
+    List<Rate> getRates();
     List<PositionDict> getPositionDicts();
 
     @Email

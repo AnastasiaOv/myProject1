@@ -36,7 +36,7 @@
                                        renderFunction="renderCheckbox"/>
                     <datatables:column title="Дата регистрации" filterable="false" property="registered"
                                        renderFunction="renderDate"/>
-                    <datatables:column title="Должность" filterable="false" property="positions"
+                    <datatables:column title="Должность" filterable="false" property="rates"
                                        renderFunction="renderList"/>
                     <datatables:column sortable="false" renderFunction="renderUpdateBtn"/>
                     <datatables:column sortable="false" renderFunction="renderDeleteBtn"/>
@@ -105,11 +105,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="positions" class="control-label col-xs-3">Должность</label>
+                        <label for="positionDicts" class="control-label col-xs-3">Должность</label>
 
                         <div class="col-xs-9">
-                            <select id="positions" >
-
+                            <select id="positionDicts" >
                             </select>
                         </div>
                     </div>

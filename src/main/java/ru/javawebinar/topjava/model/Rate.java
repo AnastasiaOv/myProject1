@@ -9,12 +9,13 @@ import java.math.BigDecimal;
 @Entity
 @Table(name="rate")
 @NamedQueries({
-
+        @NamedQuery(name = Rate.ALL_SORTED, query = "SELECT r FROM Rate r Where r.id=:id"),
 })
 
 public class Rate extends BaseEntity{
 
     public static final String DELETE = "Rate.delete";
+    public static final String ALL_SORTED = "Rate.getByUser";
 
     public Rate() {
     }
