@@ -45,6 +45,6 @@ public class DataJpaProcessRepositoryImpl implements ProcessRepository {
 
     @Override
     public List<Process> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
-        return null;
+        return proxy.getBetween(startDate, endDate);
     }
 }

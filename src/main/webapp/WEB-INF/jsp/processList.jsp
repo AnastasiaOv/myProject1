@@ -58,8 +58,8 @@
 
                     <datatables:column title="время начала" filterable="false" sortInitDirection="desc" property="start_time"/>
                     <datatables:column title="время окончания" filterable="false" sortInitDirection="desc" property="end_time"/>
-                    <datatables:column title="имя процесса" filterable="false" property="process_name"/>
-                    <datatables:column title="описание процесса" filterable="false" property="description"/>
+                    <datatables:column title="имя процесса" filterable="false" property="processName"/>
+                    <datatables:column title="описание процесса" filterable="false" property="definition"/>
 
                     <datatables:column sortable="false" renderFunction="renderUpdateBtn"/>
                     <datatables:column sortable="false" renderFunction="renderDeleteBtn"/>
@@ -68,12 +68,6 @@
                     <datatables:callback type="init" function="makeEditable"/>
                 </datatables:table>
 
-                <datatables:table id="datatable" url="${ajaxUrl}" row="position_id" theme="bootstrap3"
-                                  cssClass="table table-striped" pageable="false" info="false">
-
-                    <datatables:column title="все должности" filterable="false" sortInitDirection="desc" property="positionName"/>
-
-                </datatables:table>
 
 
             </div>

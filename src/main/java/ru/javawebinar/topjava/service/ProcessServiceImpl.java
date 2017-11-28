@@ -2,6 +2,7 @@ package ru.javawebinar.topjava.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import ru.javawebinar.topjava.model.Process;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.repository.ProcessRepository;
@@ -50,6 +51,6 @@ public class ProcessServiceImpl implements ProcessService {
 
     @Override
     public List<Process> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
-        return null;
+        return repository.getBetween(startDate, StringUtils.isEmpty(endDate) ? LocalDateTime.now() : endDate, userId);
     }
 }
