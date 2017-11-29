@@ -31,7 +31,6 @@ public abstract class AbstractUserController extends ExceptionInfoHandler {
         LOG.info("get " + id);
         User user = service.get(id);
         user.setPassword(null);
-        user.setPositionDicts(service.getAllPositions());
         return user;
     }
 
@@ -60,6 +59,7 @@ public abstract class AbstractUserController extends ExceptionInfoHandler {
     public void update(User user, int id) {
         LOG.info("update " + user);
         user.setId(id);
+        user.setPositions(positionDictService.getPositionsByName(user.getPositionNames()));
         service.update(user);
     }
 

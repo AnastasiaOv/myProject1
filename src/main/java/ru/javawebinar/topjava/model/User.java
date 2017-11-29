@@ -65,11 +65,12 @@ public class User extends NamedEntity implements AbstractUser {
 //    @JsonIgnore
     private Set<Role> roles;
 
+
     @Column(name = "calories_per_day", nullable = false, columnDefinition = "default 2000")
     private int caloriesPerDay = 2000;
 
     @Transient
-    private List<PositionDict> positionDicts;
+    private List<String> positionNames;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user", fetch = FetchType.EAGER)
     private List<UserMeal> userMeals = new LinkedList<>();
@@ -233,12 +234,12 @@ public class User extends NamedEntity implements AbstractUser {
 
 
     @Override
-    public List<PositionDict> getPositionDicts() {
-        return positionDicts;
+    public List<String> getPositionNames() {
+        return positionNames;
     }
 
-    public void setPositionDicts(List<PositionDict> positionDicts) {
-        this.positionDicts = positionDicts;
+    public void setPositionNames(List<String> positionNames) {
+        this.positionNames = positionNames;
     }
 
     @Override

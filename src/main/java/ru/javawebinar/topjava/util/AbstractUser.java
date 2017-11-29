@@ -38,7 +38,7 @@ public interface AbstractUser {
 
     Set<Role> getRoles();
 
-    List<PositionDict> getPositionDicts();
+    List<String> getPositionNames();
 
     @Email
     @NotEmpty
