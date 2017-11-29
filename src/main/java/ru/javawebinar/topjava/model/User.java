@@ -3,12 +3,16 @@ package ru.javawebinar.topjava.model;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import ru.javawebinar.topjava.service.PositionDictService;
 import ru.javawebinar.topjava.service.PositionService;
+import ru.javawebinar.topjava.service.RateService;
 import ru.javawebinar.topjava.util.AbstractUser;
+import ru.javawebinar.topjava.util.RateUtil;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -23,14 +27,6 @@ import java.util.*;
 })
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class User extends NamedEntity implements AbstractUser {
-
-    @Transient
-    @Autowired
-    PositionDictService positionDictService;
-
-    @Transient
-    @Autowired
-    PositionService positionService;
 
     public static final String DELETE = "User.delete";
     public static final String ALL_SORTED = "User.getAllSorted";
@@ -58,22 +54,19 @@ public class User extends NamedEntity implements AbstractUser {
     @NotNull
     protected Date registered = new Date();
 
+    @Transient
+    private List<PositionDict> positions;
+
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 //    @JsonIgnore
-    protected Set<Role> roles;
+    private Set<Role> roles;
 
     @Column(name = "calories_per_day", nullable = false, columnDefinition = "default 2000")
-    protected int caloriesPerDay = 2000;
-
-    @Transient
-    private Boolean isAdmin;
-
-    @Transient
-    private String position;
+    private int caloriesPerDay = 2000;
 
     @Transient
     private List<PositionDict> positionDicts;
@@ -81,7 +74,7 @@ public class User extends NamedEntity implements AbstractUser {
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user", fetch = FetchType.EAGER)
     private List<UserMeal> userMeals = new LinkedList<>();
 
-    public User(Integer id, String name, String email, String surname, String firstName, String secondName, String password, boolean enabled, Set<Role> roles, List<Rate> rates) {
+    public User(Integer id, String name, String email, String surname, String firstName, String secondName, String password, boolean enabled, Set<Role> roles, List<PositionDict> positionDicts, List<Rate> rates) {
         super(id, name);
         this.email = email;
         this.surname = surname;
@@ -90,7 +83,7 @@ public class User extends NamedEntity implements AbstractUser {
         this.password = password;
         this.enabled = enabled;
         this.roles = roles;
-        this.positionDicts = positionDictService.getAll();
+        this.positions = positionDicts;
         this.rates = rates;
     }
 
@@ -99,15 +92,17 @@ public class User extends NamedEntity implements AbstractUser {
         return rates;
     }
 
+
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private List<Rate> rates;
 
     public User() {
     }
 
     public User(User u) {
-        this(u.getId(), u.getName(), u.getEmail(), u.getSurname(), u.getFirstName(), u.getSecondName(), u.getPassword(), u.isEnabled(), u.getRoles(), u.getRates());
+        this(u.getId(), u.getName(), u.getEmail(), u.getSurname(), u.getFirstName(), u.getSecondName(), u.getPassword(), u.isEnabled(), u.getRoles(), u.getPositions(), u.getRates());
     }
 
     public User(Integer id, String name, String email, String password, boolean enabled, Role role, Role... roles) {
@@ -134,6 +129,9 @@ public class User extends NamedEntity implements AbstractUser {
         this.roles = EnumSet.of(role);
         this.rates = rates;
     }
+
+
+
 
     private String getStringFromList(List<PositionDict> positions) {
         StringBuilder sb = new StringBuilder();
@@ -171,11 +169,6 @@ public class User extends NamedEntity implements AbstractUser {
         return secondName;
     }
 
-    @Override
-    public Boolean getIsAdmin() {
-        return isAdmin;
-    }
-
     public void setSecondName(String secondName) {
         this.secondName = secondName;
     }
@@ -210,6 +203,14 @@ public class User extends NamedEntity implements AbstractUser {
         return enabled;
     }
 
+    public List<PositionDict> getPositions() {
+        return positions;
+    }
+
+    public void setPositions(List<PositionDict> positions) {
+        this.positions = positions;
+    }
+
     public Set<Role> getRoles() {
         return roles;
     }
@@ -226,6 +227,11 @@ public class User extends NamedEntity implements AbstractUser {
         this.roles = EnumSet.copyOf(authorities);
     }
 
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+
     @Override
     public List<PositionDict> getPositionDicts() {
         return positionDicts;
@@ -238,8 +244,6 @@ public class User extends NamedEntity implements AbstractUser {
     @Override
     public String toString() {
         return "User{" +
-                "positionDictService=" + positionDictService +
-                ", positionService=" + positionService +
                 ", email='" + email + '\'' +
                 ", surname='" + surname + '\'' +
                 ", firstName='" + firstName + '\'' +
@@ -249,9 +253,7 @@ public class User extends NamedEntity implements AbstractUser {
                 ", registered=" + registered +
                 ", roles=" + roles +
                 ", caloriesPerDay=" + caloriesPerDay +
-                ", isAdmin=" + isAdmin +
-                ", position='" + position + '\'' +
-                ", positionDicts=" + positionDicts +
+                ", positions=" + positions +
                 ", userMeals=" + userMeals +
                 ", rates=" + rates +
                 '}';

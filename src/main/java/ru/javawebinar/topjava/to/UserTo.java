@@ -3,10 +3,12 @@ package ru.javawebinar.topjava.to;
 import ru.javawebinar.topjava.model.Position;
 import ru.javawebinar.topjava.model.PositionDict;
 import ru.javawebinar.topjava.model.Rate;
+import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.util.AbstractUser;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 public class UserTo implements AbstractUser, Serializable {
     protected int id;
@@ -14,7 +16,7 @@ public class UserTo implements AbstractUser, Serializable {
     public UserTo() {
     }
 
-    public UserTo(int id, String name, String email, String surname, String firstName, String secondName, int caloriesPerDay, Boolean isAdmin) {
+    public UserTo(int id, String name, String email, String surname, String firstName, String secondName, int caloriesPerDay) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -22,11 +24,9 @@ public class UserTo implements AbstractUser, Serializable {
         this.firstName = firstName;
         this.secondName = secondName;
         this.caloriesPerDay = caloriesPerDay;
-        this.isAdmin = isAdmin;
-
     }
 
-    public UserTo(int id, String name, String email, String surname, String firstName, String secondName, int caloriesPerDay, Boolean isAdmin, List<Rate> rates) {
+    public UserTo(int id, String name, String email, String surname, String firstName, String secondName, int caloriesPerDay, List<Rate> rates) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -34,12 +34,10 @@ public class UserTo implements AbstractUser, Serializable {
         this.firstName = firstName;
         this.secondName = secondName;
         this.caloriesPerDay = caloriesPerDay;
-        this.isAdmin = isAdmin;
         this.rates = rates;
-
     }
 
-    public UserTo(int id, String name, String email, String surname, String firstName, String secondName, int caloriesPerDay, Boolean isAdmin, List<PositionDict> positionDicts, List<Rate> rates) {
+    public UserTo(int id, String name, String email, String surname, String firstName, String secondName, int caloriesPerDay, List<PositionDict> positionDicts, List<Rate> rates) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -47,9 +45,22 @@ public class UserTo implements AbstractUser, Serializable {
         this.firstName = firstName;
         this.secondName = secondName;
         this.caloriesPerDay = caloriesPerDay;
-        this.isAdmin = isAdmin;
         this.rates = rates;
-        this.positionDicts=positionDicts;
+        this.positions = positionDicts;
+    }
+
+    public UserTo(int id, String name, String email, String surname, String firstName, String secondName, int caloriesPerDay,
+                  Set<Role> roles, List<Rate> rates, List<PositionDict> positions) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.surname = surname;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.caloriesPerDay = caloriesPerDay;
+        this.rates = rates;
+        this.positions = positions;
+        this.roles = roles;
     }
 
     protected String name;
@@ -63,13 +74,13 @@ public class UserTo implements AbstractUser, Serializable {
     private String secondName;
 
     private int caloriesPerDay = 2000;
-    private Boolean isAdmin;
-    private List<PositionDict> positionDicts;
+    private List<PositionDict> positions;
     private List<Rate> rates;
+    private Set<Role> roles;
 
     @Override
     public List<PositionDict> getPositionDicts() {
-        return positionDicts;
+        return positions;
     }
 
     public void setId(int id) {
@@ -86,6 +97,15 @@ public class UserTo implements AbstractUser, Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
@@ -149,12 +169,9 @@ public class UserTo implements AbstractUser, Serializable {
         this.caloriesPerDay = caloriesPerDay;
     }
 
-    public void setIsAdmin(Boolean isAdmin) {
-        this.isAdmin = isAdmin;
-    }
-
-    public Boolean getIsAdmin() {
-        return isAdmin;
+    @Override
+    public List<PositionDict> getPositions() {
+        return positions;
     }
 
     @Override
@@ -168,9 +185,9 @@ public class UserTo implements AbstractUser, Serializable {
                 ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
                 ", caloriesPerDay=" + caloriesPerDay +
-                ", isAdmin=" + isAdmin +
-                ", positionDicts=" + positionDicts +
+                ", positions=" + positions +
                 ", rates=" + rates +
+                ", roles=" + roles +
                 '}';
     }
 }

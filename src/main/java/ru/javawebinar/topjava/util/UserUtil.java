@@ -1,7 +1,9 @@
 package ru.javawebinar.topjava.util;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
+import ru.javawebinar.topjava.service.RateService;
 import ru.javawebinar.topjava.to.UserTo;
 
 /**
@@ -10,17 +12,17 @@ import ru.javawebinar.topjava.to.UserTo;
  */
 public class UserUtil {
 
+    @Autowired
+    static RateService rateService;
+
     public static User createFromTo(UserTo newUser) {
-        if (newUser.getIsAdmin())
-            return new User(null, newUser.getName(), newUser.getEmail().toLowerCase(), newUser.getSurname(), newUser.getFirstName(), newUser.getSecondName(),
-                    PasswordUtil.encode(newUser.getPassword()), true, Role.ROLE_ADMIN, newUser.getRates());
-        else
-            return new User(null, newUser.getName(), newUser.getEmail().toLowerCase(), newUser.getSurname(), newUser.getFirstName(), newUser.getSecondName(),
-                    PasswordUtil.encode(newUser.getPassword()), true, Role.ROLE_USER, newUser.getRates());
+        return new User(null, newUser.getName(), newUser.getEmail().toLowerCase(), newUser.getSurname(), newUser.getFirstName(), newUser.getSecondName(),
+                PasswordUtil.encode(newUser.getPassword()), true, newUser.getRoles(), newUser.getPositions(), rateService.getByUserAndPosition(newUser.getId(),newUser.getPositionDicts()));
     }
 
     public static UserTo asTo(AbstractUser user) {
-        return new UserTo(user.getId(), user.getName(), user.getEmail(), user.getSurname(), user.getFirstName(), user.getSecondName(), user.getCaloriesPerDay(), user.getIsAdmin(),  user.getPositionDicts(),user.getRates());
+        return new UserTo(user.getId(),user.getName(),user.getEmail(), user.getSurname(), user.getFirstName(),user.getSecondName(),user.getCaloriesPerDay(),
+                user.getRoles(),user.getRates(),user.getPositions());
     }
 
     public static User updateFromTo(User oldUser, UserTo updatedUser) {
@@ -46,11 +48,7 @@ public class UserUtil {
         oldUser.setName(updatedUser.getName());
         oldUser.setEmail(updatedUser.getEmail().toLowerCase());
         oldUser.setCaloriesPerDay(updatedUser.getCaloriesPerDay());
-        if (updatedUser.getIsAdmin()) {
-            oldUser.setRoles(Role.ROLE_ADMIN);
-        } else {
-            oldUser.setRoles(Role.ROLE_USER);
-        }
+        oldUser.setRoles(updatedUser.getRoles());
         return oldUser;
     }
 }

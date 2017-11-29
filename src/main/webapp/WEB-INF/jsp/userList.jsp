@@ -4,6 +4,8 @@
 <%@ taglib prefix="datatables" uri="http://github.com/dandelion/datatables" %>
 <%@ taglib prefix="dandelion" uri="http://github.com/dandelion" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="button" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="input" uri="http://github.com/dandelion/datatables" %>
 
 
 <html>
@@ -21,7 +23,8 @@
 
             <c:set var="ajaxUrl" value="ajax/admin/users/"/>
             <div class="view-box">
-                <a class="btn btn-sm btn-info" id="add">Add User</a>
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editRow" >Добавить</button>
 
                 <datatables:table id="datatable" url="${ajaxUrl}" row="user" theme="bootstrap3"
                                   cssClass="table table-striped" pageable="false" info="false">

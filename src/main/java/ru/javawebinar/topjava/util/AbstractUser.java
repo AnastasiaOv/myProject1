@@ -5,11 +5,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 import ru.javawebinar.topjava.model.Position;
 import ru.javawebinar.topjava.model.PositionDict;
 import ru.javawebinar.topjava.model.Rate;
+import ru.javawebinar.topjava.model.Role;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Set;
 
 /**
  * GKislin
@@ -30,11 +32,12 @@ public interface AbstractUser {
 
     String getSecondName();
 
-    Boolean getIsAdmin();
-
     void setName(String password);
 
     List<Rate> getRates();
+
+    Set<Role> getRoles();
+
     List<PositionDict> getPositionDicts();
 
     @Email
@@ -54,4 +57,5 @@ public interface AbstractUser {
 
     void setCaloriesPerDay(int caloriesPerDay);
 
+    List<PositionDict> getPositions();
 }

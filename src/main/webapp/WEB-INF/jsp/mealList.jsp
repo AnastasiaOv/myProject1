@@ -5,8 +5,10 @@
 <%@ taglib prefix="dandelion" uri="http://github.com/dandelion" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <fmt:setLocale value="ru"/>
 <fmt:setBundle basename="messages.app"/>
+
 <html>
 <dandelion:bundle includes="topjavaDatatable"/>
 <jsp:include page="fragments/headTag.jsp"/>

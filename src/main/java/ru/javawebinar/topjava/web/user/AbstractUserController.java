@@ -17,6 +17,9 @@ public abstract class AbstractUserController extends ExceptionInfoHandler {
     @Autowired
     private UserService service;
 
+    @Autowired
+    private PositionDictService positionDictService;
+
     public List<User> getAll() {
         LOG.info("getAll");
         List<User> all = service.getAll();
