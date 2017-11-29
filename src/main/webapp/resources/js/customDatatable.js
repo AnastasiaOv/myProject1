@@ -89,14 +89,16 @@ function save() {
     var a = $("#roles").on( "change").val();
     var isAdmin;
     if (a === 'Администратор') {
-        isAdmin = '&isAdmin=true';
+        isAdmin = '&roles=ROLE_ADMIN';
     } else {
-        isAdmin = '&isAdmin=false'
+        isAdmin = '&roles=ROLE_USER';
     }
+    var rates = '&positionNames=' + $("#positionDicts").on( "change").val();
+
     $.ajax({
         type: "POST",
         url: ajaxUrl,
-        data: form.serialize() + isAdmin,
+        data: form.serialize() + isAdmin + rates,
         success: function (data) {
             $('#editRow').modal('hide');
             updateTable();

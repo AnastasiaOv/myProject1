@@ -111,7 +111,10 @@
                         <label for="positionDicts" class="control-label col-xs-3">Должность</label>
 
                         <div class="col-xs-9">
-                            <select id="positionDicts" >
+                            <select multiple id="positionDicts" >
+                                <c:forEach var="position" items="<%= ru.javawebinar.topjava.model.PositionEnum.values() %>">
+                                    <option>${position.readableName}</option>
+                                </c:forEach>
                             </select>
                         </div>
                     </div>

@@ -4,11 +4,21 @@ package ru.javawebinar.topjava.model;
  * Created by Анастасия on 29.11.2017.
  */
 public enum PositionEnum {
-    POSITION_1,
-    POSITION_2,
-    POSITION_3;
+    NAME_1("название должности"),
+    NAME_2("название должности2");
+
+    String s;
+
+    PositionEnum(String s) {
+        this.s = s;
+    }
+
+    public String getReadableName() {
+        return s;
+    }
 
     public String getName() {
         return name();
     }
+
 }
