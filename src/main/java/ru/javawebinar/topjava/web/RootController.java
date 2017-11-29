@@ -74,7 +74,7 @@ public class RootController {
             status.setComplete();
             LoggedUser.get().updateUserTo(userTo);
             userService.update(userTo);
-            return "redirect:meals";
+            return "redirect:processes";
         }
     }
 
