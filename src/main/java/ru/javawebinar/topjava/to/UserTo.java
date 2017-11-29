@@ -78,11 +78,6 @@ public class UserTo implements AbstractUser, Serializable {
     private List<Rate> rates;
     private Set<Role> roles;
 
-    @Override
-    public List<PositionDict> getPositionDicts() {
-        return positions;
-    }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -102,6 +97,11 @@ public class UserTo implements AbstractUser, Serializable {
     @Override
     public Set<Role> getRoles() {
         return roles;
+    }
+
+    @Override
+    public List<String> getPositionNames() {
+        return null;
     }
 
     public void setRoles(Set<Role> roles) {
