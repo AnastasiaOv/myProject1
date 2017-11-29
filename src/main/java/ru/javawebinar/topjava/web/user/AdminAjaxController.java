@@ -22,7 +22,8 @@ public class AdminAjaxController extends AbstractUserController {
         return super.getAll();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)//вызывается при апдейте строки
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+//вызывается при апдейте строки
     public User get(@PathVariable("id") int id) {
         return super.get(id);
     }
@@ -38,15 +39,15 @@ public class AdminAjaxController extends AbstractUserController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void createOrUpdate(@Valid UserTo userTo, BindingResult result, SessionStatus status) {
+    public void createOrUpdate(@Valid User user, BindingResult result, SessionStatus status) {
         if (result.hasErrors()) {
             throw LOG.getValidationException(result);
         } else {
             status.setComplete();
-            if (userTo.getId() == 0) {
-                create(userTo);
+            if (user.getId() == null || user.getId() == 0) {
+                create(user);
             } else {
-                update(userTo, userTo.getId());
+                update(user, user.getId());
             }
         }
     }

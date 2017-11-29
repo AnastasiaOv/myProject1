@@ -13,11 +13,11 @@ import ru.javawebinar.topjava.to.UserTo;
 public class UserUtil {
 
     @Autowired
-    static RateService rateService;
+    RateService rateService;
 
     public static User createFromTo(UserTo newUser) {
         return new User(null, newUser.getName(), newUser.getEmail().toLowerCase(), newUser.getSurname(), newUser.getFirstName(), newUser.getSecondName(),
-                PasswordUtil.encode(newUser.getPassword()), true, newUser.getRoles(), newUser.getPositions(), rateService.getByUserAndPosition(newUser.getId(),newUser.getPositionDicts()));
+                PasswordUtil.encode(newUser.getPassword()), true, newUser.getRoles(), newUser.getPositions(), newUser.getRates());
     }
 
     public static UserTo asTo(AbstractUser user) {

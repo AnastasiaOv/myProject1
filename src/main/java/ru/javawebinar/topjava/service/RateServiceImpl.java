@@ -43,8 +43,10 @@ public class RateServiceImpl implements RateService {
         List<Rate> result = new ArrayList<>();
         for (Rate rate : allRates) {
             for (PositionDict position : positions)
-                if (rate.getPositionId().equals(position.getId()) && rate.getUserId() == userId)
+                if (rate.getPositionId().equals(position.getId()) && rate.getUserId() == userId){
                     result.add(rate);
+                    repository.save(rate);
+                }
         }
         return result;
     }

@@ -12,4 +12,8 @@ import java.util.List;
 public interface PositionDictService {
     List<PositionDict> getAll();
 
+    List<String> getAllPositionNames();
+
+    List<PositionDict> getPositionsByName(List<String> positionNames);
+
 }

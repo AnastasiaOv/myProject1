@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import ru.javawebinar.topjava.LoggedUser;
+import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.service.UserService;
 import ru.javawebinar.topjava.to.DateTimeFilter;
 import ru.javawebinar.topjava.to.UserTo;
@@ -80,19 +81,19 @@ public class RootController {
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register(ModelMap model) {
-        model.addAttribute("userTo", new UserTo());
+        model.addAttribute("user", new User());
         model.addAttribute("register", true);
         return "profile";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String saveRegister(@Valid UserTo userTo, BindingResult result, SessionStatus status, ModelMap model) {
+    public String saveRegister(@Valid User user, BindingResult result, SessionStatus status, ModelMap model) {
         if (result.hasErrors()) {
             model.addAttribute("register", true);
             return "profile";
         } else {
             status.setComplete();
-            userService.save(UserUtil.createFromTo(userTo));
+            userService.save(user);
             return "redirect:login?message=app.registered";
         }
     }
