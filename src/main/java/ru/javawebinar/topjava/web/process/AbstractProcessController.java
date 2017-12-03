@@ -27,9 +27,8 @@ public class AbstractProcessController extends ExceptionInfoHandler {
     }
 
     public void delete(int id) {
-        int userId = LoggedUser.id();
-        LOG.info("delete meal {} for User {}", id, userId);
-        service.delete(id, userId);
+        LOG.info("delete process {} ", id);
+        service.delete(id);
     }
 
     public List<Process> getAll() {
@@ -42,12 +41,6 @@ public class AbstractProcessController extends ExceptionInfoHandler {
         int userId = LoggedUser.id();
         LOG.info("getBetween {} and {} for User {}", startDate, endDate, userId);
         return service.getBetween(startDate, endDate, userId);
-    }
-
-    public void deleteAll() {
-        int userId = LoggedUser.id();
-        LOG.info("deleteAll for User {}", userId);
-        service.deleteAll(userId);
     }
 
     public void update(Process process, int id) {

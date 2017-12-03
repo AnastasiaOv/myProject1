@@ -15,9 +15,7 @@ public interface ProcessService {
 
     Process update(Process process, int userId);
 
-    void delete(int id, int userId);
-
-    void deleteAll(int userId);
+    void delete(int id);
 
     Process get(int id);
 

@@ -18,7 +18,7 @@
 <div class="jumbotron">
     <div class="container">
         <div class="shadow">
-            <h3><fmt:message key="meals.title"/></h3>
+            <h3>"Сведения о процессах"</h3>
 
             <c:set var="ajaxUrl" value="ajax/profile/processes/"/>
             <div class="view-box">
@@ -56,7 +56,8 @@
                     </div>
                 </form:form>
 
-                <a class="btn btn-sm btn-info" id="add">Добавить процесс</a>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProcess" >Добавить процесс</button>
+
 
                 <datatables:table id="datatable" url="${ajaxUrl}" row="process" theme="bootstrap3"
                                   cssClass="table table-striped" pageable="false" info="false">
@@ -93,7 +94,7 @@
 
                     <input type="text" hidden="hidden" id="id" name="id">
                     <input type="datetime" hidden="hidden" id="start_time" name="start_time">
-                    <input type="number" hidden="hidden" id="level" name="level">
+
                     <input type="text" hidden="hidden" id="processName" name="processName">
 
                     <div class="form-group">
@@ -114,6 +115,69 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="addProcess">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h2 class="modal-title">Добавить процесс:</h2>
+            </div>
+            <div class="modal-body">
+                <form:form class="form-horizontal" method="post" id="detailsForm">
+
+                    <input type="text" hidden="hidden" id="id" name="id">
+                    <input type="datetime" hidden="hidden" id="start_time" name="start_time">
+                    <input type="text" hidden="hidden" id="processName" name="processName">
+
+                    <div class="form-group">
+                        <label for="name" class="control-label col-xs-3">Название процесса</label>
+
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" id="name" name="name"
+                                   placeholder="Description">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="try" class="control-label col-xs-3">Уровень процесса</label>
+
+                        <div class="col-xs-9">
+                            <form>
+                                <input list="try" type="number" id ="level" name="level">
+                                <datalist id="try">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                </datalist>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="definition" class="control-label col-xs-3">Описание</label>
+
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" name="definition"
+                                   placeholder="Description">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-offset-3 col-xs-3">
+                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                        </div>
+                    </div>
+                </form:form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
 </body>
 <script type="text/javascript">
     var ajaxUrl = '${ajaxUrl}';

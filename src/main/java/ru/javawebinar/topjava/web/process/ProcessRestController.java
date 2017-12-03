@@ -36,11 +36,6 @@ public class ProcessRestController extends AbstractProcessController {
         return super.getAll();
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
-    public void deleteAll() {
-        super.deleteAll();
-    }
-
     @RequestMapping(value = "/between", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Process> getBetween(
             @RequestParam(value = "startDate") LocalDateTime startDate,

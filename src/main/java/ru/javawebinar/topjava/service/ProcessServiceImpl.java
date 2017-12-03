@@ -34,13 +34,8 @@ public class ProcessServiceImpl implements ProcessService {
     }
 
     @Override
-    public void delete(int id, int userId) {
-
-    }
-
-    @Override
-    public void deleteAll(int userId) {
-
+    public void delete(int id) {
+        ExceptionUtil.check(repository.delete(id), id);
     }
 
     @Override
