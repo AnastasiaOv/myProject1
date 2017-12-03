@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import ru.javawebinar.topjava.model.Rate;
+import ru.javawebinar.topjava.model.UserMeal;
 
 import java.util.List;
 
@@ -19,6 +20,12 @@ public interface ProxyRateRepository extends JpaRepository<Rate, Integer> {
     @Modifying
     @Query("DELETE FROM Rate r WHERE r.id=:id")
     int delete(@Param("id") int id);
+
+    @Query("SELECT r FROM Rate r WHERE r.id=:id AND r.user.id=:userId")
+    Rate get(@Param("id") int id, @Param("userId") int userId);
+
+    @Query("SELECT r FROM Rate r WHERE r.user.id=:userId")
+    List<Rate> getByUserId(@Param("userId") int userId);
 
     @Override
     @Transactional

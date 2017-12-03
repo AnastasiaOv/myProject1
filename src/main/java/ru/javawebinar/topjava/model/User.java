@@ -94,9 +94,11 @@ public class User extends NamedEntity implements AbstractUser {
     }
 
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", nullable = false)
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    public void setRates(List<Rate> rates) {
+        this.rates = rates;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
     private List<Rate> rates;
 
     public User() {

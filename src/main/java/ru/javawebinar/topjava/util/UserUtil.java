@@ -30,7 +30,6 @@ public class UserUtil {
     }
 
     public static User update(User oldUser, User updatedUser) {
-        oldUser.setRoles(updatedUser.getRoles());
         oldUser.setEnabled(updatedUser.isEnabled());
         return updateInternal(oldUser, updatedUser);
     }
@@ -49,6 +48,8 @@ public class UserUtil {
         oldUser.setEmail(updatedUser.getEmail().toLowerCase());
         oldUser.setCaloriesPerDay(updatedUser.getCaloriesPerDay());
         oldUser.setRoles(updatedUser.getRoles());
+        oldUser.setPositions(updatedUser.getPositions());
+        oldUser.setRates(updatedUser.getRates());
         return oldUser;
     }
 }

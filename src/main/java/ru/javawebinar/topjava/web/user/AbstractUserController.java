@@ -1,8 +1,10 @@
 package ru.javawebinar.topjava.web.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.javawebinar.topjava.model.Rate;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.service.PositionDictService;
+import ru.javawebinar.topjava.service.RateService;
 import ru.javawebinar.topjava.service.UserService;
 import ru.javawebinar.topjava.to.UserTo;
 import ru.javawebinar.topjava.util.UserUtil;
@@ -19,6 +21,9 @@ public abstract class AbstractUserController extends ExceptionInfoHandler {
 
     @Autowired
     private PositionDictService positionDictService;
+
+    @Autowired
+    private RateService rateService;
 
     public List<User> getAll() {
         LOG.info("getAll");
@@ -42,6 +47,12 @@ public abstract class AbstractUserController extends ExceptionInfoHandler {
     public User create(User user) {
         LOG.info("create " + user);
         user.setId(null);
+        user.setPositions(positionDictService.getPositionsByName(user.getPositionNames()));
+        List<Rate> rates = rateService.getByPositionName(user.getPositions());
+        for(Rate rate:rates){
+            rate.setUser(user);
+        }
+        user.setRates(rates);
         return service.save(UserUtil.encode(user));
     }
 
@@ -59,7 +70,16 @@ public abstract class AbstractUserController extends ExceptionInfoHandler {
     public void update(User user, int id) {
         LOG.info("update " + user);
         user.setId(id);
+        List<Rate> oldRates = rateService.getByUserId(id);
+        for(Rate oldRate: oldRates){
+            rateService.delete(oldRate.getId());
+        }
         user.setPositions(positionDictService.getPositionsByName(user.getPositionNames()));
+        List<Rate> rates = rateService.getByPositionName(user.getPositions());
+        for(Rate rate:rates){
+            rate.setUser(user);
+        }
+        user.setRates(rates);
         service.update(user);
     }
 

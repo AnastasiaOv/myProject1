@@ -148,7 +148,7 @@ function renderDate(date, type, row) {
 function renderList(date, type, row) {
     var newDate = '';
     $.each(date, function (index) {
-        newDate += date[index].id + '\n';
+        newDate += date[index].position() + '\n';
     });
     return newDate;
 }

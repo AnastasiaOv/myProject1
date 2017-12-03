@@ -11,17 +11,19 @@ import java.util.List;
  * Created by Анастасия on 24.11.2017.
  */
 public interface RateService {
-    public Rate save(Rate rate);
+    Rate save(Rate rate, int userId);
 
-    public void delete(int id) throws NotFoundException;
+    void delete(int id) throws NotFoundException;
 
-    public Rate get(int id) throws NotFoundException;
+    Rate get(int id, int userId) throws NotFoundException;
 
-    public List<Rate> getByUserAndPosition(int user, List<PositionDict> positions) throws NotFoundException;
+    List<Rate> getByUserId(int userId) throws NotFoundException;
 
-    public List<Rate> getAll();
+    List<Rate> getByPositionName(List<PositionDict> positions) throws NotFoundException;
 
-    public void update(Rate rate) throws NotFoundException;
+    List<Rate> getAll();
 
-    void enable(int id, boolean enable);
+    Rate createOrUpdate(Rate rate, int userId) throws NotFoundException;
+
+    Rate update(Rate rate, int userId);
 }

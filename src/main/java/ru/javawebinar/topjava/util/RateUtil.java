@@ -16,15 +16,6 @@ public class RateUtil {
     @Autowired
     protected RateService service;
 
-    public List<Rate> getRateByUserAndPositionsList(int userId, List<PositionDict> positionsList) {
-        List<Rate> rates = new ArrayList<>();
-        for (PositionDict position : positionsList) {
-            Rate newRate = new Rate(userId, position.getId(), new BigDecimal(1));
-            if (newRate.equals(service.getByUserAndPosition(userId, positionsList).get(0)))
-                service.update(newRate);
-            else service.save(newRate);
-        }
-        return rates;
-    }
+
 
 }

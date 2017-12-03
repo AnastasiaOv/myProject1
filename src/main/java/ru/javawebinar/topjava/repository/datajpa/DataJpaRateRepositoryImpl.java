@@ -1,7 +1,6 @@
 package ru.javawebinar.topjava.repository.datajpa;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Rate;
 import ru.javawebinar.topjava.repository.RateRepository;
@@ -16,8 +15,15 @@ public class DataJpaRateRepositoryImpl implements RateRepository {
     @Autowired
     private ProxyRateRepository proxy;
 
+    @Autowired
+    private ProxyUserRepository userProxy;
+
     @Override
-    public Rate save(Rate rate) {
+    public Rate save(Rate rate, int userId) {
+        rate.setUser(userProxy.getOne(userId));
+        if (!rate.isNew() && get(rate.getId(), userId) == null) {
+            return null;
+        }
         return proxy.save(rate);
     }
 
@@ -27,16 +33,16 @@ public class DataJpaRateRepositoryImpl implements RateRepository {
     }
 
     @Override
-    public Rate get(int id) {
-        return proxy.findOne(id);
+    public Rate get(int id, int userId) {
+        return proxy.get(id, userId);
     }
 
     @Override
-    public List<Rate> getByUser(int userId) {
-        return null;
+    public List<Rate> getByUserId(int userId) {
+        return proxy.getByUserId(userId);
     }
 
-    @Override
+     @Override
     public List<Rate> getAll() {
         return proxy.findAll();
     }

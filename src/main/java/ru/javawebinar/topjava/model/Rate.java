@@ -1,5 +1,7 @@
 package ru.javawebinar.topjava.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -20,11 +22,21 @@ public class Rate extends BaseEntity {
     public Rate() {
     }
 
-    @Transient
-    int userId;
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    public Rate(Integer userId, Integer positionId, BigDecimal rateAmount) {
-        this.userId = userId;
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Rate(Integer id, Integer positionId, BigDecimal rateAmount) {
+        super(id);
         this.positionId = positionId;
         this.rateAmount = rateAmount;
     }
@@ -56,11 +68,4 @@ public class Rate extends BaseEntity {
         this.rateAmount = rateAmount;
     }
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 }

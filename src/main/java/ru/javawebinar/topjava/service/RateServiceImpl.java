@@ -23,8 +23,8 @@ public class RateServiceImpl implements RateService {
     private RateRepository repository;
 
     @Override
-    public Rate save(Rate rate) {
-        return repository.save(rate);
+    public Rate save(Rate rate, int userId) {
+        return repository.save(rate, userId);
     }
 
     @Override
@@ -33,22 +33,28 @@ public class RateServiceImpl implements RateService {
     }
 
     @Override
-    public Rate get(int id) throws NotFoundException {
-        return ExceptionUtil.check(repository.get(id), id);
+    public Rate get(int id, int userId) throws NotFoundException {
+        return ExceptionUtil.check(repository.get(id,userId ), id);
     }
 
     @Override
-    public List<Rate> getByUserAndPosition(int userId, List<PositionDict> positions) throws NotFoundException {
-        List<Rate> allRates = repository.getAll();
+    public List<Rate> getByUserId(int userId) throws NotFoundException {
+        return repository.getByUserId(userId);
+    }
+
+    @Override
+    public List<Rate> getByPositionName(List<PositionDict> positions) throws NotFoundException {
         List<Rate> result = new ArrayList<>();
-        for (Rate rate : allRates) {
-            for (PositionDict position : positions)
-                if (rate.getPositionId().equals(position.getId()) && rate.getUserId() == userId){
-                    result.add(rate);
-                    repository.save(rate);
-                }
+        for (PositionDict position : positions) {
+            Rate rate = new Rate(position.getId(), new BigDecimal(1));
+            result.add(rate);
         }
         return result;
+    }
+
+    @Override
+    public Rate update(Rate rate, int userId) {
+        return ExceptionUtil.check(repository.save(rate, userId), rate.getId());
     }
 
     @Override
@@ -59,15 +65,17 @@ public class RateServiceImpl implements RateService {
     @Override
     @CacheEvict(value = "users", allEntries = true)
     @Transactional
-    public void update(Rate rate) throws NotFoundException {
-        Rate oldRate = get(rate.getId());
-        oldRate.setPositionId(rate.getPositionId());
-        oldRate.setRateAmount(rate.getRateAmount());
-        ExceptionUtil.check(repository.save(oldRate), rate.getId());
+    public Rate createOrUpdate(Rate rate, int userId) throws NotFoundException {
+        if (rate.getId() == null || rate.getId() == 0) {
+            repository.save(new Rate(rate.getPositionId(), rate.getRateAmount()), userId);
+            return new Rate(rate.getPositionId(), rate.getRateAmount());
+        } else {
+            Rate oldRate = repository.get(rate.getId(), rate.getUser().getId());
+            oldRate.setPositionId(rate.getPositionId());
+            oldRate.setRateAmount(rate.getRateAmount());
+            repository.save(oldRate, oldRate.getUser().getId());
+            return oldRate;
+        }
     }
 
-    @Override
-    public void enable(int id, boolean enable) {
-
-    }
 }

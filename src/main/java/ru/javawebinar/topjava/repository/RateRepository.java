@@ -8,16 +8,16 @@ import java.util.List;
  * Created by Анастасия on 24.11.2017.
  */
 public interface RateRepository {
-    Rate save(Rate user);
+    Rate save(Rate user, int userId);
 
     // false if not found
     boolean delete(int id);
 
     // null if not found
-    Rate get(int id);
+    Rate get(int id, int userId);
 
     // null if not found
-    List<Rate> getByUser(int userId);
+    List<Rate> getByUserId(int userId);
 
     List<Rate> getAll();
 

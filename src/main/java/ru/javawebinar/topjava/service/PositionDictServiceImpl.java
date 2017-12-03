@@ -43,4 +43,5 @@ public class PositionDictServiceImpl implements PositionDictService {
         }
         return result;
     }
+
 }
