@@ -58,7 +58,6 @@ CREATE TABLE position_dict (
 );
 
 
-
 CREATE TABLE rate (
   id          INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
   user_id     INTEGER NOT NULL,
@@ -78,3 +77,12 @@ CREATE TABLE position (
   FOREIGN KEY (rate_id) REFERENCES rate (id) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (process_id) REFERENCES process (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+CREATE TABLE criteria (
+  id           INTEGER NOT NULL PRIMARY KEY DEFAULT nextval('global_seq'),
+  process_id   INTEGER NOT NULL REFERENCES process (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  name         VARCHAR NOT NULL,
+  description  VARCHAR,
+  value        DECIMAL NOT NULL,
+  target_value DECIMAL NOT NULL
+)

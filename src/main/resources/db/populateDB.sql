@@ -36,3 +36,10 @@ INSERT INTO meals (datetime, description, calories, user_id) VALUES ('2015-01-06
 INSERT INTO meals (datetime, description, calories, user_id) VALUES ('2015-01-07 00:00:00', 'ужин', 600, 100000);
 INSERT INTO meals (datetime, description, calories, user_id) VALUES ('2015-01-07 13:00:00', 'еще обед', 1300, 100000);
 INSERT INTO meals (datetime, description, calories, user_id) VALUES ('2015-01-06 14:00:00', 'еда админа', 2000, 100001);
+
+insert into criteria(id, process_id, name,description, value, target_value) values (100023, 100019, 'rateName1','description1', 0.5, 0.7);
+insert into criteria(id, process_id, name,description, value, target_value) values (100024, 100019, 'rateName2','description2', 0.6, 0.7);
+insert into criteria(id, process_id, name,description, value, target_value) values (100025, 100019, 'rateName3','description3', 0.7, 0.7);
+insert into criteria(id, process_id, name,description, value, target_value) values (100026, 100020, 'rateName1','description1', 0.3, 0.7);
+insert into criteria(id, process_id, name,description, value, target_value) values (100027, 100020, 'rateName2','description2', 0.2, 0.7);
+insert into criteria(id, process_id, name,description, value, target_value) values (100028, 100020, 'rateName3','description3', 0.1, 0.7);
