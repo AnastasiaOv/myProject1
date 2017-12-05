@@ -47,7 +47,7 @@ public class ProcessAjaxController extends AbstractProcessController {
             throw LOG.getValidationException(result);
         } else {
             status.setComplete();
-            if (process.getId() == 0) {
+            if (process.getId() == null || process.getId() == 0) {
                 super.create(process);
             } else {
                 super.update(process, process.getId());
@@ -62,8 +62,8 @@ public class ProcessAjaxController extends AbstractProcessController {
 
     @RequestMapping(value = "/filter", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Process> filterWithExceed(DateTimeFilter filter) {
-        return filterWithExceed(super.getBetween(startDateTime(filter.getStartDate()), endDateTime(filter.getEndDate())),
-                toTime(filter.getStartTime(), LocalTime.MIN), toTime(filter.getEndTime(), LocalTime.MAX));
+        return filterWithExceed(super.getBetween(startDateTime(filter.getStartDate()), endDateTime(filter.getStartDate())),
+                toTime(filter.getStartTime(), LocalTime.MIN), toTime(filter.getStartTime(), LocalTime.MAX));
     }
 
     public List<Process> filterWithExceed(List<Process> mealList, LocalTime startTime, LocalTime endTime) {
@@ -75,7 +75,7 @@ public class ProcessAjaxController extends AbstractProcessController {
         List<Process> list = new ArrayList<>();
         for (Process meal : mealList) {
             if (TimeUtil.isBetween(meal.getStart_time().toLocalTime(), startTime, endTime)) {
-                Process userMealWithExceed = new Process(meal.getId(), meal.getProcessName(),meal.getLevel(), meal.getStart_time(), meal.getEnd_time(), meal.getDefinition(),
+                Process userMealWithExceed = new Process(meal.getId(), meal.getProcessName(), meal.getLevel(), meal.getStart_time(), meal.getEnd_time(), meal.getDefinition(),
                         meal.getPositionList());
                 list.add(userMealWithExceed);
             }

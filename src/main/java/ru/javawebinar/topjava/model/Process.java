@@ -31,7 +31,20 @@ public class Process extends BaseEntity {
     @JoinColumn(name = "process_id", nullable = false)
     private List<Position> positionList;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "process", fetch = FetchType.EAGER)
+    private List<Criteria> criteriaList;
+
     public Process() {
+    }
+
+    public Process(String processName, Integer level, LocalDateTime start_time, LocalDateTime end_time, String definition, List<Position> positionList, List<Criteria> criteriaList) {
+        this.processName = processName;
+        this.level = level;
+        this.start_time = start_time;
+        this.end_time = end_time;
+        this.definition = definition;
+        this.positionList = positionList;
+        this.criteriaList = criteriaList;
     }
 
     public Process(Integer id, String processName, Integer level, LocalDateTime start_time, LocalDateTime end_time, String definition, List<Position> positionList) {
@@ -102,6 +115,13 @@ public class Process extends BaseEntity {
         this.positionList = positionList;
     }
 
+    public List<Criteria> getCriteriaList() {
+        return criteriaList;
+    }
+
+    public void setCriteriaList(List<Criteria> criteriaList) {
+        this.criteriaList = criteriaList;
+    }
 
     @Override
     public String toString() {
@@ -112,6 +132,7 @@ public class Process extends BaseEntity {
                 ", end_time=" + end_time +
                 ", definition='" + definition + '\'' +
                 ", positionList=" + positionList +
+                ", criteriaList=" + criteriaList +
                 '}';
     }
 }

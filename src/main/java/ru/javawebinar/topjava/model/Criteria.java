@@ -29,6 +29,8 @@ public class Criteria extends BaseEntity {
     @JoinColumn(name = "process_id", nullable = false)
     private Process process;
 
+    public Criteria() {}
+
     public Criteria(Integer id, String name, String description, BigDecimal value, BigDecimal targetValue, Process process) {
         super(id);
         this.name = name;

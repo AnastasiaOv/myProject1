@@ -6,7 +6,6 @@ import ru.javawebinar.topjava.LoggerWrapper;
 import ru.javawebinar.topjava.model.Process;
 import ru.javawebinar.topjava.service.ProcessService;
 import ru.javawebinar.topjava.web.ExceptionInfoHandler;
-import ru.javawebinar.topjava.web.meal.AbstractMealController;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,45 +14,45 @@ import java.util.List;
  * Created by Анастасия on 27.11.2017.
  */
 public class AbstractProcessController extends ExceptionInfoHandler {
-    protected static final LoggerWrapper LOG = LoggerWrapper.get(AbstractMealController.class);
+    protected static final LoggerWrapper LOG = LoggerWrapper.get(AbstractProcessController.class);
 
     @Autowired
     protected ProcessService service;
 
     public Process get(int id) {
         int userId = LoggedUser.id();
-        LOG.info("get meal {} for User {}", id, userId);
+        LOG.info("get meal {} for Process {}", id, userId);
         return service.get(id);
     }
 
     public void delete(int id) {
-        LOG.info("delete process {} ", id);
+        LOG.info("delete Process {} ", id);
         service.delete(id);
     }
 
     public List<Process> getAll() {
         int userId = LoggedUser.id();
-        LOG.info("getAll for User {}", userId);
+        LOG.info("getAll for Process {}", userId);
         return service.getAll(userId);
     }
 
     public List<Process> getBetween(LocalDateTime startDate, LocalDateTime endDate) {
         int userId = LoggedUser.id();
-        LOG.info("getBetween {} and {} for User {}", startDate, endDate, userId);
+        LOG.info("getBetween {} and {} for Process {}", startDate, endDate, userId);
         return service.getBetween(startDate, endDate, userId);
     }
 
     public void update(Process process, int id) {
         process.setId(id);
         int userId = LoggedUser.id();
-        LOG.info("update {} for User {}", process, userId);
+        LOG.info("update {} for Process {}", process, userId);
         service.update(process, userId);
     }
 
     public Process create(Process process) {
         process.setId(null);
         int userId = LoggedUser.id();
-        LOG.info("create {} for User {}" + process, userId);
+        LOG.info("create {} for Process {}" + process, userId);
         return service.save(process, userId);
     }
 }

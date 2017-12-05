@@ -44,13 +44,13 @@ public class ProcessRestController extends AbstractProcessController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@RequestBody Process meal, @PathVariable("id") int id) {
-        super.update(meal, id);
+    public void update(@RequestBody Process process, @PathVariable("id") int id) {
+        super.update(process, id);
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Process> createWithLocation(@RequestBody Process meal) {
-        Process created = super.create(meal);
+    public ResponseEntity<Process> createWithLocation(@RequestBody Process process) {
+        Process created = super.create(process);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
