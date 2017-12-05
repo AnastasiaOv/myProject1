@@ -57,6 +57,7 @@
                 </form:form>
 
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProcess" >Добавить процесс</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editRow" >Добавить</button>
 
 
                 <datatables:table id="datatable" url="${ajaxUrl}" row="process" theme="bootstrap3"
@@ -91,10 +92,10 @@
             </div>
             <div class="modal-body">
                 <form:form class="form-horizontal" method="post" id="detailsForm">
-
+                    <c:set var="ajaxUrl" value="ajax/profile/processes/"/>
                     <input type="text" hidden="hidden" id="id" name="id">
                     <input type="datetime" hidden="hidden" id="start_time" name="start_time">
-
+                    <input type="number" hidden="hidden" id="level" name="level">
                     <input type="text" hidden="hidden" id="processName" name="processName">
 
                     <div class="form-group">
@@ -125,7 +126,7 @@
                 <h2 class="modal-title">Добавить процесс:</h2>
             </div>
             <div class="modal-body">
-                <form:form class="form-horizontal" method="post" id="detailsForm">
+                <form:form class="form-horizontal" action="ajax/profile/processes/" method="post" id="detailsForm">
 
                     <input type="text" hidden="hidden" id="id" name="id">
                     <input type="datetime" hidden="hidden" id="start_time" name="start_time">
@@ -141,18 +142,16 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="try" class="control-label col-xs-3">Уровень процесса</label>
+                        <label for="level" class="control-label col-xs-3">Уровень процесса</label>
 
                         <div class="col-xs-9">
-                            <form>
-                                <input list="try" type="number" id ="level" name="level">
-                                <datalist id="try">
+                                <input list="level1" type="number" id ="level" name="level">
+                                <datalist id="level1">
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
                                     <option>4</option>
                                 </datalist>
-                            </form>
                         </div>
                     </div>
 
