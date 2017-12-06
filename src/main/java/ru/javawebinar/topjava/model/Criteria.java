@@ -25,7 +25,7 @@ public class Criteria extends BaseEntity {
     private BigDecimal targetValue;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "process_id", nullable = false)
     private Process process;
 
