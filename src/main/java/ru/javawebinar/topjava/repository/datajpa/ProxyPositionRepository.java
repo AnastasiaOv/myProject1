@@ -32,7 +32,10 @@ public interface ProxyPositionRepository extends JpaRepository<Position, Integer
     @Override
     List<Position> findAll(Sort sort);
 
-    @Query("SELECT p FROM PositionDict p")
+    @Query("SELECT p FROM Position p")
     List<Position> getAll();
+
+    @Query("SELECT r FROM Position r WHERE r.process.id=:processId")
+    List<Position> getByProcessId(@Param("processId") int processId);
 
 }

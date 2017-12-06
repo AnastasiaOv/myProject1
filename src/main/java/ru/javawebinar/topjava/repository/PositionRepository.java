@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface PositionRepository {
     List<Position> getAll();
+
+    List<Position> getByProcessId(int processId);
 }
