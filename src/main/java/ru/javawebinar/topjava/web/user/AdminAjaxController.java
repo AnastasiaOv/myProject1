@@ -38,7 +38,7 @@ public class AdminAjaxController extends AbstractUserController {
         super.delete(id);
     }
 
-    @RequestMapping(value = "users", method = RequestMethod.POST)
+    @RequestMapping( method = RequestMethod.POST)
     public void createOrUpdate(@Valid User user, BindingResult result, SessionStatus status) {
         if (result.hasErrors()) {
             throw LOG.getValidationException(result);

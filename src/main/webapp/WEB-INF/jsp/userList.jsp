@@ -59,7 +59,7 @@
                 <h2 class="modal-title">Сведения о пользователе:</h2>
             </div>
             <div class="modal-body">
-                <form:form class="form-horizontal" method="post" id="detailsForm">
+                <form:form class="form-horizontal" action="ajax/admin/users/" method="post" id="detailsForm">
                     <input type="text" hidden="hidden" id="id" name="id">
 
                     <div class="form-group">

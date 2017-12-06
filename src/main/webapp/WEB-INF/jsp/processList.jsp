@@ -91,7 +91,7 @@
                 <h2 class="modal-title">Сведения о процессе</h2>
             </div>
             <div class="modal-body">
-                <form:form class="form-horizontal" method="post" id="detailsForm">
+                <form:form class="form-horizontal" action="ajax/profile/processes/" method="post" id="detailsForm">
                     <c:set var="ajaxUrl" value="ajax/profile/processes/"/>
                     <input type="text" hidden="hidden" id="id" name="id">
                     <input type="datetime" hidden="hidden" id="start_time" name="start_time">
