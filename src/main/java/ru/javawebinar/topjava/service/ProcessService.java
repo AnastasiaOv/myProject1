@@ -11,9 +11,9 @@ import java.util.List;
  */
 public interface ProcessService {
 
-    Process save(Process process, int userId);
+    Process save(Process process);
 
-    Process update(Process process, int userId);
+    Process update(Process process);
 
     void delete(int id);
 

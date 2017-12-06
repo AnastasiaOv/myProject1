@@ -19,8 +19,8 @@ public class ProcessServiceImpl implements ProcessService {
     private ProcessRepository repository;
 
     @Override
-    public Process save(Process process, int userId) {
-        return repository.save(process);
+    public Process save(Process process) {
+        return ExceptionUtil.check(repository.save(process), process.getId());
     }
 
     @Override
@@ -29,7 +29,7 @@ public class ProcessServiceImpl implements ProcessService {
     }
 
     @Override
-    public Process update(Process process, int userId) {
+    public Process update(Process process) {
         return ExceptionUtil.check(repository.save(process), process.getId());
     }
 

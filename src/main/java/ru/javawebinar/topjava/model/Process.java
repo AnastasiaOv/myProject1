@@ -27,8 +27,7 @@ public class Process extends BaseEntity {
     @Column(name = "description")
     private String definition;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "process_id", nullable = false)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "process", fetch = FetchType.EAGER)
     private List<Position> positionList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "process", fetch = FetchType.EAGER)
@@ -47,7 +46,7 @@ public class Process extends BaseEntity {
         this.criteriaList = criteriaList;
     }
 
-    public Process(Integer id, String processName, Integer level, LocalDateTime start_time, LocalDateTime end_time, String definition, List<Position> positionList) {
+    public Process(int id, String processName, Integer level, LocalDateTime start_time, LocalDateTime end_time, String definition, List<Position> positionList) {
         super(id);
         this.processName = processName;
         this.level = level;

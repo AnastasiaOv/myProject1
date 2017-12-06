@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ru.javawebinar.topjava.LoggedUser;
 import ru.javawebinar.topjava.LoggerWrapper;
 import ru.javawebinar.topjava.model.Process;
+import ru.javawebinar.topjava.service.CriteriaService;
+import ru.javawebinar.topjava.service.PositionService;
 import ru.javawebinar.topjava.service.ProcessService;
 import ru.javawebinar.topjava.web.ExceptionInfoHandler;
 
@@ -18,6 +20,12 @@ public class AbstractProcessController extends ExceptionInfoHandler {
 
     @Autowired
     protected ProcessService service;
+
+    @Autowired
+    protected CriteriaService criteriaService;
+
+    @Autowired
+    PositionService positionService;
 
     public Process get(int id) {
         int userId = LoggedUser.id();
@@ -44,16 +52,17 @@ public class AbstractProcessController extends ExceptionInfoHandler {
 
     public void update(Process process, int id) {
         process.setId(id);
+        process.setCriteriaList(criteriaService.getCriteriaByProcess(process.getId()));
+        process.setPositionList(positionService.getByProcessId(process.getId()));
         int userId = LoggedUser.id();
         LOG.info("update {} for Process {}", process, userId);
-        service.update(process, userId);
+        service.update(process);
     }
 
     public Process create(Process process) {
         process.setId(null);
-        int userId = LoggedUser.id();
-        LOG.info("create {} for Process {}" + process, userId);
-        return service.save(process, userId);
+        LOG.info("create Process {}" + process);
+        return service.save(process);
     }
 }
 
