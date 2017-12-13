@@ -162,14 +162,14 @@ function renderEmail(data, type, row) {
 
 function renderUpdateBtn(data, type, row) {
     if (type == 'display') {
-        return '<a class="btn btn-xs btn-primary" onclick="updateRow(' + row.id + ')">Update</a>';
+        return '<a class="btn btn-xs btn-primary" onclick="updateRow(' + row.id + ')">Изменить</a>';
     }
     return data;
 }
 
 function renderDeleteBtn(data, type, row) {
     if (type == 'display') {
-        return '<a class="btn btn-xs btn-danger" onclick="deleteRow(' + row.id + ')">Delete</a>';
+        return '<a class="btn btn-xs btn-danger" onclick="deleteRow(' + row.id + ')">Удалить</a>';
     }
     return data;
 }
@@ -179,4 +179,11 @@ function renderCheckbox(data, type, row) {
         return '<input type="checkbox"' + (data ? ' checked ' : ' ') + 'onclick="enable(' + row.id + ',$(this))"/>';
     }
     return data;
+}
+
+function showCheckbox(data, type) {
+    if (type == 'display') {
+        return '<input type="checkbox"' + (data ? ' checked ' : ' ') + 'onclick="enable(' + row.id + ',$(this))"/>';
+    }
+
 }
