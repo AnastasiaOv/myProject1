@@ -5,6 +5,8 @@
 <%@ taglib prefix="dandelion" uri="http://github.com/dandelion" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="datatable" uri="http://github.com/dandelion/datatables" %>
+<%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
 <fmt:setLocale value="ru"/>
@@ -56,9 +58,9 @@
                     </div>
                 </form:form>
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProcess" >Добавить процесс</button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editRow" >Добавить</button>
-
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProcess">Добавить
+                    процесс
+                </button>
 
                 <datatables:table id="datatable" url="${ajaxUrl}" row="process" theme="bootstrap3"
                                   cssClass="table table-striped" pageable="false" info="false">
@@ -70,7 +72,7 @@
                     <datatables:column title="имя процесса" filterable="false" property="processName"/>
                     <datatables:column title="описание процесса" filterable="false" property="definition"/>
 
-                    <datatables:column sortable="false" renderFunction="renderUpdateBtn"/>
+                    <datatables:column sortable="false" name="Изменить" renderFunction="renderUpdateBtn"/>
                     <datatables:column sortable="false" renderFunction="renderDeleteBtn"/>
                     <datatables:column property="exceed" sortable="false" cssCellClass="hidden exceed"/>
 
@@ -83,6 +85,7 @@
     </div>
 </div>
 <jsp:include page="fragments/footer.jsp"/>
+
 <div class="modal fade" id="editRow">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -93,11 +96,12 @@
             <div class="modal-body">
                 <form:form class="form-horizontal" action="ajax/profile/processes/" method="post" id="detailsForm">
                     <c:set var="ajaxUrl" value="ajax/profile/processes/"/>
+
                     <input type="text" hidden="hidden" id="id" name="id">
                     <input type="datetime" hidden="hidden" id="start_time" name="start_time">
                     <input type="number" hidden="hidden" id="level" name="level">
                     <input type="text" hidden="hidden" id="processName" name="processName">
-
+                    <c:set var="procId" value="${param.id}" scope="session"/>
                     <div class="form-group">
                         <label for="definition" class="control-label col-xs-3">Описание</label>
 
@@ -106,6 +110,49 @@
                                    placeholder="Description">
                         </div>
                     </div>
+
+                    <div>
+                        <datatables:table id="datatable2" url="${ajaxUrl}" row="rateTo" theme="bootstrap3"
+                                          cssClass="table table-striped" pageable="true" info="false">
+
+                            <datatables:column title="positionName" filterable="false" sortInitDirection="desc"
+                                               property="positionName"/>
+                            <datatables:column title="owner" filterable="false" sortInitDirection="desc"
+                                               property="owner" renderFunction="renderCheckbox"/>
+
+                            <datatables:callback type="init" function="makeEditable"/>
+                        </datatables:table>
+                    </div>
+
+                    <div>
+                        <table class = "table table-striped" id="positions">
+                            <thread>
+                            <tr>
+                                <th></th>
+                                <th>Имя процесса</th>
+                                <th>ФИО сотрудника</th>
+                                <th>владелец</th>
+                                <th>исполнитель</th>
+                                <th>ответственный</th>
+                            </tr>
+                            </thread>
+                            <c:forEach var="positions" items="${positions}">
+
+                                <c:set var="procID" value="${positions.processId}"/>
+                                <c:if test="${positions.processId==procID}">
+                                <tr>
+                                    <th></th>
+                                    <th>${positions.positionName}</th>
+                                    <th>${positions.userName}</th>
+                                    <th><c:if test="${positions.owner == 'true'}"><input type="checkbox" title="owner" checked/></c:if><c:if test="${positions.owner == 'false'}"><input type="checkbox" title="owner"/></c:if></th>
+                                    <th><c:if test="${positions.executor == 'true'}"><input type="checkbox" title="executor" checked/></c:if><c:if test="${positions.executor == 'false'}"><input type="checkbox" title="executor"/></c:if></th>
+                                    <th><c:if test="${positions.responsible == 'true'}"><input type="checkbox" title="responsible" checked/></c:if><c:if test="${positions.responsible == 'false'}"><input type="checkbox" title="responsible"/></c:if></th>
+                                </tr>
+                                </c:if>
+                            </c:forEach>
+                        </table>
+                    </div>
+
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
                             <button type="submit" class="btn btn-primary">Сохранить</button>
@@ -119,7 +166,7 @@
 
 
 <div class="modal fade" id="addProcess">
-    <div class="modal-dialog" >
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -130,13 +177,13 @@
 
                     <input type="text" hidden="hidden" id="id" name="id">
                     <input type="datetime" hidden="hidden" id="start_time" name="start_time">
-                    <input type="text" hidden="hidden" id="processName" name="processName">
+
 
                     <div class="form-group">
-                        <label for="name" class="control-label col-xs-3">Название процесса</label>
+                        <label for="processName" class="control-label col-xs-3">Название процесса</label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="name" name="name"
+                            <input type="text" class="form-control" id="processName" name="processName"
                                    placeholder="Description">
                         </div>
                     </div>
@@ -145,13 +192,13 @@
                         <label for="level" class="control-label col-xs-3">Уровень процесса</label>
 
                         <div class="col-xs-9">
-                                <input list="level1" type="number" id ="level" name="level">
-                                <datalist id="level1">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </datalist>
+                            <input list="level1" type="number" id="level" name="level">
+                            <datalist id="level1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </datalist>
                         </div>
                     </div>
 
@@ -223,5 +270,6 @@
             span.parent().css("color", span.html() == 'true' ? 'red' : 'green');
         });
     }
+
 </script>
 </html>
