@@ -27,6 +27,9 @@ public interface ProxyRateRepository extends JpaRepository<Rate, Integer> {
     @Query("SELECT r FROM Rate r WHERE r.user.id=:userId")
     List<Rate> getByUserId(@Param("userId") int userId);
 
+    @Query("SELECT r FROM Rate r")
+    List<Rate> getAll();
+
     @Override
     @Transactional
     Rate save(Rate rate);

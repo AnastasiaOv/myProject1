@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import ru.javawebinar.topjava.LoggedUser;
 import ru.javawebinar.topjava.model.User;
+import ru.javawebinar.topjava.service.ProcessService;
 import ru.javawebinar.topjava.service.UserService;
 import ru.javawebinar.topjava.to.DateTimeFilter;
 import ru.javawebinar.topjava.to.UserTo;
 import ru.javawebinar.topjava.util.UserUtil;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 
 /**
  * User: gkislin
@@ -27,6 +29,9 @@ import javax.validation.Valid;
 public class RootController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ProcessService processService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String root() {
@@ -52,6 +57,7 @@ public class RootController {
     @RequestMapping(value = "/processes", method = RequestMethod.GET)
     public String processList(Model model) {
         model.addAttribute("filter", new DateTimeFilter());
+        model.addAttribute("positions", processService.getAllPositions());
         return "processList";
     }
 

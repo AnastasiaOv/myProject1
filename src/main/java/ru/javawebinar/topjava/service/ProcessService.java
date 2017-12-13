@@ -2,6 +2,7 @@ package ru.javawebinar.topjava.service;
 
 
 import ru.javawebinar.topjava.model.Process;
+import ru.javawebinar.topjava.to.RateTo;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,4 +23,6 @@ public interface ProcessService {
     List<Process> getAll(int userId);
 
     List<Process> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId);
+
+    List<RateTo> getAllPositions();
 }

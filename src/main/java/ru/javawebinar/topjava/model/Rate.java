@@ -4,20 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Created by Анастасия on 24.11.2017.
  */
 @Entity
 @Table(name = "rate")
-@NamedQueries({
-        @NamedQuery(name = Rate.ALL_SORTED, query = "SELECT r FROM Rate r Where r.id=:id"),
-})
-
 public class Rate extends BaseEntity {
-
-    public static final String DELETE = "Rate.delete";
-    public static final String ALL_SORTED = "Rate.getByUser";
 
     public Rate() {
     }
@@ -26,6 +20,9 @@ public class Rate extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "process", fetch = FetchType.EAGER)
+    private List<Position> positionList;
 
     public User getUser() {
         return user;
@@ -68,4 +65,11 @@ public class Rate extends BaseEntity {
         this.rateAmount = rateAmount;
     }
 
+    public List<Position> getPositionList() {
+        return positionList;
+    }
+
+    public void setPositionList(List<Position> positionList) {
+        this.positionList = positionList;
+    }
 }

@@ -39,4 +39,7 @@ public interface ProxyUserRepository extends JpaRepository<User, Integer> {
     @Modifying
     @Query("UPDATE User u SET u.enabled=:enabled WHERE u.id=:id")
     void enable(@Param("id") int id, @Param("enabled") boolean enabled);
+
+    @Query("Select u from User u")
+    List<User> getAll();
 }

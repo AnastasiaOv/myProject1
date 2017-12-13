@@ -87,7 +87,6 @@ public class Criteria extends BaseEntity {
                 ", description='" + description + '\'' +
                 ", value=" + value +
                 ", targetValue=" + targetValue +
-                ", process=" + process +
                 '}';
     }
 }

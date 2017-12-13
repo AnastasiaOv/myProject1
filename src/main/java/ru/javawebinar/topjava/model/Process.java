@@ -1,9 +1,12 @@
 package ru.javawebinar.topjava.model;
 
 import com.fasterxml.jackson.databind.ser.Serializers;
+import ru.javawebinar.topjava.to.RateTo;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,10 +22,10 @@ public class Process extends BaseEntity {
     private Integer level;
 
     @Column(name = "start_time", nullable = false)
-    protected LocalDateTime start_time;
+    private LocalDateTime start_time;
 
     @Column(name = "end_time")
-    protected LocalDateTime end_time;
+    private LocalDateTime end_time;
 
     @Column(name = "description")
     private String definition;
@@ -32,6 +35,9 @@ public class Process extends BaseEntity {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "process", fetch = FetchType.EAGER)
     private List<Criteria> criteriaList;
+
+    @Transient
+    private List<RateTo> ratesList;
 
     public Process() {
     }
@@ -44,6 +50,7 @@ public class Process extends BaseEntity {
         this.definition = definition;
         this.positionList = positionList;
         this.criteriaList = criteriaList;
+        this.ratesList = new ArrayList<>();
     }
 
     public Process(int id, String processName, Integer level, LocalDateTime start_time, LocalDateTime end_time, String definition, List<Position> positionList) {
@@ -64,7 +71,6 @@ public class Process extends BaseEntity {
         this.definition = definition;
         this.positionList = positionList;
     }
-
 
     public String getProcessName() {
         return processName;
@@ -122,6 +128,14 @@ public class Process extends BaseEntity {
         this.criteriaList = criteriaList;
     }
 
+    public List<RateTo> getRatesList() {
+        return ratesList;
+    }
+
+    public void setRatesList(List<RateTo> ratesList) {
+        this.ratesList = ratesList;
+    }
+
     @Override
     public String toString() {
         return "Process{" +
@@ -130,8 +144,6 @@ public class Process extends BaseEntity {
                 ", start_time=" + start_time +
                 ", end_time=" + end_time +
                 ", definition='" + definition + '\'' +
-                ", positionList=" + positionList +
-                ", criteriaList=" + criteriaList +
                 '}';
     }
 }

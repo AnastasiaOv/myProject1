@@ -1,6 +1,7 @@
 package ru.javawebinar.topjava.repository;
 
 import ru.javawebinar.topjava.model.Rate;
+import ru.javawebinar.topjava.to.RateTo;
 
 import java.util.List;
 
@@ -20,5 +21,7 @@ public interface RateRepository {
     List<Rate> getByUserId(int userId);
 
     List<Rate> getAll();
+
+    List<RateTo> getAllRatesForProcess(int processId);
 
 }

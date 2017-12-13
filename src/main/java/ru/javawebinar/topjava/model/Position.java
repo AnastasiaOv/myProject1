@@ -27,6 +27,11 @@ public class Position extends BaseEntity {
     @JoinColumn(name = "process_id", nullable = false)
     private Process process;
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "rate_id", nullable = false)
+    private Rate rate;
+
     public Position(Boolean isOwner, Boolean isExecutor, Boolean isResponsible) {
 
         this.isOwner = isOwner;
@@ -35,6 +40,14 @@ public class Position extends BaseEntity {
     }
 
     public Position() {
+    }
+
+    public Rate getRate() {
+        return rate;
+    }
+
+    public void setRate(Rate rate) {
+        this.rate = rate;
     }
 
     public Process getProcess() {
