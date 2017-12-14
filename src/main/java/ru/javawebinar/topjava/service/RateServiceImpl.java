@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.javawebinar.topjava.model.PositionDict;
 import ru.javawebinar.topjava.model.Rate;
+import ru.javawebinar.topjava.repository.PositionDictRepository;
 import ru.javawebinar.topjava.repository.RateRepository;
+import ru.javawebinar.topjava.repository.datajpa.ProxyDictPositionReposiory;
 import ru.javawebinar.topjava.util.exception.ExceptionUtil;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
@@ -21,6 +23,9 @@ import java.util.List;
 public class RateServiceImpl implements RateService {
     @Autowired
     private RateRepository repository;
+
+    @Autowired
+    private PositionDictRepository dictRepository;
 
     @Override
     public Rate save(Rate rate, int userId) {
@@ -39,14 +44,18 @@ public class RateServiceImpl implements RateService {
 
     @Override
     public List<Rate> getByUserId(int userId) throws NotFoundException {
-        return repository.getByUserId(userId);
+        List<Rate> result = repository.getByUserId(userId);
+        for(Rate rate:result){
+            rate.setPositionName(dictRepository.getById(rate.getPositionId()).getName());
+        }
+        return result;
     }
 
     @Override
     public List<Rate> getByPositionName(List<PositionDict> positions) throws NotFoundException {
         List<Rate> result = new ArrayList<>();
         for (PositionDict position : positions) {
-            Rate rate = new Rate(position.getId(), new BigDecimal(1));
+            Rate rate = new Rate(position.getId(), new BigDecimal(1), position.getName());
             result.add(rate);
         }
         return result;
@@ -67,8 +76,8 @@ public class RateServiceImpl implements RateService {
     @Transactional
     public Rate createOrUpdate(Rate rate, int userId) throws NotFoundException {
         if (rate.getId() == null || rate.getId() == 0) {
-            repository.save(new Rate(rate.getPositionId(), rate.getRateAmount()), userId);
-            return new Rate(rate.getPositionId(), rate.getRateAmount());
+            repository.save(new Rate(rate.getPositionId(), rate.getRateAmount(),rate.getPositionName()), userId);
+            return new Rate(rate.getPositionId(), rate.getRateAmount(), rate.getPositionName());
         } else {
             Rate oldRate = repository.get(rate.getId(), rate.getUser().getId());
             oldRate.setPositionId(rate.getPositionId());

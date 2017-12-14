@@ -34,4 +34,7 @@ public interface ProxyDictPositionReposiory extends JpaRepository<PositionDict, 
     @Query("SELECT p FROM PositionDict p")
     List<PositionDict> getAll();
 
+    @Query("SELECT p FROM PositionDict p Where p.id = :id")
+    PositionDict getById(@Param("id") int id);
+
 }

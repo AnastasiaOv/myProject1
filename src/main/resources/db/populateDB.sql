@@ -21,8 +21,9 @@ INSERT INTO position_dict (id, name, department) VALUES (100021, 'названи
 INSERT INTO position_dict (id, name, department) VALUES (100022, 'название должности2', 'департамент2');
 
 
-INSERT INTO rate (id, user_id, position_id, rate_amount) VALUES (100015, 100001, 100021, 0.5);
-INSERT INTO rate (id, user_id, position_id, rate_amount) VALUES (100016, 100001, 100022, 0.3);
+INSERT INTO rate (id, user_id, position_id, rate_amount, position_name) VALUES (100015, 100001, 100021, 0.5, 'dolzn1');
+INSERT INTO rate (id, user_id, position_id, rate_amount, position_name) VALUES (100016, 100001, 100022, 0.3, 'dolzn2');
+INSERT INTO rate (id, user_id, position_id, rate_amount, position_name) VALUES (100012, 100001, 100022, 0.3, 'dolzn2');
 
 INSERT INTO position (id, rate_id, process_id, is_owner, is_executor, is_responsible)
 VALUES (100017, 100015,100019, TRUE, FALSE, FALSE);

@@ -6,6 +6,7 @@ DROP TABLE position_dict CASCADE;
 DROP TABLE process CASCADE;
 DROP TABLE position CASCADE;
 DROP TABLE rate Cascade;
+Drop table criteria Cascade;
 drop SEQUENCE global_seq CASCADE;
 
 */
@@ -63,6 +64,7 @@ CREATE TABLE rate (
   user_id     INTEGER NOT NULL,
   position_id INTEGER NOT NULL,
   rate_amount DECIMAL NOT NULL,
+  position_name VARCHAR,
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
   FOREIGN KEY (position_id) REFERENCES position_dict (id) ON DELETE CASCADE
 );

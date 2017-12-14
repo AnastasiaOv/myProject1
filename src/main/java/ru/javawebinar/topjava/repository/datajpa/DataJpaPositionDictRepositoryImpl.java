@@ -20,4 +20,9 @@ public class DataJpaPositionDictRepositoryImpl implements PositionDictRepository
     public List<PositionDict> getAll() {
         return proxy.getAll();
     }
+
+    @Override
+    public PositionDict getById(int positionId) {
+        return proxy.getById(positionId);
+    }
 }

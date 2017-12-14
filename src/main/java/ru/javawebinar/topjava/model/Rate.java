@@ -1,6 +1,7 @@
 package ru.javawebinar.topjava.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -24,6 +25,9 @@ public class Rate extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "process", fetch = FetchType.EAGER)
     private List<Position> positionList;
 
+    @Column(name="position_name")
+    private String positionName;
+
     public User getUser() {
         return user;
     }
@@ -41,6 +45,12 @@ public class Rate extends BaseEntity {
     public Rate(Integer position_id, BigDecimal rateAmount) {
         this.positionId = position_id;
         this.rateAmount = rateAmount;
+    }
+
+    public Rate(Integer position_id, BigDecimal rateAmount, String positionName) {
+        this.positionId = position_id;
+        this.rateAmount = rateAmount;
+        this.positionName = positionName;
     }
 
     @Column(name = "position_id")
@@ -71,5 +81,20 @@ public class Rate extends BaseEntity {
 
     public void setPositionList(List<Position> positionList) {
         this.positionList = positionList;
+    }
+
+    public String getPositionName() {
+        return positionName;
+    }
+
+    public void setPositionName(String positionName) {
+        this.positionName = positionName;
+    }
+
+    @Override
+    public String toString() {
+        return "Rate{" +
+                "positionName='" + positionName + '\'' +
+                '}';
     }
 }
