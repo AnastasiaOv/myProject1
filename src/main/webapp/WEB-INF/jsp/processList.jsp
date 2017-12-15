@@ -73,7 +73,6 @@
                     <datatables:column title="описание процесса" filterable="false" property="definition"/>
 
                     <datatables:column sortable="false" renderFunction="renderUpdateBtn"/>
-                    <datatables:column sortable="false" renderFunction="renderDeleteBtn"/>
                     <datatables:column sortable="false" renderFunction="renderCancelBtn"/>
                     <datatables:column property="exceed" sortable="false" cssCellClass="hidden exceed"/>
 
@@ -97,12 +96,10 @@
             <div class="modal-body">
                 <form:form class="form-horizontal" action="ajax/profile/processes/" method="post" id="detailsForm">
                     <c:set var="ajaxUrl" value="ajax/profile/processes/"/>
-                    <c:set var="procId1" />
                     <input type="text" hidden="hidden" id="id" name="id">
                     <input type="datetime" hidden="hidden" id="start_time" name="start_time">
                     <input type="number" hidden="hidden" id="level" name="level">
                     <input type="text" hidden="hidden" id="processName" name="processName">
-                    <input type="text" value=<%=request.getParameter("process")%>>
                     <div class="form-group">
                         <label for="definition" class="control-label col-xs-3">Описание</label>
 
