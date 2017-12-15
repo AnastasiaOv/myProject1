@@ -72,8 +72,9 @@
                     <datatables:column title="имя процесса" filterable="false" property="processName"/>
                     <datatables:column title="описание процесса" filterable="false" property="definition"/>
 
-                    <datatables:column sortable="false" name="Изменить" renderFunction="renderUpdateBtn"/>
+                    <datatables:column sortable="false" renderFunction="renderUpdateBtn"/>
                     <datatables:column sortable="false" renderFunction="renderDeleteBtn"/>
+                    <datatables:column sortable="false" renderFunction="renderCancelBtn"/>
                     <datatables:column property="exceed" sortable="false" cssCellClass="hidden exceed"/>
 
                     <datatables:callback type="init" function="makeEditable"/>
@@ -96,12 +97,12 @@
             <div class="modal-body">
                 <form:form class="form-horizontal" action="ajax/profile/processes/" method="post" id="detailsForm">
                     <c:set var="ajaxUrl" value="ajax/profile/processes/"/>
-
+                    <c:set var="procId1" />
                     <input type="text" hidden="hidden" id="id" name="id">
                     <input type="datetime" hidden="hidden" id="start_time" name="start_time">
                     <input type="number" hidden="hidden" id="level" name="level">
                     <input type="text" hidden="hidden" id="processName" name="processName">
-                    <c:set var="procId" value="${param.id}" scope="session"/>
+                    <input type="text" value=<%=request.getParameter("process")%>>
                     <div class="form-group">
                         <label for="definition" class="control-label col-xs-3">Описание</label>
 
@@ -111,26 +112,14 @@
                         </div>
                     </div>
 
-                    <div>
-                        <datatables:table id="datatable2" url="${ajaxUrl}" row="rateTo" theme="bootstrap3"
-                                          cssClass="table table-striped" pageable="true" info="false">
-
-                            <datatables:column title="positionName" filterable="false" sortInitDirection="desc"
-                                               property="positionName"/>
-                            <datatables:column title="owner" filterable="false" sortInitDirection="desc"
-                                               property="owner" renderFunction="renderCheckbox"/>
-
-                            <datatables:callback type="init" function="makeEditable"/>
-                        </datatables:table>
-                    </div>
 
                     <div>
                         <table class = "table table-striped" id="positions">
                             <thread>
                             <tr>
                                 <th></th>
-                                <th>Имя процесса</th>
-                                <th>ФИО сотрудника</th>
+                                <th>Название показателя</th>
+                                <th>Значение</th>
                                 <th>владелец</th>
                                 <th>исполнитель</th>
                                 <th>ответственный</th>
@@ -139,11 +128,12 @@
                             <c:forEach var="positions" items="${positions}">
 
                                 <c:set var="procID" value="${positions.processId}"/>
-                                <c:if test="${positions.processId==procID}">
+                                <c:set var="procId" value="${param.id}"/>
+                                <c:if test="${positions.processId == id}">
                                 <tr>
                                     <th></th>
                                     <th>${positions.positionName}</th>
-                                    <th>${positions.userName}</th>
+                                    <th>${ajaxUrl}</th>
                                     <th><c:if test="${positions.owner == 'true'}"><input type="checkbox" title="owner" checked/></c:if><c:if test="${positions.owner == 'false'}"><input type="checkbox" title="owner"/></c:if></th>
                                     <th><c:if test="${positions.executor == 'true'}"><input type="checkbox" title="executor" checked/></c:if><c:if test="${positions.executor == 'false'}"><input type="checkbox" title="executor"/></c:if></th>
                                     <th><c:if test="${positions.responsible == 'true'}"><input type="checkbox" title="responsible" checked/></c:if><c:if test="${positions.responsible == 'false'}"><input type="checkbox" title="responsible"/></c:if></th>
@@ -223,6 +213,61 @@
     </div>
 </div>
 
+<div class="modal fade" id="cancel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h2 class="modal-title">Ввод показателей процесса:</h2>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <table id="example" class="display" width="100%"></table>
+                </div>
+                <form:form class="form-horizontal" action="ajax/profile/processes/" method="post" id="detailsForm">
+
+                    <input type="text" hidden="hidden" id="id" name="id">
+                    <input type="datetime" hidden="hidden" id="start_time" name="start_time">
+                    <div>
+                        <table id="criterias" class = "table table-striped" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>Название критерия</th>
+                                <th>Значение</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr>
+                                <td>Критерий1</td>
+                                <td><input type="number" step="any"></td>
+                            </tr>
+                            <tr>
+                                <td>Критерий2</td>
+                                <td><input type="number" step="any"></td>
+                            </tr>
+                            <tr>
+                                <td>Критерий3</td>
+                                <td><input type="number" step="any"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="col-xs-offset-3 col-xs-3">
+                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                        </div>
+                    </div>
+                </form:form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 
 </body>
 <script type="text/javascript">
@@ -267,9 +312,11 @@
     function coloredTable() {
         $.each($('td.exceed'), function (key, item) {
             var span = $(item);
-            span.parent().css("color", span.html() == 'true' ? 'red' : 'green');
+            span.parent().css("color", span.html() == 'true' ? 'black' : 'black');
         });
     }
+
+
 
 </script>
 </html>

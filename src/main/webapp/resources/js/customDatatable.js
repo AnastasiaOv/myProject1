@@ -53,6 +53,13 @@ function updateRow(id) {
     });
 }
 
+
+function cancelProc(id) {
+    $.get(ajaxUrl + id, function (data) {
+        $('#cancel').modal();
+    });
+}
+
 function deleteRow(id) {
     $.ajax({
         url: ajaxUrl + id,
@@ -163,6 +170,13 @@ function renderEmail(data, type, row) {
 function renderUpdateBtn(data, type, row) {
     if (type == 'display') {
         return '<a class="btn btn-xs btn-primary" onclick="updateRow(' + row.id + ')">Изменить</a>';
+    }
+    return data;
+}
+
+function renderCancelBtn(data, type, row) {
+    if (type == 'display') {
+        return '<a class="btn btn-xs btn-primary" onclick="cancelProc(' + row.id + ')">Завершить процесс</a>';
     }
     return data;
 }
