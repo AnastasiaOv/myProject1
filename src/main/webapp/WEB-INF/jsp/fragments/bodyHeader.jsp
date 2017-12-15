@@ -10,8 +10,8 @@
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 
     <div class="container">
-        <c:url value="/meals" var="meals"/>
-        <a href="${meals}" class="navbar-brand"><fmt:message key="app.title"/></a>
+        <c:url value="/processes" var="processes"/>
+        <a href="${processes}" class="navbar-brand"><fmt:message key="app.title"/></a>
 
         <div class="collapse navbar-collapse">
             <c:url value="/logout" var="logout"/>
@@ -22,7 +22,7 @@
                         <a class="btn btn-info" role="button" href="${users}"><fmt:message key="users.title"/></a>
                     </sec:authorize>
                     <c:url value="/profile" var="profile"/>
-                    <a class="btn btn-info" role="button" href="${profile}">${userTo.name} profile</a>
+                    <a class="btn btn-info" role="button" href="${profile}">Изменить данные</a>
                     <input type="submit" class="btn btn-primary" value="Logout">
                 </sec:authorize>
             </form:form>
