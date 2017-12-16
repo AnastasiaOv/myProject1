@@ -44,12 +44,6 @@ public class UserUtil {
         if (password != null) {
             oldUser.setPassword(PasswordUtil.encode(password));
         }
-        oldUser.setName(updatedUser.getName());
-        oldUser.setEmail(updatedUser.getEmail().toLowerCase());
-        oldUser.setCaloriesPerDay(updatedUser.getCaloriesPerDay());
-        oldUser.setRoles(updatedUser.getRoles());
-        oldUser.setPositions(updatedUser.getPositions());
-        oldUser.setRates(updatedUser.getRates());
         return oldUser;
     }
 }

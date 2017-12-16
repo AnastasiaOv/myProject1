@@ -78,6 +78,7 @@ public abstract class AbstractUserController extends ExceptionInfoHandler {
         List<Rate> rates = rateService.getByPositionName(user.getPositions());
         for(Rate rate:rates){
             rate.setUser(user);
+            rateService.save(rate, user.getId());
         }
         user.setRates(rates);
         service.update(user);

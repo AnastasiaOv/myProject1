@@ -1,6 +1,8 @@
 package ru.javawebinar.topjava.service;
 
 
+import ru.javawebinar.topjava.model.Criteria;
+import ru.javawebinar.topjava.model.Position;
 import ru.javawebinar.topjava.model.Process;
 import ru.javawebinar.topjava.to.RateTo;
 
@@ -25,4 +27,6 @@ public interface ProcessService {
     List<Process> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId);
 
     List<RateTo> getAllPositions();
+
+    List<Criteria> getAllCriteria(int processId);
 }

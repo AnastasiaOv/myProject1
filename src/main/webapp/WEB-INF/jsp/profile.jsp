@@ -17,7 +17,7 @@
     <div class="container">
         <div class="shadow">
             <h2>
-                ${register ? 'Register new' : userTo.name.concat(' profile')}
+                ${register ? 'Register new' : 'Изменить данные'}
             </h2>
 
             <div class="view-box">

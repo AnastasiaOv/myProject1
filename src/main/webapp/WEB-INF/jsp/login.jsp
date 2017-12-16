@@ -18,7 +18,7 @@
                     <input type="text" placeholder="Email" class="form-control" name='username'>
                 </div>
                 <div class="form-group">
-                    <input type="password" placeholder="Password" class="form-control" name='password'>
+                    <input type="password" placeholder="Пароль" class="form-control" name='password'>
                 </div>
                 <button type="submit" class="btn btn-success">Sign in</button>
             </form:form>
@@ -44,8 +44,6 @@
 
         <p>Admin login: <b>admin@gmail.com / admin</b></p>
 
-        <p>Technology stack: <a href="http://projects.spring.io/spring-security/">Spring Security</a>,
-            <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html">Spring MVC</a>,
     </div>
 </div>
 <div class="container">

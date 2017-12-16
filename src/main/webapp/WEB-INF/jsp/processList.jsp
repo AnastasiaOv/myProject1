@@ -70,6 +70,7 @@
                     <datatables:column title="время окончания" filterable="false" sortInitDirection="desc"
                                        property="end_time"/>
                     <datatables:column title="имя процесса" filterable="false" property="processName"/>
+                    <datatables:column title="уровень процесса" filterable="false" property="level"/>
                     <datatables:column title="описание процесса" filterable="false" property="definition"/>
 
                     <datatables:column sortable="false" renderFunction="renderUpdateBtn"/>
