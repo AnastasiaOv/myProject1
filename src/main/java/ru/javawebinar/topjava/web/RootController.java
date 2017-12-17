@@ -103,4 +103,10 @@ public class RootController {
             return "redirect:login?message=app.registered";
         }
     }
+
+    @RequestMapping(value = "/statistics", method = RequestMethod.GET)
+    public String statistics(Model model) {
+        return "statistics";
+    }
+
 }
