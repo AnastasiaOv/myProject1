@@ -1,13 +1,12 @@
-/*
 DROP TABLE users CASCADE;
 DROP TABLE user_roles;
 DROP TABLE meals;
 DROP TABLE position_dict CASCADE;
 DROP TABLE process CASCADE;
 DROP TABLE position CASCADE;
-DROP TABLE rate Cascade;
-Drop table criteria Cascade;
-drop SEQUENCE global_seq CASCADE;
+DROP TABLE rate CASCADE;
+DROP TABLE criteria CASCADE;
+DROP SEQUENCE global_seq CASCADE;
 
 */
 CREATE SEQUENCE global_seq;
@@ -60,10 +59,10 @@ CREATE TABLE position_dict (
 
 
 CREATE TABLE rate (
-  id          INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
-  user_id     INTEGER NOT NULL,
-  position_id INTEGER NOT NULL,
-  rate_amount DECIMAL NOT NULL,
+  id            INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  user_id       INTEGER NOT NULL,
+  position_id   INTEGER NOT NULL,
+  rate_amount   DECIMAL NOT NULL,
   position_name VARCHAR,
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
   FOREIGN KEY (position_id) REFERENCES position_dict (id) ON DELETE CASCADE
@@ -81,10 +80,12 @@ CREATE TABLE position (
 );
 
 CREATE TABLE criteria (
-  id           INTEGER NOT NULL PRIMARY KEY DEFAULT nextval('global_seq'),
-  process_id   INTEGER NOT NULL REFERENCES process (id) ON DELETE CASCADE ON UPDATE CASCADE,
-  name         VARCHAR NOT NULL,
-  description  VARCHAR,
-  value        DECIMAL NOT NULL,
-  target_value DECIMAL NOT NULL
+  id            INTEGER NOT NULL PRIMARY KEY DEFAULT nextval('global_seq'),
+  process_id    INTEGER NOT NULL REFERENCES process (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  name          VARCHAR NOT NULL,
+  description   VARCHAR,
+  value         DECIMAL NOT NULL,
+  target_value  DECIMAL NOT NULL,
+  weight        DECIMAL NOT NULL,
+  reduce_factor DECIMAL NOT NULL
 )

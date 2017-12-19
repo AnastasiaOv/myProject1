@@ -19,4 +19,9 @@ public class CriteriaServiceImpl implements CriteriaService{
     public List<Criteria> getCriteriaByProcess(int processId) {
         return criteriaRepository.getByProcessId(processId);
     }
+
+    @Override
+    public List<Criteria> getAll() {
+        return criteriaRepository.getAll();
+    }
 }

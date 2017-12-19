@@ -29,7 +29,14 @@ public class Criteria extends BaseEntity {
     @JoinColumn(name = "process_id", nullable = false)
     private Process process;
 
-    public Criteria() {}
+    @Column(name = "weight")
+    private BigDecimal weight;
+
+    @Column(name = "reduce_factor")
+    private BigDecimal reduceFactor;
+
+    public Criteria() {
+    }
 
     public Criteria(Integer id, String name, String description, BigDecimal value, BigDecimal targetValue, Process process) {
         super(id);
@@ -38,6 +45,17 @@ public class Criteria extends BaseEntity {
         this.value = value;
         this.targetValue = targetValue;
         this.process = process;
+    }
+
+    public Criteria(Integer id, String name, String description, BigDecimal value, BigDecimal targetValue, Process process, BigDecimal weigth, BigDecimal reduceFactor) {
+        super(id);
+        this.name = name;
+        this.description = description;
+        this.value = value;
+        this.targetValue = targetValue;
+        this.process = process;
+        this.weight = weigth;
+        this.reduceFactor = reduceFactor;
     }
 
     public String getName() {
@@ -78,6 +96,22 @@ public class Criteria extends BaseEntity {
 
     public void setProcess(Process process) {
         this.process = process;
+    }
+
+    public BigDecimal getWeight() {
+        return weight;
+    }
+
+    public void setWeight(BigDecimal weight) {
+        this.weight = weight;
+    }
+
+    public BigDecimal getReduceFactor() {
+        return reduceFactor;
+    }
+
+    public void setReduceFactor(BigDecimal reduceFactor) {
+        this.reduceFactor = reduceFactor;
     }
 
     @Override

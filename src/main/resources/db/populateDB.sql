@@ -26,10 +26,9 @@ INSERT INTO rate (id, user_id, position_id, rate_amount, position_name) VALUES (
 INSERT INTO rate (id, user_id, position_id, rate_amount, position_name) VALUES (100012, 100001, 100022, 0.3, 'dolzn2');
 
 INSERT INTO position (id, rate_id, process_id, is_owner, is_executor, is_responsible)
-VALUES (100017, 100015,100019, TRUE, FALSE, FALSE);
+VALUES (100017, 100015, 100019, TRUE, FALSE, FALSE);
 INSERT INTO position (id, rate_id, process_id, is_owner, is_executor, is_responsible)
 VALUES (100018, 100016, 100020, TRUE, TRUE, TRUE);
-
 
 
 INSERT INTO meals (datetime, description, calories, user_id) VALUES ('2015-01-06 09:00:00', 'завтрак', 500, 100000);
@@ -38,9 +37,15 @@ INSERT INTO meals (datetime, description, calories, user_id) VALUES ('2015-01-07
 INSERT INTO meals (datetime, description, calories, user_id) VALUES ('2015-01-07 13:00:00', 'еще обед', 1300, 100000);
 INSERT INTO meals (datetime, description, calories, user_id) VALUES ('2015-01-06 14:00:00', 'еда админа', 2000, 100001);
 
-insert into criteria(id, process_id, name,description, value, target_value) values (100023, 100019, 'rateName1','description1', 0.5, 0.7);
-insert into criteria(id, process_id, name,description, value, target_value) values (100024, 100019, 'rateName2','description2', 0.6, 0.7);
-insert into criteria(id, process_id, name,description, value, target_value) values (100025, 100019, 'rateName3','description3', 0.7, 0.7);
-insert into criteria(id, process_id, name,description, value, target_value) values (100026, 100020, 'rateName1','description1', 0.3, 0.7);
-insert into criteria(id, process_id, name,description, value, target_value) values (100027, 100020, 'rateName2','description2', 0.2, 0.7);
-insert into criteria(id, process_id, name,description, value, target_value) values (100028, 100020, 'rateName3','description3', 0.1, 0.7);
+INSERT INTO criteria (id, process_id, name, description, value, target_value, weight, reduce_factor)
+VALUES (100023, 100019, 'rateName1', 'description1', 0.5, 0.7, 0.5, 1);
+INSERT INTO criteria (id, process_id, name, description, value, target_value, weight, reduce_factor)
+VALUES (100024, 100019, 'rateName2', 'description2', 0.6, 0.7, 0.6, 1);
+INSERT INTO criteria (id, process_id, name, description, value, target_value, weight, reduce_factor)
+VALUES (100025, 100019, 'rateName3', 'description3', 0.7, 0.7, 0.99, 1);
+INSERT INTO criteria (id, process_id, name, description, value, target_value, weight, reduce_factor)
+VALUES (100026, 100020, 'rateName1', 'description1', 0.3, 0.7, 0.2, 1);
+INSERT INTO criteria (id, process_id, name, description, value, target_value, weight, reduce_factor)
+VALUES (100027, 100020, 'rateName2', 'description2', 0.2, 0.7, 0.3, 1);
+INSERT INTO criteria (id, process_id, name, description, value, target_value, weight, reduce_factor)
+VALUES (100028, 100020, 'rateName3', 'description3', 0.1, 0.7, 0.8, 1);

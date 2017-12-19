@@ -12,4 +12,6 @@ import java.util.List;
 public interface CriteriaService {
 
     List<Criteria> getCriteriaByProcess(int processId);
+
+    List<Criteria> getAll();
 }
