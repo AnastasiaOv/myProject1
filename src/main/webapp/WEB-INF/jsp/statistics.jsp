@@ -24,15 +24,17 @@
 
             <c:set var="ajaxUrl" value="ajax/profile/processes/"/>
 
-            <button type="button" class="btn btn-primary">Показать завершенные процессы</button>
+            <c:set var="cancelled" value="/cancelled_processes"/>
+
+            <a class="btn btn-info" role="button" href="${cancelled}">Показать завершенные процессы</a>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProcess">Показать
                 незавершенные процессы
             </button>
 
             <div>Соотношение завершенных/незавершенных процессов</div>
-            <div id="piechart" style="width: 500px; height: 500px; enable-background: 'false'" ></div>
+            <div id="piechart" style="width: 500px; height: 500px; enable-background: 'false'"></div>
             <div>Общая диаграмма показателей результативности</div>
-            <div id="piechart" style="width: 500px; height: 500px; enable-background: 'false'" ></div>
+            <div id="piechart" style="width: 500px; height: 500px; background-color: powderblue"></div>
         </div>
     </div>
 </div>
@@ -120,23 +122,23 @@
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-    google.charts.load('current', {'packages':['corechart']});
+    google.charts.load('current', {'packages': ['corechart']});
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
 
         var data = google.visualization.arrayToDataTable([
             ['Task', 'Hours per Day'],
-            ['Work',     11],
-            ['Eat',      2],
+            ['Work', 11],
+            ['Eat', 2],
 
         ]);
 
         var options = {
             title: 'My Daily Activities',
             slices: {
-                0: { color: 'green' },
-                1: { color: 'orange' }
+                0: {color: 'green'},
+                1: {color: 'orange'}
             },
 
 

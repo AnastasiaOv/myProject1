@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.support.SessionStatus;
 import ru.javawebinar.topjava.LoggedUser;
 import ru.javawebinar.topjava.model.Process;
+import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.to.DateTimeFilter;
+import ru.javawebinar.topjava.to.UserMealWithExceed;
 import ru.javawebinar.topjava.util.TimeUtil;
 
 import javax.validation.Valid;
@@ -32,7 +34,7 @@ import static ru.javawebinar.topjava.util.TimeUtil.toTime;
 public class StatisticsAjaxController extends AbstractStatisticController {
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Process> getAllProcesses() {
-        return super.getAll();
+        return getAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
