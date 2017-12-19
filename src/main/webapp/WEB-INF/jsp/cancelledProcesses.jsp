@@ -24,54 +24,40 @@
 
             <c:set var="ajaxUrl" value="ajax/profile/cancelled_processes/"/>
             <div class="view-box">
-                <form:form modelAttribute="filter" class="form-horizontal" action="ajax/profile/cancelled_processes/filter"
+                <form:form modelAttribute="filter" class="form-horizontal"
+                           action="ajax/profile/cancelled_processes/filter"
                            charset="utf-8"
                            accept-charset="UTF-8" id="filter">
                     <div class="form-group">
                         <spring:bind path="startDate">
-                            <label class="col-sm-2">Дата с</label>
-                            <div class="col-sm-2"><form:input path="startDate" class="form-control date-picker"
+                            <label class="col-sm-1">Дата начала</label>
+                            <div class="col-sm-2"><form:input path="startDate" class="form-control datetime-picker"
                                                               placeholder="Дата начала"/></div>
                         </spring:bind>
-                        <spring:bind path="startTime">
-                            <label class="col-sm-2">Время с</label>
-                            <div class="col-sm-2"><form:input path="startTime" class="form-control time-picker"
-                                                              placeholder="Время начала"/></div>
-                        </spring:bind>
-                    </div>
-                    <div class="form-group">
+
                         <spring:bind path="endDate">
-                            <label class="col-sm-2">Дата по</label>
-                            <div class="col-sm-2"><form:input path="endDate" class="form-control date-picker"
-                                                              placeholder="Дата конца"/></div>
+                            <label class="col-sm-1">Дата завершения</label>
+                            <div class="col-sm-2"><form:input path="endDate" class="form-control datetime-picker"
+                                                              placeholder="Дата завершения"/></div>
                         </spring:bind>
-                        <spring:bind path="endTime">
-                            <label class="col-sm-2">Время по</label>
-                            <div class="col-sm-2"><form:input path="endTime" class="form-control time-picker"
-                                                              placeholder="Время конца"/></div>
-                        </spring:bind>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-8">
+
+
+                        <div class="col-sm-1">
                             <button type="submit" class="btn btn-primary pull-right">Поиск</button>
                         </div>
                     </div>
                 </form:form>
-
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProcess">Добавить
-                    процесс
-                </button>
-
+                <div></div>
                 <datatables:table id="datatable" url="${ajaxUrl}" row="process" theme="bootstrap3"
-                                  cssClass="table table-striped" pageable="false" info="false" >
+                                  cssClass="table table-striped" pageable="false" info="false">
 
                     <datatables:column title="время начала" filterable="false" sortInitDirection="desc"
                                        property="start_time"/>
                     <datatables:column title="время окончания" filterable="false" sortInitDirection="desc"
-                                       property="end_time" />
+                                       property="end_time"/>
                     <datatables:column title="имя процесса" filterable="false" property="processName"/>
                     <datatables:column title="уровень процесса" filterable="false" property="level"/>
-                    <datatables:column title="описание процесса" filterable="false" property="definition" />
+                    <datatables:column title="описание процесса" filterable="false" property="definition"/>
 
                     <datatables:column sortable="false" renderFunction="renderInfoBtn"/>
                     <datatables:column property="exceed" sortable="false" cssCellClass="hidden exceed"/>
@@ -95,64 +81,83 @@
                 <h2 class="modal-title">Сведения о процессе</h2>
             </div>
             <div class="modal-body">
-                <form:form class="form-horizontal" action="ajax/profile/processes/" method="post" id="detailsForm">
-                    <c:set var="ajaxUrl" value="ajax/profile/processes/"/>
-                    <input type="text" hidden="hidden" id="id" name="id">
-                    <input type="datetime" hidden="hidden" id="start_time" name="start_time">
-                    <input type="number" hidden="hidden" id="level" name="level">
-                    <input type="text" hidden="hidden" id="processName" name="processName">
+                <form:form class="form-horizontal" action="ajax/profile/cancelled_processes/" method="post"
+                           id="detailsForm">
+                    <c:set var="ajaxUrl" value="ajax/profile/cancelled_processes/"/>
                     <div class="form-group">
-                        <label for="definition" class="control-label col-xs-3">Описание</label>
+                        <label for="owner" class="control-label col-xs-3">Владелец:</label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="definition" name="definition"
-                                   placeholder="Description">
+                            <input type="text" class="form-control" id="owner" name="processName" value="Иванов"
+                                   disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="executor" class="control-label col-xs-3">Исполнители:</label>
+
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" id="executor" name="processName" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="responsible" class="control-label col-xs-3">Ответственный:</label>
+
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" id="responsible" name="processName" disabled>
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="result" class="control-label col-xs-3">Результативность процесса</label>
+
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" id="result" name="processResult" value="0,8" style="color: darkblue; font-size: 14pt" disabled>
+                        </div>
+                    </div>
 
                     <div>
-                        <table class = "table table-striped" id="positions">
-                            <thread>
-                                <tr>
-                                    <th></th>
-                                    <th>Название показателя</th>
-                                    <th>Значение</th>
-                                    <th>владелец</th>
-                                    <th>исполнитель</th>
-                                    <th>ответственный</th>
-                                </tr>
-                            </thread>
-                            <c:forEach var="positions" items="${positions}">
+                        <table id="criterias" class="table table-striped" cellspacing="0" width="100">
+                            <thead>
+                            <tr>
+                                <th>Название критерия</th>
+                                <th>Фактическое<br>значение</th>
+                                <th>Целевое<br>значение</th>
+                                <th>Понижающий<br>коэффициент</th>
+                                <th>Вес критерия</th>
+                            </tr>
+                            </thead>
 
-                                <c:set var="procID" value="${positions.processId}"/>
-                                <c:set var="procId" value="${param.id}"/>
-                                <c:if test="${positions.processId == id}">
-                                    <tr>
-                                        <th></th>
-                                        <th>${positions.positionName}</th>
-                                        <th>${ajaxUrl}</th>
-                                        <th><c:if test="${positions.owner == 'true'}"><input type="checkbox" title="owner" checked/></c:if><c:if test="${positions.owner == 'false'}"><input type="checkbox" title="owner"/></c:if></th>
-                                        <th><c:if test="${positions.executor == 'true'}"><input type="checkbox" title="executor" checked/></c:if><c:if test="${positions.executor == 'false'}"><input type="checkbox" title="executor"/></c:if></th>
-                                        <th><c:if test="${positions.responsible == 'true'}"><input type="checkbox" title="responsible" checked/></c:if><c:if test="${positions.responsible == 'false'}"><input type="checkbox" title="responsible"/></c:if></th>
-                                    </tr>
-                                </c:if>
-                            </c:forEach>
+                            <tbody>
+                            <tr>
+                                <td>Критерий 1</td>
+                                <td><input type="number" style="width: 90px;" step="any" width="10"></td>
+                                <td><input type="number" style="width: 90px;" step="any" disabled></td>
+                                <td><input type="number" style="width: 90px;" step="any" value="0.5" disabled></td>
+                                <td><input type="number" style="width: 90px;" step="any" disabled></td>
+                            </tr>
+                            <tr>
+                                <td>Критерий 2</td>
+                                <td><input type="number" style="width: 90px;" step="any" width="10"></td>
+                                <td><input type="number" style="width: 90px;" step="any" disabled></td>
+                                <td><input type="number" style="width: 90px;" step="any" value="0.5" disabled></td>
+                                <td><input type="number" style="width: 90px;" step="any" disabled></td>
+                            </tr>
+                            <tr>
+                                <td>Критерий 3</td>
+                                <td><input type="number" style="width: 90px;" step="any" width="10"></td>
+                                <td><input type="number" style="width: 90px;" step="any" disabled></td>
+                                <td><input type="number" style="width: 90px;" step="any" value="0.5" disabled></td>
+                                <td><input type="number" style="width: 90px;" step="any" disabled></td>
+                            </tr>
+                            </tbody>
                         </table>
                     </div>
 
-                    <div class="form-group">
-                        <div class="col-xs-offset-3 col-xs-9">
-                            <button type="submit" class="btn btn-primary">Сохранить</button>
-                        </div>
-                    </div>
                 </form:form>
             </div>
         </div>
     </div>
 </div>
-
-
 
 
 </body>
@@ -201,7 +206,6 @@
             span.parent().css("color", span.html() == 'true' ? 'black' : 'black');
         });
     }
-
 
 
 </script>
