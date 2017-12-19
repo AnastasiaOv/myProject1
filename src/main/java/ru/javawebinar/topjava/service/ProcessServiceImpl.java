@@ -53,7 +53,7 @@ public class ProcessServiceImpl implements ProcessService {
     }
 
     @Override
-    public List<Process> getAll(int userId) {
+    public List<Process> getAll() {
         return repository.getAll();
     }
 

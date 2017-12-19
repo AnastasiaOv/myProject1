@@ -174,6 +174,13 @@ function renderUpdateBtn(data, type, row) {
     return data;
 }
 
+function renderInfoBtn(data, type, row) {
+    if (type == 'display') {
+        return '<a class="btn btn-xs btn-primary" onclick="updateRow(' + row.id + ')">Подробнее</a>';
+    }
+    return data;
+}
+
 function renderCancelBtn(data, type, row) {
     if (type == 'display') {
         return '<a class="btn btn-xs btn-primary" onclick="cancelProc(' + row.id + ')">Завершить процесс</a>';

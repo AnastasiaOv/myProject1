@@ -22,7 +22,7 @@ public interface ProcessService {
 
     Process get(int id);
 
-    List<Process> getAll(int userId);
+    List<Process> getAll();
 
     List<Process> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId);
 

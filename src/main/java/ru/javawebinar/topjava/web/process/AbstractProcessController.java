@@ -41,7 +41,7 @@ public class AbstractProcessController extends ExceptionInfoHandler {
     public List<Process> getAll() {
         int userId = LoggedUser.id();
         LOG.info("getAll for Process {}", userId);
-        return service.getAll(userId);
+        return service.getAll();
     }
 
     public List<Process> getBetween(LocalDateTime startDate, LocalDateTime endDate) {

@@ -109,4 +109,11 @@ public class RootController {
         return "statistics";
     }
 
+    @RequestMapping(value = "/cancelled_processes", method = RequestMethod.GET)
+    public String cancelledProcesses(Model model) {
+        model.addAttribute("filter", new DateTimeFilter());
+        return "cancelledProcesses";
+    }
+
+
 }
