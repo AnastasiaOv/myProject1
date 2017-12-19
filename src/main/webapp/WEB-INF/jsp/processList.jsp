@@ -209,45 +209,53 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <table id="example" class="display" width="100%"></table>
+                    <table id="example" class="display" width="70%"></table>
                 </div>
                 <form:form class="form-horizontal" action="ajax/profile/processes/" method="post" id="detailsForm">
 
                     <input type="text" hidden="hidden" id="id" name="id">
                     <input type="datetime" hidden="hidden" id="start_time" name="start_time">
+                    <input type="datetime" hidden="hidden" id="start_time" name="start_time">
+                    <input type="datetime" hidden="hidden" id="start_time" name="start_time">
+                    <input type="datetime" hidden="hidden" id="start_time" name="start_time">
                     <div>
-                        <table id="criterias" class = "table table-striped" cellspacing="0" width="100%">
+                        <table id="criterias" class = "table table-striped" cellspacing="0" width="100" >
                             <thead>
                             <tr>
                                 <th>Название критерия</th>
-                                <th>Значение</th>
+                                <th>Фактическое<br>значение</th>
+                                <th>Целевое<br>значение</th>
+                                <th>Понижающий<br>коэффициент</th>
+                                <th>Вес критерия</th>
                             </tr>
                             </thead>
 
                             <tbody>
                             <tr>
                                 <td>Критерий1</td>
-                                <td><input type="number" step="any"></td>
+                                <td><input type="number" style="width: 90px;"  step="any" width="10"></td>
+                                <td><input type="number" style="width: 90px;" step="any"></td>
+                                <td><input type="number" style="width: 90px;" step="any" value="0.5" disabled></td>
+                                <td><input type="number" style="width: 90px;" step="any"></td>
                             </tr>
                             <tr>
                                 <td>Критерий2</td>
-                                <td><input type="number" step="any"></td>
+                                <td><input type="number" style="width: 90px;" step="any" width="10"></td>
+                                <td><input type="number" style="width: 90px;" step="any"></td>
+                                <td><input type="number" style="width: 90px;" step="any" value="0.5" disabled></td>
+                                <td><input type="number" style="width: 90px;" step="any"></td>
                             </tr>
                             <tr>
                                 <td>Критерий3</td>
-                                <td><input type="number" step="any"></td>
+                                <td><input type="number" style="width: 90px;"  step="any" width="10"></td>
+                                <td><input type="number"style="width: 90px;"  step="any"></td>
+                                <td><input type="number" style="width: 90px;" step="any" value="0.5" disabled></td>
+                                <td><input type="number" style="width: 90px;" step="any"></td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
 
-
-
-                    <div class="form-group">
-                        <div class="col-xs-offset-3 col-xs-3">
-                            <button type="submit" class="btn btn-primary">Сохранить</button>
-                        </div>
-                    </div>
                 </form:form>
 
             </div>
