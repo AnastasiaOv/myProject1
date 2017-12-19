@@ -29,30 +29,19 @@
                            accept-charset="UTF-8" id="filter">
                     <div class="form-group">
                         <spring:bind path="startDate">
-                            <label class="col-sm-2">Дата с</label>
-                            <div class="col-sm-2"><form:input path="startDate" class="form-control date-picker"
+                            <label class="col-sm-1">Дата начала</label>
+                            <div class="col-sm-2"><form:input path="startDate" class="form-control datetime-picker"
                                                               placeholder="Дата начала"/></div>
                         </spring:bind>
-                        <spring:bind path="startTime">
-                            <label class="col-sm-2">Время с</label>
-                            <div class="col-sm-2"><form:input path="startTime" class="form-control time-picker"
-                                                              placeholder="Время начала"/></div>
-                        </spring:bind>
-                    </div>
-                    <div class="form-group">
+
                         <spring:bind path="endDate">
-                            <label class="col-sm-2">Дата по</label>
-                            <div class="col-sm-2"><form:input path="endDate" class="form-control date-picker"
-                                                              placeholder="Дата конца"/></div>
+                            <label class="col-sm-1">Дата завершения</label>
+                            <div class="col-sm-2"><form:input path="endDate" class="form-control datetime-picker"
+                                                              placeholder="Дата завершения"/></div>
                         </spring:bind>
-                        <spring:bind path="endTime">
-                            <label class="col-sm-2">Время по</label>
-                            <div class="col-sm-2"><form:input path="endTime" class="form-control time-picker"
-                                                              placeholder="Время конца"/></div>
-                        </spring:bind>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-8">
+
+
+                        <div class="col-sm-1">
                             <button type="submit" class="btn btn-primary pull-right">Поиск</button>
                         </div>
                     </div>

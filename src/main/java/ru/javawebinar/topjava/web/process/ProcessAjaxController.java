@@ -21,9 +21,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static ru.javawebinar.topjava.util.TimeUtil.endDateTime;
-import static ru.javawebinar.topjava.util.TimeUtil.startDateTime;
-import static ru.javawebinar.topjava.util.TimeUtil.toTime;
+import static ru.javawebinar.topjava.util.TimeUtil.*;
+import static ru.javawebinar.topjava.util.TimeUtil.dateTimeFromString;
 
 /**
  * Created by Анастасия on 27.11.2017.
@@ -33,7 +32,7 @@ import static ru.javawebinar.topjava.util.TimeUtil.toTime;
 public class ProcessAjaxController extends AbstractProcessController {
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Process> getAllWithExceed() {
-        return filterWithExceed(super.getAll(), LocalTime.MIN, LocalTime.MAX);
+        return getAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -62,22 +61,14 @@ public class ProcessAjaxController extends AbstractProcessController {
 
     @RequestMapping(value = "/filter", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Process> filterWithExceed(DateTimeFilter filter) {
-        return filterWithExceed(super.getBetween(startDateTime(filter.getStartDate()), endDateTime(filter.getStartDate())),
-                toTime(filter.getStartTime(), LocalTime.MIN), toTime(filter.getStartTime(), LocalTime.MAX));
+        return filterWithExceed(getBetween(dateTimeFromString(filter.getStartDate()), dateTimeFromString(filter.getEndDate())));
     }
 
-    public List<Process> filterWithExceed(List<Process> mealList, LocalTime startTime, LocalTime endTime) {
-        int caloriesPerDay = LoggedUser.get().getUserTo().getCaloriesPerDay();
-        Map<LocalDate, Integer> groupAndSumMap = mealList.stream().collect(Collectors.groupingBy(
-                userMeal -> userMeal.getStart_time().toLocalDate(),
-                Collectors.summingInt(Process::getLevel)
-        ));
+    private List<Process> filterWithExceed(List<Process> processList) {
         List<Process> list = new ArrayList<>();
-        for (Process meal : mealList) {
-            if (TimeUtil.isBetween(meal.getStart_time().toLocalTime(), startTime, endTime)) {
-                Process userMealWithExceed = new Process(meal.getId(), meal.getProcessName(), meal.getLevel(), meal.getStart_time(), meal.getEnd_time(), meal.getDefinition(),
-                        meal.getPositionList());
-                list.add(userMealWithExceed);
+        for (Process process : processList) {
+            if (process.getEnd_time()!=null) {
+                list.add(process);
             }
         }
         return list;
