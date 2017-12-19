@@ -12,7 +12,6 @@ import ru.javawebinar.topjava.to.DateTimeFilter;
 import ru.javawebinar.topjava.web.process.AbstractProcessController;
 
 import javax.validation.Valid;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +54,7 @@ public class CancelledProcessAjaxController extends AbstractProcessController {
 
     @RequestMapping(value = "/filter", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Process> filterWithExceed(DateTimeFilter filter) {
-        return filterWithExceed(super.getBetween(dateTimeFromString(filter.getStartDate(), filter.getStartTime()), dateTimeFromString(filter.getEndDate(), filter.getEndTime())));
+        return filterWithExceed(super.getBetween(dateTimeFromString(filter.getStartDate()), dateTimeFromString(filter.getEndDate())));
     }
 
     private List<Process> filterWithExceed(List<Process> processList) {

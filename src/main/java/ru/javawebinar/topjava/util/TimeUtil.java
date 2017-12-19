@@ -44,8 +44,8 @@ public class TimeUtil {
         return LocalDateTime.of(toDate(str, LocalDate.of(0, 1, 1)), LocalTime.MIN);
     }
 
-    public static LocalDateTime dateTimeFromString(String date, String time) {
-        return toDateTime(date + " " + time, DATE_TME_FORMATTER);
+    public static LocalDateTime dateTimeFromString(String date) {
+        return toDateTime(date, DATE_TME_FORMATTER);
     }
 
     public static LocalDateTime endDateTime(String str) {

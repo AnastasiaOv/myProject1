@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import ru.javawebinar.topjava.LoggedUser;
 import ru.javawebinar.topjava.model.User;
+import ru.javawebinar.topjava.service.CriteriaService;
 import ru.javawebinar.topjava.service.ProcessService;
 import ru.javawebinar.topjava.service.UserService;
 import ru.javawebinar.topjava.to.DateTimeFilter;
@@ -32,6 +33,10 @@ public class RootController {
 
     @Autowired
     private ProcessService processService;
+
+    @Autowired
+    private CriteriaService criteriaService;
+
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String root() {
@@ -112,6 +117,8 @@ public class RootController {
     @RequestMapping(value = "/cancelled_processes", method = RequestMethod.GET)
     public String cancelledProcesses(Model model) {
         model.addAttribute("filter", new DateTimeFilter());
+        model.addAttribute("positions", processService.getAllPositions());
+        model.addAttribute("criterias", criteriaService.getAll());
         return "cancelledProcesses";
     }
 

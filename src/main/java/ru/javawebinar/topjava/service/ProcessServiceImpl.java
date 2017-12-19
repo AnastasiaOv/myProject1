@@ -73,7 +73,6 @@ public class ProcessServiceImpl implements ProcessService {
 
     @Override
     public List<Criteria> getAllCriteria(int processId) {
-        List<Criteria> result = criteriaRepository.getByProcessId(processId);
-        return result;
+        return criteriaRepository.getByProcessId(processId);
     }
 }
