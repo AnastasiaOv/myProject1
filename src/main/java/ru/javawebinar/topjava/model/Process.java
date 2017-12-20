@@ -30,6 +30,9 @@ public class Process extends BaseEntity {
     @Column(name = "description")
     private String definition;
 
+    @Column(name = "result")
+    private BigDecimal result;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "process", fetch = FetchType.EAGER)
     private List<Position> positionList;
 
@@ -134,6 +137,14 @@ public class Process extends BaseEntity {
 
     public void setRatesList(List<RateTo> ratesList) {
         this.ratesList = ratesList;
+    }
+
+    public BigDecimal getResult() {
+        return result;
+    }
+
+    public void setResult(BigDecimal result) {
+        this.result = result;
     }
 
     @Override

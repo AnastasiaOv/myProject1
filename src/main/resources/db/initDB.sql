@@ -48,7 +48,8 @@ CREATE TABLE process (
   level        INTEGER,
   start_time   TIMESTAMP,
   end_time     TIMESTAMP NULL,
-  description  TEXT
+  description  TEXT,
+  result       DECIMAL
 );
 
 CREATE TABLE position_dict (

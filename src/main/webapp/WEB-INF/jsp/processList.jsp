@@ -116,7 +116,7 @@
                             <c:forEach var="positions" items="${positions}">
                                 <c:set var="procID" value="${positions.processId}"/>
                                 <c:set var="procId" value="${param.id}"/>
-                                <c:if test="${positions.processId == '100020'}">
+                                <c:if test="${(positions.processId == '100020')&&(positions.userName == 'Иванов Иван Иванович' ||positions.userName == 'Петров Петр Петрович')}">
                                 <tr>
                                     <th></th>
                                     <th>${positions.positionName}</th>
@@ -157,20 +157,25 @@
 
 
                     <div class="form-group">
-                        <label for="processName" class="control-label col-xs-3">Название процесса</label>
+                        <label for="processName1" class="control-label col-xs-3">Имя процесса</label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="processName" name="processName"
-                                   placeholder="Description">
+                            <input list="names" type="text" id="processName1" name="level">
+                            <datalist id="names">
+                                <option>P1.1-1</option>
+                                <option>P2.1-3</option>
+                                <option>P3.1-2</option>
+                                <option>P4.1-1</option>
+                            </datalist>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="level" class="control-label col-xs-3">Уровень процесса</label>
+                        <label for="level1" class="control-label col-xs-3">Уровень процесса</label>
 
                         <div class="col-xs-9">
-                            <input list="level1" type="number" id="level" name="level">
-                            <datalist id="level1">
+                            <input list="level2" type="number" id="level1" name="level">
+                            <datalist id="level2">
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -184,8 +189,35 @@
 
                         <div class="col-xs-9">
                             <input type="text" class="form-control" name="definition"
-                                   placeholder="Description">
+                                   placeholder="Описание">
                         </div>
+                    </div>
+
+                    <div>
+                        <table class = "table table-striped" id="positions">
+                            <thread>
+                                <tr>
+                                    <th></th>
+                                    <th>Должность</th>
+                                    <th>ФИО</th>
+                                    <th>владелец</th>
+                                    <th>исполнитель</th>
+                                    <th>ответственный</th>
+                                </tr>
+                            </thread>
+                            <c:forEach var="positions" items="${positions}">
+                                <c:if test="${(positions.processId=='100020')&&(positions.userName == 'Иванов Иван Иванович' ||positions.userName == 'Петров Петр Петрович')}">
+                                    <tr>
+                                        <th></th>
+                                        <th>${positions.positionName}</th>
+                                        <th>${positions.userName}</th>
+                                        <th><c:if test="${positions.owner == 'true'}"><input type="checkbox" title="owner" checked/></c:if><c:if test="${positions.owner == 'false'}"><input type="checkbox" title="owner"/></c:if></th>
+                                        <th><c:if test="${positions.executor == 'true'}"><input type="checkbox" title="executor" checked/></c:if><c:if test="${positions.executor == 'false'}"><input type="checkbox" title="executor"/></c:if></th>
+                                        <th><c:if test="${positions.responsible == 'true'}"><input type="checkbox" title="responsible" checked/></c:if><c:if test="${positions.responsible == 'false'}"><input type="checkbox" title="responsible"/></c:if></th>
+                                    </tr>
+                                </c:if>
+                            </c:forEach>
+                        </table>
                     </div>
 
                     <div class="form-group">
