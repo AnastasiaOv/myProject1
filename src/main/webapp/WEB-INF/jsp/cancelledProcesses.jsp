@@ -111,12 +111,15 @@
                         <label for="result" class="control-label col-xs-3">Результативность процесса</label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="result" name="processResult" value="0,8" style="color: darkblue; font-size: 14pt" disabled>
+                            <input type="text" class="form-control" id="result" name="result"
+                                   style="color: darkblue; font-size: 14pt" disabled>
                         </div>
                     </div>
 
+
                     <div>
                         <table id="criterias" class="table table-striped" cellspacing="0" width="100">
+
                             <thead>
                             <tr>
                                 <th>Название критерия</th>
@@ -128,27 +131,19 @@
                             </thead>
 
                             <tbody>
-                            <tr>
-                                <td>Критерий 1</td>
-                                <td><input type="number" style="width: 90px;" step="any" width="10"></td>
-                                <td><input type="number" style="width: 90px;" step="any" disabled></td>
-                                <td><input type="number" style="width: 90px;" step="any" value="0.5" disabled></td>
-                                <td><input type="number" style="width: 90px;" step="any" disabled></td>
-                            </tr>
-                            <tr>
-                                <td>Критерий 2</td>
-                                <td><input type="number" style="width: 90px;" step="any" width="10"></td>
-                                <td><input type="number" style="width: 90px;" step="any" disabled></td>
-                                <td><input type="number" style="width: 90px;" step="any" value="0.5" disabled></td>
-                                <td><input type="number" style="width: 90px;" step="any" disabled></td>
-                            </tr>
-                            <tr>
-                                <td>Критерий 3</td>
-                                <td><input type="number" style="width: 90px;" step="any" width="10"></td>
-                                <td><input type="number" style="width: 90px;" step="any" disabled></td>
-                                <td><input type="number" style="width: 90px;" step="any" value="0.5" disabled></td>
-                                <td><input type="number" style="width: 90px;" step="any" disabled></td>
-                            </tr>
+                            <c:forEach var="criteria" items="${criterias}">
+
+                                <c:set var="procID" value="${criteria.process.id}"/>
+                                <c:if test="${criteria.process.id == '100019'}">
+                                    <tr>
+                                        <td>${criteria.name}</td>
+                                        <td>${criteria.value}</td>
+                                        <td>${criteria.targetValue}</td>
+                                        <td>${criteria.reduceFactor}</td>
+                                        <td>${criteria.weight}</td>
+                                    </tr>
+                                </c:if>
+                            </c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -161,6 +156,8 @@
 
 
 </body>
+
+
 <script type="text/javascript">
     var ajaxUrl = '${ajaxUrl}';
 
