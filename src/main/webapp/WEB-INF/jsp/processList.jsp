@@ -86,7 +86,8 @@
             <div class="modal-body">
                 <form:form class="form-horizontal" action="ajax/profile/processes/" method="post" id="detailsForm">
                     <c:set var="ajaxUrl" value="ajax/profile/processes/"/>
-                    <input type="text" hidden="hidden" id="id" name="id">
+                    <input type="text" hidden = "hidden" id="id" name="id">
+
                     <input type="datetime" hidden="hidden" id="start_time" name="start_time">
                     <input type="number" hidden="hidden" id="level" name="level">
                     <input type="text" hidden="hidden" id="processName" name="processName">
@@ -105,22 +106,21 @@
                             <thread>
                             <tr>
                                 <th></th>
-                                <th>Название показателя</th>
-                                <th>Значение</th>
+                                <th>Должность</th>
+                                <th>ФИО</th>
                                 <th>владелец</th>
                                 <th>исполнитель</th>
                                 <th>ответственный</th>
                             </tr>
                             </thread>
                             <c:forEach var="positions" items="${positions}">
-
                                 <c:set var="procID" value="${positions.processId}"/>
                                 <c:set var="procId" value="${param.id}"/>
-                                <c:if test="${positions.processId == id}">
+                                <c:if test="${positions.processId == '100020'}">
                                 <tr>
                                     <th></th>
                                     <th>${positions.positionName}</th>
-                                    <th>${ajaxUrl}</th>
+                                    <th>${positions.userName}</th>
                                     <th><c:if test="${positions.owner == 'true'}"><input type="checkbox" title="owner" checked/></c:if><c:if test="${positions.owner == 'false'}"><input type="checkbox" title="owner"/></c:if></th>
                                     <th><c:if test="${positions.executor == 'true'}"><input type="checkbox" title="executor" checked/></c:if><c:if test="${positions.executor == 'false'}"><input type="checkbox" title="executor"/></c:if></th>
                                     <th><c:if test="${positions.responsible == 'true'}"><input type="checkbox" title="responsible" checked/></c:if><c:if test="${positions.responsible == 'false'}"><input type="checkbox" title="responsible"/></c:if></th>
@@ -224,9 +224,8 @@
                             <tr>
                                 <th>Название критерия</th>
                                 <th>Фактическое<br>значение</th>
-                                <th>Целевое<br>значение</th>
                                 <th>Понижающий<br>коэффициент</th>
-                                <th>Вес критерия</th>
+
                             </tr>
                             </thead>
 
@@ -235,27 +234,29 @@
                                 <td>Критерий1</td>
                                 <td><input type="number" style="width: 90px;"  step="any" width="10"></td>
                                 <td><input type="number" style="width: 90px;" step="any"></td>
-                                <td><input type="number" style="width: 90px;" step="any" value="0.5" disabled></td>
-                                <td><input type="number" style="width: 90px;" step="any"></td>
+
                             </tr>
                             <tr>
                                 <td>Критерий2</td>
                                 <td><input type="number" style="width: 90px;" step="any" width="10"></td>
                                 <td><input type="number" style="width: 90px;" step="any"></td>
-                                <td><input type="number" style="width: 90px;" step="any" value="0.5" disabled></td>
-                                <td><input type="number" style="width: 90px;" step="any"></td>
+
                             </tr>
                             <tr>
                                 <td>Критерий3</td>
                                 <td><input type="number" style="width: 90px;"  step="any" width="10"></td>
-                                <td><input type="number"style="width: 90px;"  step="any"></td>
-                                <td><input type="number" style="width: 90px;" step="any" value="0.5" disabled></td>
                                 <td><input type="number" style="width: 90px;" step="any"></td>
+
                             </tr>
                             </tbody>
                         </table>
                     </div>
 
+                    <div class="form-group">
+                        <div class="col-xs-offset-4 col-xs-4">
+                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                        </div>
+                    </div>
                 </form:form>
 
             </div>
