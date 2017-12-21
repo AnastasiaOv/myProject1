@@ -116,7 +116,7 @@
                             <c:forEach var="positions" items="${positions}">
                                 <c:set var="procID" value="${positions.processId}"/>
                                 <c:set var="procId" value="${param.id}"/>
-                                <c:if test="${(positions.processId == '100020')&&(positions.userName == 'Иванов Иван Иванович' ||positions.userName == 'Петров Петр Петрович')}">
+                                <c:if test="${(positions.processId == '100020')}">
                                 <tr>
                                     <th></th>
                                     <th>${positions.positionName}</th>
