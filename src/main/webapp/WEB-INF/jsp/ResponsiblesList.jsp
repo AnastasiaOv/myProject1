@@ -51,14 +51,14 @@
                     <td>Оценка персонала</td>
                     <td>16.04.2017</td>
                     <td>30.06.2017</td>
-                    <td bgcolor="#7cfc00">0,85</td>
+                    <td bgcolor="#81ff8b">0,85</td>
                 </tr>
                 <tr>
                     <td>P2.1-3</td>
                     <td>Оценка персонала</td>
                     <td>16.07.2017</td>
                     <td>30.09.2017</td>
-                    <td bgcolor="#7cfc00">0,94</td>
+                    <td bgcolor="#81ff8b">0,94</td>
                 </tr>
                 </tbody>
             </table>
@@ -66,7 +66,7 @@
             <div><label></label></div>
             <div><label></label></div>
             <div><label></label></div>
-            <h4> Иванов Иван Иванович</h4>
+            <h4> Петров Петр Петрович</h4>
             <table id="example" class="table table-striped" border="all" datapagesize="1" cellspacing="0" width="80%">
                 <thead>
                 <tr>
@@ -79,25 +79,25 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>P2.1-3</td>
-                    <td>Оценка персонала</td>
+                    <td>P3.1-3</td>
+                    <td>Развитие персонала</td>
                     <td>15.02.2017</td>
                     <td>25.03.2017</td>
-                    <td bgcolor="#f08080">0,45</td>
+                    <td bgcolor="#f08080">0,49</td>
                 </tr>
                 <tr>
-                    <td>P2.1-3</td>
-                    <td>Оценка персонала</td>
+                    <td>P3.1-3</td>
+                    <td>Развитие персонала</td>
                     <td>16.04.2017</td>
                     <td>30.06.2017</td>
-                    <td bgcolor="#7cfc00">0,85</td>
+                    <td bgcolor="#81ff8b">0,65</td>
                 </tr>
                 <tr>
                     <td>P2.1-3</td>
                     <td>Оценка персонала</td>
                     <td>16.07.2017</td>
                     <td>30.09.2017</td>
-                    <td bgcolor="#7cfc00">0,94</td>
+                    <td bgcolor="#81ff8b">0,74</td>
                 </tr>
                 </tbody>
             </table>
