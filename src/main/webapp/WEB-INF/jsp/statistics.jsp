@@ -26,11 +26,24 @@
 
             <c:set var="cancelled" value="/cancelled_processes"/>
 
-            <a class="btn btn-info" role="button" href="${cancelled}">Показать завершенные процессы</a>
-            <a class="btn btn-info" role="button" href="${cancelled}">Показать незавершенные процессы</a>
-            <div>Соотношение завершенных/незавершенных процессов</div>
+            <c:set var="responsibles" value="/responsibles"/>
+
+            <div><a class="btn btn-info" role="button" href="${cancelled}">Показать завершенные процессы</a></div>
+            <div><label></label></div>
+            <div><label></label></div>
+            <div><label></label></div>
+            <div><a class="btn btn-info" role="button" href="${cancelled}">Показать незавершенные процессы</a></div>
+            <div><label></label></div>
+            <div><label></label></div>
+            <div><label></label></div>
+            <div><a class="btn btn-info" role="button" href="${responsibles}">Показать список ответственных</a></div>
+            <div><label></label></div>
+            <div><label></label></div>
+            <div><label></label></div>
             <div id="piechart"></div>
-            <div>Общая диаграмма показателей результативности</div>
+            <div><label></label></div>
+            <div><label></label></div>
+            <div><label></label></div>
             <div id="piechart1"></div>
         </div>
     </div>
@@ -108,5 +121,7 @@
         chart.draw(data, options);
     }
 </script>
+
+
 </html>
 

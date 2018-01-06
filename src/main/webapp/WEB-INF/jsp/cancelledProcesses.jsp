@@ -7,6 +7,7 @@
 <%@ taglib prefix="datatable" uri="http://github.com/dandelion/datatables" %>
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="button" uri="http://www.springframework.org/tags/form" %>
 
 
 <fmt:setLocale value="ru"/>
@@ -42,9 +43,26 @@
                         </spring:bind>
 
 
-                        <div class="col-sm-1">
+                        <div class="col-sm-3">
                             <button type="submit" class="btn btn-primary pull-right">Поиск</button>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="processName1" class="control-label col-sm-2">Выбрать имя процесса</label>
+
+                        <div class="col-sm-2">
+                            <input list="names" type="text" class="form-control" id="processName1" name="level">
+                            <datalist id="names">
+                                <option>P1.1-1</option>
+                                <option>P2.1-3</option>
+                                <option>P3.1-2</option>
+                                <option>P4.1-1</option>
+                            </datalist>
+                        </div>
+                        <div class="col-sm-1">
+                            <button type="submit" class="btn btn-primary">Выбрать</button>
+                        </div>
+
                     </div>
                 </form:form>
                 <div></div>
@@ -64,11 +82,11 @@
 
                     <datatables:callback type="init" function="makeEditable"/>
                 </datatables:table>
-
-
             </div>
+            <div id="piechart1"></div>
         </div>
     </div>
+
 </div>
 
 <jsp:include page="fragments/footer.jsp"/>
@@ -88,22 +106,22 @@
                         <label for="owner" class="control-label col-xs-3">Владелец:</label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="owner" name="processName" value="Иванов"
-                                   disabled>
+                            <input type="text" class="form-control" id="owner" value="Иванов И.И." disabled>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="executor" class="control-label col-xs-3">Исполнители:</label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="executor" name="processName" disabled>
+                            <input type="text" class="form-control" id="executor" value="Петров П.П., Иванов И.И. "
+                                   disabled>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="responsible" class="control-label col-xs-3">Ответственный:</label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="responsible" name="processName" disabled>
+                            <input type="text" class="form-control" id="responsible" value="Петров П.П." disabled>
                         </div>
                     </div>
 
@@ -153,7 +171,6 @@
         </div>
     </div>
 </div>
-
 
 </body>
 
@@ -205,5 +222,36 @@
     }
 
 
+</script>
+
+<script type="text/javascript">
+    google.charts.load('current', {'packages': ['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Task', 'Hours per Day'],
+            ['результативен (>0,75)', 11],
+            ['не результативен (<0,25)', 2],
+            ['средний уровень результативности(0,5-0,75)', 2],
+            ['низкий уровень результативности(0,25-0,5)', 2]
+
+        ]);
+        var options = {
+            title: 'Сводная диаграмма показателей результативности процессов',
+            slices: {
+                0: {color: 'green'},
+                1: {color: 'red'},
+                2: {color: 'yellow'},
+                3: {color: 'orange'}
+            },
+            backgroundColor: 'ghostwhite',
+            height:300,
+            width:600
+
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('piechart1'));
+        chart.draw(data, options);
+    }
 </script>
 </html>
