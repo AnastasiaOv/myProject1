@@ -114,6 +114,12 @@ public class RootController {
         return "statistics";
     }
 
+    @RequestMapping(value = "/responsibles", method = RequestMethod.GET)
+    public String responsibles(Model model) {
+        model.addAttribute("processes", processService.getAll());
+        return "ResponsiblesList";
+    }
+
     @RequestMapping(value = "/cancelled_processes", method = RequestMethod.GET)
     public String cancelledProcesses(Model model) {
         model.addAttribute("filter", new DateTimeFilter());
