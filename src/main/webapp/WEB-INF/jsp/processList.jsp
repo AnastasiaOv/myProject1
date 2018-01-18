@@ -116,14 +116,14 @@
                             <c:forEach var="positions" items="${positions}">
                                 <c:set var="procID" value="${positions.processId}"/>
                                 <c:set var="procId" value="${param.id}"/>
-                                <c:if test="${(positions.processId == '100020')}">
+                                <c:if test="${(positions.processId=='100020')&&(positions.userName == 'Сидоров Семен Семенович'|| positions.userName == 'Иванов Иван Иванович' ||positions.userName == 'Петров Петр Петрович')}">
                                 <tr>
-                                    <th></th>
-                                    <th>${positions.positionName}</th>
-                                    <th>${positions.userName}</th>
-                                    <th><c:if test="${positions.owner == 'true'}"><input type="checkbox" title="owner" checked/></c:if><c:if test="${positions.owner == 'false'}"><input type="checkbox" title="owner"/></c:if></th>
-                                    <th><c:if test="${positions.executor == 'true'}"><input type="checkbox" title="executor" checked/></c:if><c:if test="${positions.executor == 'false'}"><input type="checkbox" title="executor"/></c:if></th>
-                                    <th><c:if test="${positions.responsible == 'true'}"><input type="checkbox" title="responsible" checked/></c:if><c:if test="${positions.responsible == 'false'}"><input type="checkbox" title="responsible"/></c:if></th>
+                                    <td></td>
+                                    <td>${positions.positionName}</td>
+                                    <td>${positions.userName}</td>
+                                    <td><c:if test="${positions.owner == 'true'}"><input type="checkbox" title="owner" checked/></c:if><c:if test="${positions.owner == 'false'}"><input type="checkbox" title="owner"/></c:if></td>
+                                    <td><c:if test="${positions.executor == 'true'}"><input type="checkbox" title="executor" checked/></c:if><c:if test="${positions.executor == 'false'}"><input type="checkbox" title="executor"/></c:if></td>
+                                    <td><c:if test="${positions.responsible == 'true'}"><input type="checkbox" title="responsible" checked/></c:if><c:if test="${positions.responsible == 'false'}"><input type="checkbox" title="responsible"/></c:if></td>
                                 </tr>
                                 </c:if>
                             </c:forEach>
@@ -206,14 +206,14 @@
                                 </tr>
                             </thread>
                             <c:forEach var="positions" items="${positions}">
-                                <c:if test="${(positions.processId=='100020')&&(positions.userName == 'Иванов Иван Иванович' ||positions.userName == 'Петров Петр Петрович')}">
+                                <c:if test="${(positions.processId=='100020')&&(positions.userName == 'Сидоров Семен Семенович'|| positions.userName == 'Иванов Иван Иванович' ||positions.userName == 'Петров Петр Петрович')}">
                                     <tr>
-                                        <th></th>
-                                        <th>${positions.positionName}</th>
-                                        <th>${positions.userName}</th>
-                                        <th><c:if test="${positions.owner == 'true'}"><input type="checkbox" title="owner" checked/></c:if><c:if test="${positions.owner == 'false'}"><input type="checkbox" title="owner"/></c:if></th>
-                                        <th><c:if test="${positions.executor == 'true'}"><input type="checkbox" title="executor" checked/></c:if><c:if test="${positions.executor == 'false'}"><input type="checkbox" title="executor"/></c:if></th>
-                                        <th><c:if test="${positions.responsible == 'true'}"><input type="checkbox" title="responsible" checked/></c:if><c:if test="${positions.responsible == 'false'}"><input type="checkbox" title="responsible"/></c:if></th>
+                                        <td></td>
+                                        <td>${positions.positionName}</td>
+                                        <td>${positions.userName}</td>
+                                        <td><c:if test="${positions.owner == 'true'}"><input type="checkbox" title="owner" checked/></c:if><c:if test="${positions.owner == 'false'}"><input type="checkbox" title="owner"/></c:if></td>
+                                        <td><c:if test="${positions.executor == 'true'}"><input type="checkbox" title="executor" checked/></c:if><c:if test="${positions.executor == 'false'}"><input type="checkbox" title="executor"/></c:if></td>
+                                        <td><c:if test="${positions.responsible == 'true'}"><input type="checkbox" title="responsible" checked/></c:if><c:if test="${positions.responsible == 'false'}"><input type="checkbox" title="responsible"/></c:if></td>
                                     </tr>
                                 </c:if>
                             </c:forEach>
@@ -263,19 +263,19 @@
 
                             <tbody>
                             <tr>
-                                <td>Критерий1</td>
+                                <td>Количество сотрудников, успешно прошедших аттестацию</td>
                                 <td><input type="number" style="width: 90px;"  step="any" width="10"></td>
                                 <td><input type="number" style="width: 90px;" step="any"></td>
 
                             </tr>
                             <tr>
-                                <td>Критерий2</td>
+                                <td>Количество сотрудников, отправленных на повышение квалификации по результатам аттестации</td>
                                 <td><input type="number" style="width: 90px;" step="any" width="10"></td>
                                 <td><input type="number" style="width: 90px;" step="any"></td>
 
                             </tr>
                             <tr>
-                                <td>Критерий3</td>
+                                <td>Количество сотрудников, рекомендованных к повышению по результатам аттестации</td>
                                 <td><input type="number" style="width: 90px;"  step="any" width="10"></td>
                                 <td><input type="number" style="width: 90px;" step="any"></td>
 

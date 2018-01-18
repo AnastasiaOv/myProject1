@@ -37,9 +37,9 @@ INSERT INTO rate (id, user_id, position_id, rate_amount, position_name) VALUES (
 INSERT INTO rate (id, user_id, position_id, rate_amount, position_name) VALUES (16, 100001, 125, 0.7, 'руководитель');
 
 INSERT INTO position (id, rate_id, process_id, is_owner, is_executor, is_responsible)
-VALUES (100017, 12, 100019, TRUE, FALSE, FALSE);
+VALUES (100017, 14, 100019, TRUE, FALSE, FALSE);
 INSERT INTO position (id, rate_id, process_id, is_owner, is_executor, is_responsible)
-VALUES (100018, 13, 100020, TRUE, TRUE, TRUE);
+VALUES (100018, 16, 100020, TRUE, TRUE, TRUE);
 
 
 INSERT INTO meals (datetime, description, calories, user_id) VALUES ('2015-01-06 09:00:00', 'завтрак', 500, 100000);
