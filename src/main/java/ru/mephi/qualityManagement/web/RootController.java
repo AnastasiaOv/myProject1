@@ -14,7 +14,7 @@ import ru.mephi.qualityManagement.LoggedUser;
 import ru.mephi.qualityManagement.model.User;
 import ru.mephi.qualityManagement.service.CriteriaService;
 import ru.mephi.qualityManagement.service.ProcessService;
-import ru.mephi.qualityManagement.service.TargetCriteriaService;
+import ru.javawebinar.topjava.service.TargetCriteriaService;
 import ru.mephi.qualityManagement.service.UserService;
 import ru.mephi.qualityManagement.to.DateTimeFilter;
 import ru.mephi.qualityManagement.to.UserTo;

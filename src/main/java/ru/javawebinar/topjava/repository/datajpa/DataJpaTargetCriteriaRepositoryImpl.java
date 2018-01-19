@@ -1,9 +1,9 @@
-package ru.mephi.qualityManagement.repository.datajpa;
+package ru.javawebinar.topjava.repository.datajpa;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ru.mephi.qualityManagement.model.TargetCriteria;
-import ru.mephi.qualityManagement.repository.TargetCriteriaRepository;
+import ru.javawebinar.topjava.model.TargetCriteria;
+import ru.javawebinar.topjava.repository.TargetCriteriaRepository;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class DataJpaTargetCriteriaRepositoryImpl implements TargetCriteriaReposi
     private ProxyTargetCriteriaRepository proxyTargetCriteriaRepository;
 
     @Autowired
-    private ProxyProcessRepository processProxy;
+    private ru.mephi.qualityManagement.repository.datajpa.ProxyProcessRepository processProxy;
 
     @Override
     public TargetCriteria save(TargetCriteria criteria, int processId) {

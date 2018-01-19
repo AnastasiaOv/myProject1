@@ -1,9 +1,9 @@
-package ru.mephi.qualityManagement.service;
+package ru.javawebinar.topjava.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.mephi.qualityManagement.model.TargetCriteria;
-import ru.mephi.qualityManagement.repository.TargetCriteriaRepository;
+import ru.javawebinar.topjava.model.TargetCriteria;
+import ru.javawebinar.topjava.repository.TargetCriteriaRepository;
 import ru.mephi.qualityManagement.util.exception.ExceptionUtil;
 import ru.mephi.qualityManagement.util.exception.NotFoundException;
 

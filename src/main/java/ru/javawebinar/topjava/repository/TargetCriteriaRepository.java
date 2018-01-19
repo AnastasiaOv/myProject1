@@ -1,6 +1,6 @@
-package ru.mephi.qualityManagement.repository;
+package ru.javawebinar.topjava.repository;
 
-import ru.mephi.qualityManagement.model.TargetCriteria;
+import ru.javawebinar.topjava.model.TargetCriteria;
 
 import java.util.List;
 

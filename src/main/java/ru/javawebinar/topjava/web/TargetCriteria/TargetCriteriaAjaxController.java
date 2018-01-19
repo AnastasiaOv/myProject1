@@ -1,4 +1,4 @@
-package ru.mephi.qualityManagement.web.TargetCriteria;
+package ru.javawebinar.topjava.web.TargetCriteria;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.support.SessionStatus;
 import ru.mephi.qualityManagement.model.Process;
-import ru.mephi.qualityManagement.model.TargetCriteria;
+import ru.javawebinar.topjava.model.TargetCriteria;
 import ru.mephi.qualityManagement.service.ProcessService;
-import ru.mephi.qualityManagement.service.TargetCriteriaService;
+import ru.javawebinar.topjava.service.TargetCriteriaService;
 import ru.mephi.qualityManagement.service.UserService;
 
 import javax.validation.Valid;

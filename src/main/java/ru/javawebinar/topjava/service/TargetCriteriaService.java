@@ -1,6 +1,6 @@
-package ru.mephi.qualityManagement.service;
+package ru.javawebinar.topjava.service;
 
-import ru.mephi.qualityManagement.model.TargetCriteria;
+import ru.javawebinar.topjava.model.TargetCriteria;
 import ru.mephi.qualityManagement.util.exception.NotFoundException;
 
 import java.util.List;
