@@ -10,13 +10,13 @@
 
     <security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
 
-    <bean class="ru.javawebinar.topjava.web.json.JacksonObjectMapper" id="objectMapper" factory-method="getMapper"/>
+    <bean class="ru.mephi.qualityManagement.web.json.JacksonObjectMapper" id="objectMapper" factory-method="getMapper"/>
 
     <!-- serve static resources (*.html, ...) from src/main/webapp/ -->
     <mvc:default-servlet-handler/>
 
     <mvc:interceptors>
-        <bean class="ru.javawebinar.topjava.web.interceptor.ModelInterceptor"/>
+        <bean class="ru.mephi.qualityManagement.web.interceptor.ModelInterceptor"/>
     </mvc:interceptors>
 
     <mvc:annotation-driven conversion-service="conversionService">
@@ -38,7 +38,7 @@
     <bean class="org.springframework.context.support.ConversionServiceFactoryBean" id="conversionService">
         <property name="converters">
             <set>
-                <bean class="ru.javawebinar.topjava.web.converter.StringToLocalDateTimeConverter"/>
+                <bean class="ru.mephi.qualityManagement.web.converter.StringToLocalDateTimeConverter"/>
             </set>
         </property>
     </bean>

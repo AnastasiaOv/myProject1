@@ -12,7 +12,7 @@
         <jdbc:script encoding="utf-8" location="classpath:db/populateDB.sql"/>
     </jdbc:initialize-database>
 
-    <bean class="ru.javawebinar.topjava.util.DbPopulator">
+    <bean class="ru.mephi.qualityManagement.util.DbPopulator">
         <constructor-arg name="scriptLocation" value="classpath:db/populateDB.sql"/>
     </bean>
 
@@ -73,7 +73,7 @@
         <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
               p:entityManagerFactory-ref="entityManagerFactory"/>
 
-        <bean class="ru.javawebinar.topjava.repository.JpaUtil"/>
+        <bean class="ru.mephi.qualityManagement.repository.JpaUtil"/>
     </beans>
 
     <beans profile="jpa">

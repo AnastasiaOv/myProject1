@@ -112,7 +112,7 @@
 
                         <div class="col-xs-9">
                             <select multiple id="positionDicts" >
-                                <c:forEach var="position" items="<%= ru.javawebinar.topjava.model.PositionEnum.values() %>">
+                                <c:forEach var="position" items="<%= ru.mephi.qualityManagement.model.PositionEnum.values() %>">
                                     <option>${position.readableName}</option>
                                 </c:forEach>
                             </select>
@@ -123,7 +123,7 @@
                         <label for="roles" class="control-label col-xs-3">Роль</label>
                         <div class="col-xs-9">
                                <select id="roles">
-                                   <c:forEach var="role" items="<%= ru.javawebinar.topjava.web.converter.ReadableRoles.getReadableRoles() %>">
+                                   <c:forEach var="role" items="<%= ru.mephi.qualityManagement.web.converter.ReadableRoles.getReadableRoles() %>">
                                        <option selected="selected">${role}</option>
                                    </c:forEach>
                                </select>
