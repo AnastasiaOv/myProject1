@@ -16,7 +16,7 @@ public class DataJpaTargetCriteriaRepositoryImpl implements TargetCriteriaReposi
     private ProxyTargetCriteriaRepository proxyTargetCriteriaRepository;
 
     @Autowired
-    private ru.mephi.qualityManagement.repository.datajpa.ProxyProcessRepository processProxy;
+    private ProxyProcessRepository processProxy;
 
     @Override
     public TargetCriteria save(TargetCriteria criteria, int processId) {

@@ -17,6 +17,7 @@ public interface RateRepository {
     // null if not found
     Rate get(int id, int userId);
 
+    Rate get(int id);
     // null if not found
     List<Rate> getByUserId(int userId);
 

@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.javawebinar.topjava.model.TargetCriteria;
 import ru.javawebinar.topjava.repository.TargetCriteriaRepository;
-import ru.mephi.qualityManagement.util.exception.ExceptionUtil;
-import ru.mephi.qualityManagement.util.exception.NotFoundException;
+import ru.javawebinar.topjava.util.exception.ExceptionUtil;
+import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import java.util.List;
 

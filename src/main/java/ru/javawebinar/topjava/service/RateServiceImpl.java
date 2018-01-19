@@ -43,6 +43,11 @@ public class RateServiceImpl implements RateService {
     }
 
     @Override
+    public Rate get(int id) throws NotFoundException {
+        return ExceptionUtil.check(repository.get(id),id);
+    }
+
+    @Override
     public List<Rate> getByUserId(int userId) throws NotFoundException {
         List<Rate> result = repository.getByUserId(userId);
         for(Rate rate:result){

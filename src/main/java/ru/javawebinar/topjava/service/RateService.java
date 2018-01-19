@@ -17,6 +17,8 @@ public interface RateService {
 
     Rate get(int id, int userId) throws NotFoundException;
 
+    Rate get(int id) throws NotFoundException;
+
     List<Rate> getByUserId(int userId) throws NotFoundException;
 
     List<Rate> getByPositionName(List<PositionDict> positions) throws NotFoundException;

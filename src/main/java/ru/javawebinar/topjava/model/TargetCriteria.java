@@ -1,7 +1,5 @@
 package ru.javawebinar.topjava.model;
 
-import ru.mephi.qualityManagement.model.*;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -10,7 +8,7 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "target_criteria")
-public class TargetCriteria extends ru.mephi.qualityManagement.model.BaseEntity {
+public class TargetCriteria extends BaseEntity {
 
     @Column(name = "name")
     private String name;

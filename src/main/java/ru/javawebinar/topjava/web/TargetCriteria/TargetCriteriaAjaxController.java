@@ -8,11 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.support.SessionStatus;
-import ru.mephi.qualityManagement.model.Process;
 import ru.javawebinar.topjava.model.TargetCriteria;
-import ru.mephi.qualityManagement.service.ProcessService;
+import ru.javawebinar.topjava.service.ProcessService;
 import ru.javawebinar.topjava.service.TargetCriteriaService;
-import ru.mephi.qualityManagement.service.UserService;
+import ru.javawebinar.topjava.service.UserService;
 
 import javax.validation.Valid;
 import java.util.List;

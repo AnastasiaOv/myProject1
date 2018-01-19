@@ -50,6 +50,11 @@ public class DataJpaRateRepositoryImpl implements RateRepository {
     }
 
     @Override
+    public Rate get(int id) {
+        return proxy.findOne(id);
+    }
+
+    @Override
     public List<Rate> getByUserId(int userId) {
         return proxy.getByUserId(userId);
     }
