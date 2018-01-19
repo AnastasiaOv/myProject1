@@ -3,12 +3,6 @@ package ru.mephi.qualityManagement.util.exception;
 
 import ru.mephi.qualityManagement.LoggerWrapper;
 
-/**
- * ExceptionUtil for check for correct DB return
- *
- * User: gkislin
- * Date: 14.05.2014
- */
 public class ExceptionUtil {
     private static final LoggerWrapper LOG = LoggerWrapper.get(ExceptionUtil.class);
 

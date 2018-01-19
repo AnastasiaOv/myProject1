@@ -5,9 +5,6 @@ import ru.mephi.qualityManagement.model.Role;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by SS on 26.11.2017.
- */
 public class ReadableRoles {
     public static List<String> getReadableRoles() {
         List<String> readableRolesList = new ArrayList<>();

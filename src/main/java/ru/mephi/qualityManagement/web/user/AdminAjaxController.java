@@ -9,9 +9,6 @@ import ru.mephi.qualityManagement.model.User;
 import javax.validation.Valid;
 import java.util.List;
 
-/**
- * User: javawebinar.topjava
- */
 @RestController
 @RequestMapping("/ajax/admin/users")
 public class AdminAjaxController extends AbstractUserController {

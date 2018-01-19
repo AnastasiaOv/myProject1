@@ -11,11 +11,6 @@ import ru.mephi.qualityManagement.util.exception.ValidationException;
 
 import java.util.List;
 
-/**
- * GKislin
- * 27.03.2015.
- */
-
 @Repository
 public class DataJpaUserRepositoryImpl implements UserRepository {
     private static final Sort SORT_NAME_EMAIL = new Sort("name", "email");

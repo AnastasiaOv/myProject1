@@ -2,10 +2,6 @@ package ru.mephi.qualityManagement.util.exception;
 
 import org.springframework.validation.BindingResult;
 
-/**
- * User: gkislin
- * Date: 19.08.2014
- */
 public class ValidationException extends RuntimeException {
 
     public ValidationException(String message) {

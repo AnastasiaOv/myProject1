@@ -12,10 +12,6 @@ import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Set;
 
-/**
- * GKislin
- * 24.04.2015.
- */
 public interface AbstractUser {
 
     Integer getId();

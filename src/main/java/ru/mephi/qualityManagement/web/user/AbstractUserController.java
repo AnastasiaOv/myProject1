@@ -12,9 +12,6 @@ import ru.mephi.qualityManagement.web.ExceptionInfoHandler;
 
 import java.util.List;
 
-/**
- * User: gkislin
- */
 public abstract class AbstractUserController extends ExceptionInfoHandler {
     @Autowired
     private UserService service;

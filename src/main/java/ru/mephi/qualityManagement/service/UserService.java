@@ -8,12 +8,6 @@ import ru.mephi.qualityManagement.util.exception.NotFoundException;
 
 import java.util.List;
 
-/**
- * Service interface for User
- *
- * User: gkislin
- * Date: 22.08.2014
- */
 public interface UserService {
 
     User save(User user);

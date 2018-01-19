@@ -5,12 +5,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-/**
- * Simple entity with name to inherit by others
- *
- * User: gkislin
- * Date: 22.08.2014
- */
 @MappedSuperclass
 public class NamedEntity extends BaseEntity {
 

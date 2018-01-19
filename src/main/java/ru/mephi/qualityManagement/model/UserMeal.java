@@ -7,10 +7,6 @@ import ru.mephi.qualityManagement.util.TimeUtil;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-/**
- * GKislin
- * 06.03.2015.
- */
 @NamedQueries({
         @NamedQuery(name = UserMeal.GET, query = "SELECT m FROM UserMeal m WHERE m.id=:id AND m.user.id=:userId"),
         @NamedQuery(name = UserMeal.ALL_SORTED, query = "SELECT m FROM UserMeal m WHERE m.user.id=:userId ORDER BY m.dateTime DESC"),
@@ -18,10 +14,7 @@ import java.time.LocalDateTime;
         @NamedQuery(name = UserMeal.DELETE, query = "DELETE FROM UserMeal m WHERE m.id=:id AND m.user.id=:userId"),
         @NamedQuery(name = UserMeal.GET_BETWEEN,
                 query = "SELECT m from UserMeal m WHERE m.user.id=:userId "+
-                        " AND m.dateTime>=:after and m.dateTime<:before ORDER BY m.dateTime DESC"),
-
-//        @NamedQuery(name = UserMeal.UPDATE, query = "UPDATE UserMeal m SET m.dateTime = :datetime, m.calories= :calories," +
-//                "m.description=:desc where m.id=:id and m.user.id=:userId")
+                        " AND m.dateTime>=:after and m.dateTime<:before ORDER BY m.dateTime DESC")
 })
 
 @Entity
@@ -33,7 +26,6 @@ public class UserMeal extends BaseEntity {
     public static final String DELETE = "UserMeal.delete";
     public static final String DELETE_ALL = "UserMeal.deleteAll";
     public static final String GET_BETWEEN = "UserMeal.getBetween";
-//    public static final String UPDATE = "UserMeal.update";
 
     @Column(name = "datetime", nullable = false)
     protected LocalDateTime dateTime;

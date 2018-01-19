@@ -9,10 +9,6 @@ import ru.mephi.qualityManagement.LoggedUser;
 import ru.mephi.qualityManagement.model.User;
 import ru.mephi.qualityManagement.to.UserTo;
 
-/**
- * GKislin
- * 06.03.2015.
- */
 @RestController
 @RequestMapping(ProfileRestController.REST_URL)
 public class ProfileRestController extends AbstractUserController {

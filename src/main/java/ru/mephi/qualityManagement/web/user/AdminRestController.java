@@ -11,12 +11,6 @@ import ru.mephi.qualityManagement.model.User;
 import java.net.URI;
 import java.util.List;
 
-/**
- * Controller for AdminUser
- *
- * GKislin
- * 06.03.2015.
- */
 @RestController
 @RequestMapping(AdminRestController.REST_URL)
 public class AdminRestController extends AbstractUserController {

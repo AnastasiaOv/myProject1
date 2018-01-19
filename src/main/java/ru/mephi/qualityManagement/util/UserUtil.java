@@ -1,18 +1,9 @@
 package ru.mephi.qualityManagement.util;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import ru.mephi.qualityManagement.model.User;
-import ru.mephi.qualityManagement.service.RateService;
 import ru.mephi.qualityManagement.to.UserTo;
 
-/**
- * GKislin
- * 01.05.2015.
- */
 public class UserUtil {
-
-    @Autowired
-    RateService rateService;
 
     public static User createFromTo(UserTo newUser) {
         return new User(null, newUser.getName(), newUser.getEmail().toLowerCase(), newUser.getSurname(), newUser.getFirstName(), newUser.getSecondName(),

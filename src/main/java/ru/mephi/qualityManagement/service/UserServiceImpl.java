@@ -19,12 +19,6 @@ import ru.mephi.qualityManagement.util.exception.NotFoundException;
 
 import java.util.List;
 
-/**
- * Service implementation for User
- *
- * GKislin
- * 06.03.2015.
- */
 @Service("userService")
 public class UserServiceImpl implements UserService, UserDetailsService {
 

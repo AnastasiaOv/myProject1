@@ -7,12 +7,6 @@ import ru.mephi.qualityManagement.LoggerWrapper;
 import ru.mephi.qualityManagement.model.User;
 import ru.mephi.qualityManagement.service.UserService;
 
-/**
- * Controller for User
- *
- * GKislin
- * 06.03.2015.
- */
 @Controller
 public class UserRestController {
     private static final LoggerWrapper LOG = LoggerWrapper.get(UserRestController.class);

@@ -4,12 +4,6 @@ import ru.mephi.qualityManagement.LoggerWrapper;
 
 import javax.persistence.*;
 
-/**
- * Simplest entity with Id to inherit by all others
- *
- * User: gkislin
- * Date: 22.08.2014
- */
 @MappedSuperclass
 @Access(AccessType.FIELD)
 //@JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, isGetterVisibility = NONE, setterVisibility = NONE)

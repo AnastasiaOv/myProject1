@@ -13,12 +13,6 @@ import java.util.Set;
 
 import static java.util.Objects.requireNonNull;
 
-/**
- * GKislin
- * 06.03.2015.
- * <p>
- * Mock implementation
- */
 public class LoggedUser implements UserDetails, Serializable {
     private UserTo userTo;
     private final boolean enabled;
