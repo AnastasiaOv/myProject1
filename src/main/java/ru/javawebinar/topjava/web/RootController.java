@@ -14,18 +14,15 @@ import ru.javawebinar.topjava.LoggedUser;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.service.CriteriaService;
 import ru.javawebinar.topjava.service.ProcessService;
+import ru.javawebinar.topjava.service.TargetCriteriaService;
 import ru.javawebinar.topjava.service.UserService;
 import ru.javawebinar.topjava.to.DateTimeFilter;
 import ru.javawebinar.topjava.to.UserTo;
-import ru.javawebinar.topjava.util.UserUtil;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
 
-/**
- * User: gkislin
- * Date: 22.08.2014
- */
+
 @Controller
 public class RootController {
     @Autowired
@@ -37,6 +34,8 @@ public class RootController {
     @Autowired
     private CriteriaService criteriaService;
 
+    @Autowired
+    private TargetCriteriaService targetCriteriaService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String root() {
@@ -128,5 +127,10 @@ public class RootController {
         return "cancelledProcesses";
     }
 
+    @RequestMapping(value = "/target_criteria", method = RequestMethod.GET)
+    public String targetCriteria(Model model) {
+        model.addAttribute("criterias", targetCriteriaService.getAll());
+        return "targetCriteria";
+    }
 
 }
